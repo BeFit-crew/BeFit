@@ -1,0 +1,92 @@
+
+/* 기본 설정 및 정렬 */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f0f4f8;
+    font-family: 'Arial', sans-serif;
+}
+
+/* 로그인 */
+.login-btn {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #1e8449;
+}
+
+
+/* 로고와 스타트  */
+/* 플랙스로 순서를 바꾸고 형제 선택자를 사용하여 호버 효과 */
+.logo-hover-area {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.logo-container {
+    width: 600px;
+    height: 600px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.logo-image,
+.logo-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url('../img/be-fit-logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.8s ease;
+}
+
+.logo-overlay {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.start-btn:hover ~ .logo-container .logo-image {
+    opacity: 0;
+}
+
+.start-btn:hover ~ .logo-container .logo-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.start-btn {
+    padding: 12px 24px;
+    font-size: 3rem;
+    font-weight: 700;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-btn:hover {
+    background-color: #1e8449;
+}
