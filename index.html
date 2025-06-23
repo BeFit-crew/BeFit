@@ -1,13 +1,123 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Be Fit</title>
+    <link rel="icon" href="src/img/b-fit-favicon-16x16.png" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f0f4f8;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-btn {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #1e8449;
+        }
+
+        .hover-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container {
+            width: 600px;
+            height: 600px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .logo-image,
+        .logo-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url('src/img/be-fit-logo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.8s ease;
+        }
+
+        .logo-overlay {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        .hover-area:hover .logo-image {
+            opacity: 0;
+        }
+
+        .hover-area:hover .logo-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .start-btn {
+            padding: 12px 24px;
+            font-size: 3rem;
+            font-weight: 700;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-btn:hover {
+            background-color: #1e8449;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- 로그인 -->
+    <button class="login-btn" onclick="login()">로그인</button>
+
+    <!-- 로고 + 버튼 -->
+    <div class="hover-area">
+        <div class="logo-container">
+            <div class="logo-image"></div>
+            <div class="logo-overlay"></div>
+        </div>
+        <button class="start-btn" onclick="startApp()">START</button>
+    </div>
+
+    <script>
+
+        function startApp() {
+            alert("Hello! Be-Fit");
+        }
+
+        function login() {
+            alert("Hello! Log-In");
+        }
+    </script>
 
 </body>
 </html>
