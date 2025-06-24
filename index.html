@@ -14,10 +14,23 @@
     <!-- 로그인 -->
     <button class="login-btn-main" onclick="login()">로그인</button>
 
-    <div class="aside-buttons">
-        <button class="login-btn" onclick="openModal()">로그인</button>
-        <button class="check-btn" onclick="checkHealth()">건강 체크</button>
-        <button class="info-btn" onclick="showInfo()">내 정보</button>
+    <!-- 어사이드 버튼들 -->
+    <div class="aside-wrapper-main">
+        <!-- 트리거 화살표 버튼 -->
+        <div class="aside-toggle-btn"><</div>
+
+        <!-- 숨겨질 버튼들 -->
+        <div class="aside-buttons-main">
+            <button class="playlist-btn-main aside-btn-main" onclick="playlist()">
+                <i class="fas fa-headphones-alt"></i>
+            </button>
+            <button class="shopping-btn-main aside-btn-main" onclick="shopping()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <button class="checkHealth-btn-main aside-btn-main" onclick="checkHealth()">
+                <i class="fas fa-comment-medical"></i>
+            </button>
+        </div>
     </div>
 
     <!-- 로고 + 버튼 -->
@@ -38,6 +51,18 @@
 
         function login() {
             alert("Hello! Log-In");
+        }
+
+        function playlist() {
+            alert("Hello! playlist");
+        }
+
+        function shopping() {
+            alert("Hello! shopping");
+        }
+
+        function checkHealth() {
+            alert("Hello! checkHealth");
         }
     </script>
 
