@@ -1,13 +1,70 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Be Fit</title>
+    <link rel="icon" href="assets/img/be-fit-favicon.png"/>
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
 </head>
 <body>
+
+    <!-- 로그인 -->
+    <button class="login-btn-main" onclick="login()">로그인</button>
+
+    <!-- 어사이드 버튼들 -->
+    <div class="aside-wrapper-main">
+        <!-- 트리거 화살표 버튼 -->
+        <div class="aside-toggle-btn"><</div>
+
+        <!-- 숨겨질 버튼들 -->
+        <div class="aside-buttons-main">
+            <button class="playlist-btn-main aside-btn-main" onclick="playlist()">
+                <i class="fas fa-headphones-alt"></i>
+            </button>
+            <button class="shopping-btn-main aside-btn-main" onclick="shopping()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <button class="checkHealth-btn-main aside-btn-main" onclick="checkHealth()">
+                <i class="fas fa-comment-medical"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 로고 + 버튼 -->
+    <div class="logo-hover-area-main">
+        <!-- css로 버튼이 로고보다 밑에있도록 조정 -->
+        <button class="start-btn-main" onclick="startApp()">START</button>
+        <div class="logo-container-main">
+            <div class="logo-image-main"></div>
+            <div class="logo-overlay-main"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function startApp() {
+            alert("Hello! Be-Fit");
+        }
+
+        function login() {
+            alert("Hello! Log-In");
+        }
+
+        function playlist() {
+            alert("Hello! playlist");
+        }
+
+        function shopping() {
+            alert("Hello! shopping");
+        }
+
+        function checkHealth() {
+            alert("Hello! checkHealth");
+        }
+    </script>
 
 </body>
 </html>
