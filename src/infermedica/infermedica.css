@@ -1,0 +1,89 @@
+/* 전체 모달 배경 */
+.modal-hs {
+    display: none; /* 처음에는 숨김 */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* 모달이 열렸을 때 활성화 상태 */
+.modal-hs.show-hs {
+    display: flex;
+}
+
+/* 챗박스 컨테이너 */
+.chatbox-hs {
+    background: #ffffff;
+    width: 400px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* 상단 헤더 */
+.chat-header-hs {
+    background: #2ecc71; /* 밝은 녹색 계열 */
+    color: white;
+    padding: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 닫기 버튼 */
+.close-btn-hs {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 메시지 표시 영역 */
+.chat-messages-hs {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    font-size: 14px;
+}
+
+/* 사용자 입력 영역 */
+.chat-input-container-hs {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+.chat-input-container-hs input {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.chat-input-container-hs button {
+    margin-left: 8px;
+    padding: 8px 12px;
+    background: #2ecc71;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.chat-input-container-hs button:hover {
+    background: #27ae60;
+}
