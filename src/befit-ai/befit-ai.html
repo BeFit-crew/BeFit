@@ -1,13 +1,194 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeFit AI</title>
+    <link rel="stylesheet" href="../../assets/css/common.css" />
+    <link rel="stylesheet" href="befit-ai.css" />
+    <link rel="icon" href="../../assets/img/be-fit-favicon.png" />
+    <script src="befit-ai.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1 class="logo-heading">
+            <img src="img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon" />
+            BeFit AI 맞춤 식단 및 운동 루틴 추천
+        </h1>
+    </header>
 
+    <main>
+        <form id="dietForm">
+            <!-- 1. 기본 정보 -->
+            <section class="card">
+                <h2 class="card-title">기본 정보</h2>
+
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>성별을 선택해주세요</option>
+                        <option value="남">남성</option>
+                        <option value="여">여성</option>
+                        <option value="비공개">선택하지 않음</option>
+                    </select>
+                </div>
+
+                <div class="inline">
+                    <div class="form-group">
+                        <label for="age">나이 (만)</label>
+                        <input type="number" id="age" name="age" min="1" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="height">신장 (cm)</label>
+                        <input type="number" id="height" name="height" min="1" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">체중 (kg)</label>
+                    <input type="number" id="weight" name="weight" min="1" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="bmrMode">기초대사량 (BMR) 입력 방식</label>
+                    <select id="bmrMode" name="bmrMode">
+                        <option value="manual">직접 입력</option>
+                        <option value="auto">모름 (자동 계산)</option>
+                    </select>
+                </div>
+
+                <div id="bmr-manual-group" class="form-group">
+                    <label for="bmrManual">기초대사량 (BMR)</label>
+                    <input type="number" id="bmrManual" name="bmrManual" min="1" required />
+                </div>
+
+                <div id="bmr-auto-group" class="form-group" style="display:none;">
+                    <label for="bmr-auto">계산된 기초대사량</label>
+                    <input type="number" id="bmr-auto" name="bmrAuto" readonly />
+                </div>
+            </section>
+
+            <!-- 2. 체성분 및 활동 정보 -->
+            <section class="card">
+                <h2 class="card-title">체성분 및 활동 정보</h2>
+
+                <div class="inline">
+                    <div class="form-group">
+                        <label for="fatMass">체지방량 (kg)</label>
+                        <input type="number" id="fatMass" name="fatMass" step="0.1" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="fatLevel">체지방 수준</label>
+                        <select id="fatLevel" name="fatLevel">
+                            <option value="">선택 안 함</option>
+                            <option value="상">매우 높음</option>
+                            <option value="중상">다소 높음</option>
+                            <option value="중">보통</option>
+                            <option value="중하">다소 낮음</option>
+                            <option value="하">매우 낮음</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inline">
+                    <div class="form-group">
+                        <label for="muscleMass">근육량 (kg)</label>
+                        <input type="number" id="muscleMass" name="muscleMass" step="0.1" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="muscleLevel">근육 수준</label>
+                        <select id="muscleLevel" name="muscleLevel">
+                            <option value="">선택 안 함</option>
+                            <option value="상">매우 높음</option>
+                            <option value="중상">다소 높음</option>
+                            <option value="중">보통</option>
+                            <option value="중하">다소 낮음</option>
+                            <option value="하">매우 낮음</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inline">
+                    <div class="form-group">
+                        <label for="activityCal">일일 활동량 (kcal)</label>
+                        <input type="number" id="activityCal" name="activityCal" step="1" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="activityLevel">활동 수준</label>
+                        <select id="activityLevel" name="activityLevel">
+                            <option value="">선택 안 함</option>
+                            <option value="상">매우 활발함</option>
+                            <option value="중상">활발함</option>
+                            <option value="중">보통</option>
+                            <option value="중하">조금 낮음</option>
+                            <option value="하">매우 낮음</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 목표 설정 -->
+            <section class="card">
+                <h2 class="card-title">목표 설정</h2>
+
+                <div class="form-group">
+                    <label for="goal">목표</label>
+                    <select id="goal" name="goal" required>
+                        <option value="" disabled selected>목표 선택</option>
+                        <option value="다이어트">체지방 감량</option>
+                        <option value="유지">현재 상태 유지</option>
+                        <option value="린매스업">근육 증가 & 체지방 최소화</option>
+                        <option value="벌크업">근육 중심 체중 증가</option>
+                        <option value="건강 개선">건강 및 생활 습관 개선</option>
+                    </select>
+                </div>
+
+                <div id="target-group">
+                    <label for="targetWeight">목표 체중</label>
+                    <input type="number" id="targetWeight" name="targetWeight" min="1" />
+
+                    <label for="targetFat">목표 체지방량</label>
+                    <input type="number" id="targetFat" name="targetFat" step="0.1" min="0" />
+
+                    <label for="targetMuscle">목표 근육량</label>
+                    <input type="number" id="targetMuscle" name="targetMuscle" step="0.1" min="0" />
+                </div>
+
+                <label for="days">목표 기간 (일)</label>
+                <input type="number" id="days" name="days" required min="1" />
+            </section>
+
+            <!-- 4. 맞춤 설정 -->
+            <section class="card">
+                <h2 class="card-title">맞춤 설정</h2>
+
+                <label for="limitations">건강 관련 특이사항</label>
+                <textarea id="limitations" name="limitations" rows="2" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압"></textarea>
+
+                <label for="foodAllergies">음식 알러지</label>
+                <textarea id="foodAllergies" name="foodAllergies" rows="2" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩"></textarea>
+
+                <label for="restrictedFoods">제외할 음식</label>
+                <textarea id="restrictedFoods" name="restrictedFoods" rows="2" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기"></textarea>
+
+                <label for="preferredWorkout">하고 싶은 운동</label>
+                <textarea id="preferredWorkout" name="preferredWorkout" rows="2" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 웨이트, 걷기"></textarea>
+
+                <label for="preferences">먹고 싶은 음식</label>
+                <textarea id="preferences" name="preferences" rows="2" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기"></textarea>
+            </section>
+
+            <div class="button-container">
+                <button class="submit-btn" type="submit">AI에게 식단 및 운동 추천 받기</button>
+            </div>
+        </form>
+
+        <div id="errorBox"></div>
+        <div id="loading">
+            <div class="loader"></div>
+            <p>AI가 식단을 작성 중입니다...</p>
+        </div>
+        <div id="result"></div>
+    </main>
 </body>
 </html>

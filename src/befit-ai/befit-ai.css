@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f6f7f8;
+    color: #2c2c2c;
+}
+
+/* 로고 헤더 */
+.logo-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #248242;
+    color: white;
+    padding: 16px 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 40px auto 40px;
+    max-width: 720px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 로고 이미지 크기 */
+.logo-heading img.logo-icon {
+    height: 36px;
+    margin-right: 12px;
+}
+
+
+form {
+    max-width: 720px;  /* 필요 시 768px 또는 800px 등으로 조정 가능 */
+    margin: 0 auto;
+}
+
+/* 카드 공통 영역 */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin: 0 auto 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 720px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #248242;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+}
+
+
+
+.inline {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.inline .form-group {
+    flex: 1;
+    min-width: 160px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    margin-bottom: 24px; /* 여기 값을 조절해서 여백 조정 가능 */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border: 1px solid #248242;
+}
+
+textarea {
+    margin-bottom: 24px;  /* 간격 조정 */
+    resize: vertical;     /* 크기 조절 허용 */
+    font-weight: 550;
+    font-size: 0.9rem
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    width: 50%;
+    padding: 16px;
+    background-color: #248242;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 24px;
+}
+
+button[type="submit"]:hover {
+    background-color: #248242;
+}
+
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#loading .loader {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #ccc;
+    border-top-color: #248242;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
