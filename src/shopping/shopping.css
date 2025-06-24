@@ -1,0 +1,169 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
+
+/* --- 기본 스타일 --- */
+.body-dj {
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5% 0;
+    min-height: 100vh;
+}
+.container-dj {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    background: #fff;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* --- 검색창 스타일 --- */
+.search-bar-dj {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+}
+.input-dj {
+    width: 100%;
+    height: 55px;
+    border: 2px solid #eee;
+    border-radius: 50px;
+    padding: 0 60px 0 25px;
+    font-size: 18px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+.input-dj::placeholder { color: #bbb; }
+.input-dj:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+}
+.search-btn-dj {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-dj {
+    color: #aaa;
+    font-size: 20px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.search-btn-dj:hover .fa-dj {
+    color: #27ae60;
+    transform: scale(1.1);
+}
+
+/* --- 추천 검색어 스타일 --- */
+.recommend-dj {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    font-size: 15px;
+    color: #555;
+}
+.recommend-list-dj {
+    display: flex;
+    list-style: none;
+    padding-left: 10px;
+}
+.recommend-list-item-dj {
+    padding: 10px;
+    cursor: pointer;
+    color: #777;
+    transition: color 0.2s;
+}
+.recommend-list-item-dj:hover { color: #27ae60; }
+
+/* --- 상품 리스트 스타일 --- */
+.product-container-dj {
+    height: auto;
+    width: 100%;
+    margin-top: 30px;
+}
+.product-list-dj {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+.product-list-item-dj {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-list-item-dj:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.1);
+}
+.product-card-dj { padding: 15px; }
+.product-img-dj {
+    width: 100%;
+    height: 220px;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.product-name-dj { font-size: 20px; font-weight: 600; margin: 0 0 5px 0; }
+.product-maker-dj { width: 100%; color: #888; font-size: 14px; margin: 0 0 10px 0; }
+.product-price-dj { font-size: 18px; display: flex; justify-content: flex-end; font-weight: 700; color: #333; }
+
+/* --- 상품 더 보기 버튼 스타일 --- */
+.load-more-container-dj {
+    width: 100%;
+    text-align: center; /* 버튼을 가운데 정렬하기 위함 */
+    padding: 40px 0 20px;
+}
+
+.load-more-btn-dj {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.load-more-btn-dj:hover {
+    background-color: #2ecc71; /* 마우스를 올렸을 때 색상 변경 */
+    transform: scale(1.05); /* 마우스를 올렸을 때 살짝 커지는 효과 */
+}
+
+/* JS로 버튼에 disabled 속성을 추가했을 때 적용될 스타일 */
+.load-more-btn-dj:disabled {
+    background-color: #bdc3c7; /* 비활성화 시 회색으로 변경 */
+    cursor: not-allowed; /* 클릭할 수 없다는 마우스 커서 모양 */
+    transform: none; /* 커지는 효과 제거 */
+}
+
+/* JS로 요소를 숨길 때 사용할 수 있는 클래스 */
+.hidden-dj {
+    display: none;
+}
