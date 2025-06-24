@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Be Fit</title>
+    <link rel="icon" href="assets/img/be-fit-favicon.png"/>
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
 </head>
 <body>
+
+    <!-- 로그인 -->
+    <button class="login-btn-main" onclick="login()">로그인</button>
+
+    <div class="aside-buttons">
+        <button class="login-btn" onclick="openModal()">로그인</button>
+        <button class="check-btn" onclick="checkHealth()">건강 체크</button>
+        <button class="info-btn" onclick="showInfo()">내 정보</button>
+    </div>
+
+    <!-- 로고 + 버튼 -->
+    <div class="logo-hover-area-main">
+        <!-- css로 버튼이 로고보다 밑에있도록 조정 -->
+        <button class="start-btn-main" onclick="startApp()">START</button>
+        <div class="logo-container-main">
+            <div class="logo-image-main"></div>
+            <div class="logo-overlay-main"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function startApp() {
+            alert("Hello! Be-Fit");
+        }
+
+        function login() {
+            alert("Hello! Log-In");
+        }
+    </script>
 
 </body>
 </html>
