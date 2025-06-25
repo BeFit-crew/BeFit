@@ -7,6 +7,8 @@
 .env
 config.js
 assets/js/config.js
+assets/js/config.*.js
+config.local.js
 
 # ▶️ 빌드 산출물
 node_modules/
