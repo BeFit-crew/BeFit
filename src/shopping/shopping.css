@@ -7,7 +7,16 @@
     justify-content: center;
     align-items: flex-start;
     padding: 5% 0;
-    min-height: 100vh;
+    min-height: 50vh;
+}
+.header-container-dj {
+    position: absolute;
+    top: 15px;
+    left: 45%;
+    cursor: pointer;
+}
+.header-img-dj {
+    width: 10%;
 }
 .container-dj {
     display: flex;
@@ -20,6 +29,7 @@
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
+    margin-top: 30px;
 }
 
 /* --- 검색창 스타일 --- */
@@ -128,7 +138,13 @@
     border-radius: 10px;
     margin-bottom: 15px;
 }
-.product-name-dj { font-size: 20px; font-weight: 600; margin: 0 0 5px 0; }
+.product-name-dj { font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .product-maker-dj { width: 100%; color: #888; font-size: 14px; margin: 0 0 10px 0; }
 .product-price-dj { font-size: 18px; display: flex; justify-content: flex-end; font-weight: 700; color: #333; }
 
@@ -166,4 +182,22 @@
 /* JS로 요소를 숨길 때 사용할 수 있는 클래스 */
 .hidden-dj {
     display: none;
+}
+
+/* 상품명 스타일 초기화 및 글자제한 */
+.a-dj {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 검색 전 초기 아이템 표시 */
+.not-searched-yet-dj {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
