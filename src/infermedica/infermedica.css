@@ -1,0 +1,138 @@
+/* 전체 모달 배경 */
+.modal-hs {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* 모달이 열렸을 때 활성화 상태 */
+.modal-hs.show-hs {
+    display: flex;
+}
+
+/* 챗박스 컨테이너 */
+.chatbox-hs {
+    background: white;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* 상단 헤더 */
+.chat-header-hs {
+    background: #2ecc71;
+    color: white;
+    padding: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 닫기 버튼 */
+.close-btn-hs {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 메시지 표시 영역 */
+.chat-messages-hs {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 사용자 입력 영역 */
+.chat-input-container-hs {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+/* 채팅 입력 */
+.chat-input-container-hs input {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* 전송 버튼 스타일 */
+.chat-input-container-hs button {
+    margin-left: 8px;
+    padding: 8px 12px;
+    background: #2ecc71;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-input-container-hs button:hover {
+    background: #27ae60;
+}
+
+/* 말풍선  타임스탬프*/
+.message-wrapper-hs {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+/* 우측 */
+.message-wrapper-hs.user-hs {
+    align-items: flex-end;
+}
+
+/* 좌측 */
+.message-wrapper-hs.bot-hs {
+    align-items: flex-start;
+}
+
+/* 말풍선 */
+.chat-bubble-hs {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.chat-bubble-hs.user-hs {
+    background: #2ecc71;
+    color: white;
+    border-bottom-right-radius: 0;
+}
+
+.chat-bubble-hs.bot-hs {
+    background: #eee;
+    color: #333;
+    border-bottom-left-radius: 0;
+}
+
+/* 시간 */
+.timestamp-hs {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+}
