@@ -12,16 +12,16 @@
 
 #### 예시
 
-| 항목     | 규칙 예시                             |
-|--------|------------------------------------|
-| ID     | `id="form-tj"`, `id="input-da"`    |
-| class  | `class="btn-hs"`, `class="section-login"` |
-| JS 함수 | `function handleSubmitTj()`         |
-| 변수명   | `const userInputDj = ...`            |
+| 항목     | 규칙 예시                                        |
+|--------|----------------------------------------------|
+| ID     | `id="form-tj"`, `id="input-dy"`              |
+| class  | `class="btn-hs"`, `class="section-playlist"` |
+| JS 함수 | `function handleSubmit-tj()`                 |
+| 변수명   | `const userInput-dj = ...`                   |
 
 **이니셜 예시**:
 - `tj` (택준), befit-ai
-- `da` (다영), playlist
+- `dy` (다영), playlist
 - `hs` (현수), infermedica
 - `dj` (동준), shopping
 
