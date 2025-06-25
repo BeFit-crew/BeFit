@@ -7,12 +7,13 @@
     <link rel="icon" href="assets/img/be-fit-favicon.png"/>
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="src/infermedica/infermedica.css">
 
 </head>
 <body>
 
     <!-- 로그인 -->
-    <button class="login-btn-main" onclick="login()">로그인</button>
+    <button class="login-btn-main">로그인</button>
 
     <!-- 어사이드 버튼들 -->
     <div class="aside-wrapper-main">
@@ -21,13 +22,13 @@
 
         <!-- 숨겨질 버튼들 -->
         <div class="aside-buttons-main">
-            <button class="playlist-btn-main aside-btn-main" onclick="playlist()">
+            <button class="playlist-btn-main aside-btn-main">
                 <i class="fas fa-headphones-alt"></i>
             </button>
-            <button class="shopping-btn-main aside-btn-main" onclick="shopping()">
+            <button class="shopping-btn-main aside-btn-main">
                 <i class="fas fa-shopping-cart"></i>
             </button>
-            <button class="checkHealth-btn-main aside-btn-main" onclick="checkHealth()">
+            <button class="checkHealth-btn-main aside-btn-main">
                 <i class="fas fa-comment-medical"></i>
             </button>
         </div>
@@ -43,28 +44,8 @@
         </div>
     </div>
 
-    <script>
 
-        function startApp() {
-            alert("Hello! Be-Fit");
-        }
-
-        function login() {
-            alert("Hello! Log-In");
-        }
-
-        function playlist() {
-            alert("Hello! playlist");
-        }
-
-        function shopping() {
-            alert("Hello! shopping");
-        }
-
-        function checkHealth() {
-            alert("Hello! checkHealth");
-        }
-    </script>
+    <script src="src/infermedica/infermedica.js" defer></script>
 
 </body>
 </html>
