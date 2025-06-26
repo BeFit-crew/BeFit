@@ -166,7 +166,9 @@ button {
 .checkHealth-btn-main[data-tooltip]::after {
     background-color: #ca6f1e;
 }
-
+.login-btn-main[data-tooltip]::after {
+    background-color: #9970a1;
+}
 .aside-btn-main[data-tooltip]:hover::after {
     opacity: 1;
 }
