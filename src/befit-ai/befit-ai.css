@@ -111,7 +111,7 @@ textarea {
 }
 
 button[type="submit"]:hover {
-    background-color: #1f6f37;
+    background-color: #248242;
 }
 
 #errorBox-befit-ai {
@@ -164,7 +164,7 @@ button[type="submit"]:hover {
 .ai-section h3 {
     font-size: 20px;
     color: #222;
-    border-left: 6px solid #4caf50;
+    border-left: 6px solid #248242;
     padding-left: 12px;
     margin-bottom: 16px;
 }
@@ -221,6 +221,50 @@ button[type="submit"]:hover {
     font-size: 20px;
     cursor: pointer;
 }
+
+.button-container-befit-ai {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#showSavedResultBtn {
+    background-color: #248242;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 140px; /* 답변 다시 보기 버튼 너비 */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#showSavedResultBtn:hover {
+    background-color: #1b6233;
+}
+
+.submit-btn-befit-ai {
+    background-color: #248242;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 300px; /* AI에게 식단 및 운동 추천 받기 버튼 너비 */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn-befit-ai:hover {
+    background-color: #1b6233;
+}
+
+
 
 /* 숨김 처리 클래스 */
 .hidden {

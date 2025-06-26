@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../assets/css/common.css"/>
     <link rel="stylesheet" href="befit-ai.css"/>
     <link rel="icon" href="../../assets/img/be-fit-favicon.png"/>
+    <!--<script type="module" src="befit-ai.js" defer></script>-->
     <script type="module" src="befit-ai.js" defer></script>
 </head>
 <body>
@@ -36,17 +37,17 @@
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
                         <label for="age-befit-ai">나이 (만)</label>
-                        <input type="number" id="age-befit-ai" name="age" min="10" max="150" required/>
+                        <input type="number" id="age-befit-ai" name="age" min="10" max="125" required/>
                     </div>
                     <div class="form-group-befit-ai">
                         <label for="height-befit-ai">신장 (cm)</label>
-                        <input type="number" id="height-befit-ai" name="height" step="0.1" min="50" max="250" required/>
+                        <input type="number" id="height-befit-ai" name="height" step="0.1" min="50" max="280" required/>
                     </div>
                 </div>
 
                 <div class="form-group-befit-ai">
                     <label for="weight-befit-ai">체중 (kg)</label>
-                    <input type="number" id="weight-befit-ai" name="weight" step="0.1" min="20" max="350" required/>
+                    <input type="number" id="weight-befit-ai" name="weight" step="0.1" min="5" max="610" required/>
                 </div>
 
                 <div class="form-group-befit-ai">
@@ -59,7 +60,7 @@
 
                 <div id="bmr-manual-group-befit-ai" class="form-group-befit-ai">
                     <label for="bmrManual-befit-ai">기초대사량 (BMR)</label>
-                    <input type="number" id="bmrManual-befit-ai" name="bmrManual" min="700" max="4000" required/>
+                    <input type="number" id="bmrManual-befit-ai" name="bmrManual" min="800" max="10000" required/>
                 </div>
 
                 <div id="bmr-auto-group-befit-ai" class="form-group-befit-ai" style="display:none;">
@@ -75,7 +76,7 @@
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
                         <label for="fatRate-befit-ai">체지방률 (%)</label>
-                        <input type="number" id="fatRate-befit-ai" name="fatRate" step="0.1" min="1" max="80" />
+                        <input type="number" id="fatRate-befit-ai" name="fatRate" step="0.1" min="0.1" max="70"/>
                     </div>
                     <div class="form-group-befit-ai">
                         <label for="fatLevel-befit-ai">체지방 수준</label>
@@ -92,8 +93,9 @@
 
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
-                        <label for="muscleMass-befit-ai">근육량 (kg)</label>
-                        <input type="number" id="muscleMass-befit-ai" name="muscleMass" step="0.1" min="5" max="100" />
+                        <label for="skeletalMuscleMass-befit-ai">골격근량 (kg)</label>
+                        <input type="number" id="skeletalMuscleMass-befit-ai" name="skeletalMuscleMass" step="0.1"
+                               min="1" max="100"/>
                     </div>
                     <div class="form-group-befit-ai">
                         <label for="muscleLevel-befit-ai">근육 수준</label>
@@ -111,7 +113,7 @@
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
                         <label for="activityCal-befit-ai">일일 활동량 (kcal)</label>
-                        <input type="number" id="activityCal-befit-ai" name="activityCal" step="1" min="0" max="5000" />
+                        <input type="number" id="activityCal-befit-ai" name="activityCal" min="0" max="5000"/>
                     </div>
                     <div class="form-group-befit-ai">
                         <label for="activityLevel-befit-ai">활동 수준</label>
@@ -145,14 +147,15 @@
 
                 <div class="form-group-befit-ai">
                     <label for="targetWeight-befit-ai">목표 체중 (kg)</label>
-                    <input type="number" id="targetWeight-befit-ai" name="targetWeight" step="0.1" min="20" max="350"/>
+                    <input type="number" id="targetWeight-befit-ai" name="targetWeight" step="0.1" min="5" max="610"/>
                 </div>
 
-                <!-- 목표 체지방량 + 수준 -->
+                <!-- 목표 체지방률 + 수준 -->
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
                         <label for="targetFatRate-befit-ai">목표 체지방률 (%)</label>
-                        <input type="number" id="targetFatRate-befit-ai" name="targetFatRate" step="0.1" min="1" max="80"/>
+                        <input type="number" id="targetFatRate-befit-ai" name="targetFatRate" step="0.1" min="0.1"
+                               max="70"/>
                     </div>
                     <div class="form-group-befit-ai">
                         <label for="targetFatLevel-befit-ai">목표 체지방 수준</label>
@@ -167,15 +170,16 @@
                     </div>
                 </div>
 
-                <!-- 목표 근육량 + 수준 -->
+                <!-- 목표 골격근량 + 수준 -->
                 <div class="inline-befit-ai">
                     <div class="form-group-befit-ai">
-                        <label for="targetMuscle-befit-ai">목표 근육량 (kg)</label>
-                        <input type="number" id="targetMuscle-befit-ai" name="targetMuscle" step="0.1" min="5" max="100"/>
+                        <label for="targetSkeletalMuscleMass-befit-ai">목표 골격근량 (kg)</label>
+                        <input type="number" id="targetSkeletalMuscleMass-befit-ai" name="targetSkeletalMuscleMass" step="0.1"
+                               min="1" max="100"/>
                     </div>
                     <div class="form-group-befit-ai">
-                        <label for="targetMuscleLevel-befit-ai">목표 근육 수준</label>
-                        <select id="targetMuscleLevel-befit-ai" name="targetMuscleLevel">
+                        <label for="targetSkeletalMuscleMassLevel-befit-ai">목표 골격근 수준</label>
+                        <select id="targetSkeletalMuscleMassLevel-befit-ai" name="targetSkeletalMuscleMassLevel">
                             <option value="">선택 안 함</option>
                             <option value="상">🔴 매우 높음</option>
                             <option value="중상">🟠 다소 높음</option>
@@ -188,7 +192,7 @@
 
                 <div class="form-group-befit-ai">
                     <label for="days-befit-ai">목표 기간 (일)</label>
-                    <input type="number" id="days-befit-ai" name="days" required min="1" max="36500"/>
+                    <input type="number" id="days-befit-ai" name="days" min="1" max="365" required/>
                 </div>
             </section>
 
@@ -197,30 +201,44 @@
                 <h2 class="card-title-befit-ai">⚙️ 맞춤 설정</h2>
 
                 <label for="limitations-befit-ai">건강 관련 특이사항</label>
-                <textarea id="limitations-befit-ai" name="limitations" rows="2"
+                <textarea id="limitations-befit-ai" name="limitations" rows="2" lang="ko"
                           placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압"></textarea>
 
                 <label for="foodAllergies-befit-ai">음식 알러지</label>
-                <textarea id="foodAllergies-befit-ai" name="foodAllergies" rows="2"
+                <textarea id="foodAllergies-befit-ai" name="foodAllergies" rows="2" lang="ko"
                           placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩"></textarea>
 
                 <label for="restrictedFoods-befit-ai">제외할 음식</label>
-                <textarea id="restrictedFoods-befit-ai" name="restrictedFoods" rows="2"
+                <textarea id="restrictedFoods-befit-ai" name="restrictedFoods" rows="2" lang="ko"
                           placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기"></textarea>
 
-                <label for="preferredWorkout-befit-ai">하고 싶은 운동</label>
-                <textarea id="preferredWorkout-befit-ai" name="preferredWorkout" rows="2"
-                          placeholder="항목은 쉼표(,)로 구분해주세요. ex. 웨이트, 걷기"></textarea>
-
                 <label for="preferences-befit-ai">먹고 싶은 음식</label>
-                <textarea id="preferences-befit-ai" name="preferences" rows="2"
+                <textarea id="preferences-befit-ai" name="preferences" rows="2" lang="ko"
                           placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기"></textarea>
+
+                <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="preferredWorkout-befit-ai">하고 싶은 운동</label>
+                    <textarea id="preferredWorkout-befit-ai" name="preferredWorkout" rows="2" lang="ko"
+                              placeholder="항목은 쉼표(,)로 구분해주세요. ex. 웨이트, 걷기"></textarea>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="preferredWorkoutTime-befit-ai">희망 운동 시간</label>
+                    <textarea id="preferredWorkoutTime-befit-ai" name="preferredWorkoutTime" rows="2" lang="ko"
+                              placeholder="ex. 하루 30분, 주 3회 등"></textarea>
+                </div>
+            </div>
             </section>
 
             <div class="button-container-befit-ai">
+                <button id="showSavedResultBtn" type="button" style="display:none;">답변 다시 보기</button>
                 <button class="submit-btn-befit-ai" type="submit">💬 AI에게 식단 및 운동 추천 받기</button>
             </div>
+
         </form>
+
+
+
 
         <div id="errorBox-befit-ai"></div>
         <div id="loading-befit-ai">
