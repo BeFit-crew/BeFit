@@ -33,7 +33,120 @@ button {
     }
 }
 
-/* 로그인 */
+/* 어사이드 버튼 전체 박스 (토글 버튼 고정) */
+.aside-wrapper-main {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.aside-toggle-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aside-buttons-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.aside-btn-main {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+}
+
+.aside-wrapper-main:hover .aside-buttons-main .aside-btn-main:nth-child(1) {
+    transform: translateX(-120px);
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.1s;
+}
+
+.aside-wrapper-main:hover .aside-buttons-main .aside-btn-main:nth-child(2) {
+    transform: translate(-100px, 25px);
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.2s;
+}
+
+.aside-wrapper-main:hover .aside-buttons-main .aside-btn-main:nth-child(3) {
+    transform: translate(-60px, 43px);
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.3s;
+}
+
+.aside-wrapper-main:hover .aside-buttons-main .aside-btn-main:nth-child(4) {
+    transform: translateY(40px);
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.4s;
+}
+
+.login-btn-main { background-color: #27ae60; }
+.login-btn-main:hover { background-color: #1e8449; }
+.playlist-btn-main { background-color: #f1c40f; }
+.playlist-btn-main:hover { background-color: #d4ac0d; }
+.shopping-btn-main { background-color: #1abc9c; }
+.shopping-btn-main:hover { background-color: #16a085; }
+.checkHealth-btn-main { background-color: #e67e22; }
+.checkHealth-btn-main:hover { background-color: #ca6f1e; }
+
+
+/* 툴팁 */
+.aside-btn-main[data-tooltip] {
+    position: relative;
+}
+
+.aside-btn-main[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 2000;
+}
+.aside-btn-main:hover::after { opacity: 1; }
+
+
+
+/*
+
+!* 로그인 *!
 .login-btn-main {
     position: fixed;
     top: 20px;
@@ -54,7 +167,7 @@ button {
     background-color: #1e8449;
 }
 
-/* 트리거 버튼 (<) */
+!* 트리거 버튼 (<) *!
 .aside-toggle-btn {
     background-color: #27ae60;
     color: white;
@@ -68,7 +181,7 @@ button {
     position: relative;
 }
 
-/* 트리거가 버튼들보다 오른쪽(앞쪽)에 나오게 설정 */
+!* 트리거가 버튼들보다 오른쪽(앞쪽)에 나오게 설정 *!
 .aside-wrapper-main {
     position: fixed;
     top: 45%;
@@ -81,21 +194,21 @@ button {
     z-index: 1000;
     margin-right: 10px;
 }
-/* 버튼 묶음 */
+!* 버튼 묶음 *!
 .aside-buttons-main {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-right: 10px; /* 트리거와 버튼 사이 간격 */
+    margin-right: 10px; !* 트리거와 버튼 사이 간격 *!
 }
 
-/* 트리거에 마우스를 올리면 투명해짐 */
+!* 트리거에 마우스를 올리면 투명해짐 *!
 .aside-wrapper-main:hover .aside-toggle-btn {
     opacity: 0;
     pointer-events: none;
 }
 
-/* 기본 숨김 */
+!* 기본 숨김 *!
 .aside-btn-main {
     padding: 12px;
     margin-right: 8px;
@@ -111,7 +224,7 @@ button {
     pointer-events: none;
 }
 
-/* 호버 시 순차적 등장 */
+!* 호버 시 순차적 등장 *!
 .aside-wrapper-main:hover .aside-buttons-main .aside-btn-main:nth-child(1) {
     opacity: 1;
     transform: translateX(0);
@@ -152,28 +265,12 @@ button {
     background-color: #ca6f1e;
 }
 
-/* 어사이드 버튼 툴팁 */
+!* 어사이드 버튼 툴팁 *!
 .aside-btn-main[data-tooltip] {
     position: relative;
 }
+*/
 
-.aside-btn-main[data-tooltip]::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    right: 110%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 2000;
-}
 .playlist-btn-main[data-tooltip]::after {
     background-color: #d4ac0d;
 }
