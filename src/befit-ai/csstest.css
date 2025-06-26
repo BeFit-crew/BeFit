@@ -1,0 +1,293 @@
+/* =================================
+   1. 변수 및 기본 설정
+   ================================= */
+:root {
+    /* 색상 변수 */
+    --primary-color: #248242;
+    --primary-color-hover: #1b6233;
+    --background-color: #f6f7f8;
+    --card-background: #ffffff;
+    --text-color: #2c2c2c;
+    --text-light: #ffffff;
+    --border-color: #ccc;
+    --error-color: #e74c3c; /* 오류 메시지 및 별표 색상 */
+
+    /* 폰트 및 기타 변수 */
+    --font-family: 'Segoe UI', sans-serif;
+    --border-radius: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* =================================
+   2. 기존 스타일 (변수 적용)
+   ================================= */
+
+/* 로고 헤더 */
+.logo-heading-befit-ai {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 16px 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 40px auto;
+    max-width: 720px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo-heading-befit-ai img.logo-icon-befit-ai {
+    height: 36px;
+    margin-right: 12px;
+}
+
+/* 폼 영역 */
+form#dietForm-befit-ai {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* 카드 공통 영역 */
+.card-befit-ai {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin: 0 auto 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 720px;
+}
+
+.card-title-befit-ai {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+}
+
+.inline-befit-ai {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.inline-befit-ai .form-group-befit-ai {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* form-group에 position: relative 추가 (오류 메시지 기준점) */
+.form-group-befit-ai {
+    position: relative;
+    /* 기존에는 margin-bottom이 input/select/textarea에 있었지만,
+       오류 메시지까지 포함하기 위해 그룹 자체에 주는 것이 더 안정적입니다. */
+    padding-bottom: 24px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-top: 6px;
+    box-sizing: border-box;
+    /* 그룹에 padding-bottom을 주었으므로 개별 요소의 margin-bottom은 제거하거나 줄입니다. */
+    margin-bottom: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
+}
+
+textarea {
+    resize: vertical;
+    font-weight: 550;
+    font-size: 0.9rem;
+}
+
+/* =================================
+   3. 추가 및 수정된 스타일
+   ================================= */
+
+/* 필수 항목 별표(*) 스타일 */
+.required-star-befit-ai {
+    color: var(--error-color);
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+/* 오류 메시지 스타일 */
+.error-message-befit-ai {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    position: absolute; /* 그룹을 기준으로 위치 잡기 */
+    bottom: 4px;      /* 그룹 하단에 위치 */
+    left: 2px;
+    display: none;      /* 평소에는 숨김 */
+}
+
+/* JavaScript로 .input-error-befit-ai 클래스가 추가될 때의 스타일 */
+.input-error-befit-ai {
+    border-color: var(--error-color) !important; /* 포커스 스타일보다 우선 적용 */
+}
+
+/* 오류가 있는 입력 필드 바로 다음에 오는 오류 메시지를 보여줌 */
+.input-error-befit-ai + .error-message-befit-ai,
+.input-error-befit-ai ~ .error-message-befit-ai { /* select 등 다른 구조 대응 */
+    display: block;
+}
+
+
+/* 버튼 컨테이너 */
+.button-container-befit-ai {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#showSavedResultBtn {
+    background-color: #6c757d;
+    color: var(--text-light);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#showSavedResultBtn:hover {
+    background-color: #5a6268;
+}
+
+.submit-btn-befit-ai {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 300px;
+    text-align: center;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.submit-btn-befit-ai:hover {
+    background-color: var(--primary-color-hover);
+}
+
+/* 비활성화된 제출 버튼 스타일 */
+.submit-btn-befit-ai:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* 로딩 및 에러 박스 (기존과 동일) */
+#errorBox-befit-ai {
+    max-width: 720px;
+    margin: 20px auto;
+    padding: 16px;
+    color: var(--text-light);
+    background-color: var(--error-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+}
+
+#loading-befit-ai {
+    /* display: none; -> hidden 클래스로 제어 */
+    text-align: center;
+    margin-top: 40px;
+}
+
+#loading-befit-ai .loader-befit-ai {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #ccc;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 모달 및 결과 (기존과 동일) */
+/* ... (이하 모달 스타일은 변경 없음) ... */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    position: relative;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 10000;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* AI가 생성할 결과물에 대한 스타일 (예시) */
+.ai-result-wrapper {
+    /* ... */
+}
+.ai-section {
+    /* ... */
+}
