@@ -662,6 +662,9 @@ function checkSavedResult() {
  * 애플리케이션 메인 함수
  */
 function main() {
+    if (!DOM.dietForm) {
+        return;
+    }
     toggleBMRMode();
     initEventListeners();
     checkSavedResult();
