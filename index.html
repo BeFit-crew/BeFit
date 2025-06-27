@@ -12,21 +12,28 @@
 </head>
 <body>
 
-    <!-- 로그인 -->
-    <button class="login-btn-main">로그인</button>
-
-    <!-- 어사이드 버튼들 -->
     <div class="aside-wrapper-main">
-        <!-- 트리거 화살표 버튼 -->
-        <div class="aside-toggle-btn"><</div>
-
-        <!-- 숨겨질 버튼들 -->
+        <div class="aside-toggle-btn-main">
+            <i class="fas fa-cog"></i>
+        </div>
         <div class="aside-buttons-main">
-            <button class="playlist-btn-main aside-btn-main" data-tooltip="음악 듣기">
-                <i class="fab fa-youtube"></i>
+            <button class="login-btn-main aside-btn-main" data-tooltip="건강체크">
+                <!-- 건강 체크 -->
+                <a href="">
+                    <i class="fas fa-user-check"></i>
+                </a>
             </button>
-            <button class="shopping-btn-main aside-btn-main" data-tooltip="쇼핑 하기">
-                <i class="fas fa-shopping-cart"></i>
+            <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 시청">
+                <!-- 다영님 -->
+                <a href="#">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </button>
+            <button class="shopping-btn-main aside-btn-main" data-tooltip="쇼핑 추천 및 구매">
+                <!-- 동준님 -->
+                <a href="">
+                    <i class="fas fa-shopping-basket"></i>
+                </a>
             </button>
             <button class="checkHealth-btn-main aside-btn-main" data-tooltip="AI 건강 상담">
                 <i class="fas fa-comment-medical"></i>
@@ -36,15 +43,20 @@
 
     <!-- 로고 + 버튼 -->
     <div class="logo-hover-area-main">
-        <!-- css로 버튼이 로고보다 밑에있도록 조정 -->
-        <button class="start-btn-main" onclick="startApp()">START</button>
+        <button class="start-btn-main" onclick="startApp()">
+            <!-- 택준님 -->
+            <a href="#"></a>
+            START</button>
         <div class="logo-container-main">
             <div class="logo-image-main"></div>
             <div class="logo-overlay-main"></div>
         </div>
     </div>
 
+    <!-- 메인 js  -->
+    <script src="assets/js/main.js"></script>
 
+    <!-- 건강 상담 챗폿 js -->
     <script src="src/infermedica/infermedica.js" type="module"></script>
 
 </body>
