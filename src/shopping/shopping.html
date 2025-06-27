@@ -5,9 +5,59 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <title>BeFit</title>
+    <!-- 파비콘 이미지 -->
+    <link rel="icon" href="../../assets/img/be-fit-favicon.png" type="image/x-icon">
+    <!-- Font Awesome 아이콘 라이브러리 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="shopping.css"/>
 </head>
-<body>
+<body class="body-dj">
 
+<!--    https://cors-anywhere.herokuapp.com/corsdemo 임시적으로 서버 빌려쓰기 -->
+
+    <header class="header-dj">
+        <a class="header-container-dj" href="../../index.html">
+            <img src="../../assets/img/be-fit-logo.png" alt="BeFit로고" class="header-img-dj">
+        </a>
+    </header>
+
+    <div class="container-dj">
+        <!-- 검색창 -->
+        <div class="search-bar-dj">
+            <input type="text" class="input-dj" placeholder="찾고 싶은 상품을 검색하세요...">
+            <button class="search-btn-dj">
+                <i class="fas fa-search fa-dj"></i>
+            </button>
+        </div>
+
+        <!-- 추천 검색어 -->
+        <div class="recommend-dj">
+            <p class="recommend-ai-dj">🤖 Ai 추천 검색어 - </p>
+            <ul class="recommend-list-dj">
+                <li class="recommend-list-item-dj">아령</li>
+                <li class="recommend-list-item-dj">쉐이크</li>
+                <li class="recommend-list-item-dj">러닝화</li>
+            </ul>
+        </div>
+
+        <!-- 상품 목록을 감싸는 컨테이너 -->
+        <div class="product-container-dj">
+            <!-- JS로 새 상품들을 추가할 부모 요소 -->
+            <ul class="product-list-dj">
+                <!-- 상품들은 여기에 위치합니다 -->
+                <p class="not-searched-yet-dj">상품을 검색해 보세요!</p>
+            </ul>
+
+            <!-- 상품 더 보기 버튼을 감싸는 컨테이너 -->
+            <div class="load-more-container-dj">
+                <!-- JS로 제어할 '더 보기' 버튼 -->
+                <button class="load-more-btn-dj hidden-dj">상품 더 보기</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="shopping.js" type="module"></script>
 </body>
 </html>
