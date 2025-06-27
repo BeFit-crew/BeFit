@@ -12,16 +12,16 @@
 
 #### 예시
 
-| 항목     | 규칙 예시                             |
-|--------|------------------------------------|
-| ID     | `id="form-tj"`, `id="input-da"`    |
-| class  | `class="btn-hs"`, `class="section-login"` |
-| JS 함수 | `function handleSubmitTj()`         |
-| 변수명   | `const userInputDj = ...`            |
+| 항목     | 규칙 예시                                        |
+|--------|----------------------------------------------|
+| ID     | `id="form-tj"`, `id="input-dy"`              |
+| class  | `class="btn-hs"`, `class="section-playlist"` |
+| JS 함수 | `function handleSubmit-tj()`                 |
+| 변수명   | `const userInput-dj = ...`                   |
 
 **이니셜 예시**:
 - `tj` (택준), befit-ai
-- `da` (다영), playlist
+- `dy` (다영), playlist
 - `hs` (현수), infermedica
 - `dj` (동준), shopping
 
@@ -163,6 +163,35 @@ LGTM! 정상 작동 확인했습니다.
 
 ---
 
+### 5-1. PR 리뷰 & 테스트 요약 가이드
+
+팀 프로젝트에서 PR(Pull Request) 확인 시,  
+코드만 보는 것이 아니라 **직접 실행 및 테스트**를 통해 오류 여부를 확인합니다.
+
+#### ✅ 리뷰 절차 요약
+
+1. **브랜치 확인**
+   - PR 브랜치 → 병합 대상 브랜치 (예: feature/indexMain → dev)
+
+2. **코드 변경 확인**
+   - GitHub에서 Files changed 탭을 통해 변경 파일/코드 확인
+
+3. **로컬 테스트**
+   - 아래 순서로 코드 내려받고, 직접 실행 후 정상 동작 및 오류 여부 확인
+   ```bash
+   git fetch origin
+   git checkout feature/브랜치명
+   # 실행 및 테스트 진행 (예: npm run dev, live server 등)
+   
+4. **이상 여부 확인 및 피드백**
+   - 정상 동작 시: GitHub PR 코멘트에 승인 의견 남기기
+   - 오류/수정 필요 시: 상세 피드백 작성
+
+5. **테스트 완료 후 병합**
+   - 충돌 없을 경우 Merge 진행
+
+---
+
 ## 6. 브랜치 병합 규칙
 
 | 대상          | 병합 방향    | 병합 방식           |
@@ -185,6 +214,9 @@ LGTM! 정상 작동 확인했습니다.
 
 ## 📝 설명
 - 작업 배경 및 목표
+
+## 👤 작업자
+- 왕택준, @TJK98
 
 ## ✅ 작업 내용
 - [ ] 레이아웃 구성
