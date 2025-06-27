@@ -8,7 +8,7 @@
 
 // [의존성] DOM 요소와 상수들을 다른 모듈에서 가져옵니다.
 import DOM from './dom-befit-ai.js';
-import { CONVERSION_TABLES, BMR_FORMULA, BMR_MODE } from './constants-befit-ai.js';
+import {BMR_FORMULA, BMR_MODE, CONVERSION_TABLES} from './constants-befit-ai.js';
 
 /**
  * 숫자 입력 필드에 대해 유효성 검사를 설정하고, 범위를 벗어날 경우 사용자에게 피드백을 줍니다.
@@ -22,6 +22,7 @@ export function setupNumberInputValidation(input, min, max) {
         const num = Number(value);
         return !isNaN(num) && num >= min && num <= max;
     }
+
     // 사용자가 입력할 때마다 실시간으로 유효성을 검사하여 시각적 피드백(CSS 클래스)을 줍니다.
     input.addEventListener('input', () => {
         const val = input.value.trim();
@@ -58,6 +59,7 @@ export function setupExclusiveInput(primaryInput, secondarySelect) {
         secondarySelect.disabled = !!primaryInput.value.trim();
         primaryInput.disabled = !!secondarySelect.value;
     }
+
     // 각 필드에 입력이나 변경이 일어날 때마다 상태를 업데이트합니다.
     primaryInput.addEventListener('input', updateState);
     secondarySelect.addEventListener('change', updateState);
@@ -73,24 +75,31 @@ export function calculateBMR() {
     const height = Number(DOM.dietForm.height.value);
     const weight = Number(DOM.dietForm.weight.value);
 
-    // 필수 정보가 모두 입력되지 않았으면 계산을 중단합니다.
-    if (!age || !height || !weight) return;
+    // 필수 정보가 모두 입력되지 않았으면 계산을 중단하고 자동 계산 필드를 비웁니다.
+    if (!age || !height || !weight) {
+        DOM.bmrAuto.value = '';
+        return;
+    }
 
-    // 성별에 관계없이 공통적인 부분을 먼저 계산합니다.
+    // BMR_FORMULA 상수에 정의된 계수들을 사용하여 공통 부분을 계산합니다.
     const baseBMR = BMR_FORMULA.WEIGHT_COEFFICIENT * weight
         + BMR_FORMULA.HEIGHT_COEFFICIENT * height
         - BMR_FORMULA.AGE_COEFFICIENT * age;
 
     let bmr;
     if (gender === '남') {
+        // 남성 상수를 더합니다.
         bmr = baseBMR + BMR_FORMULA.MALE_CONSTANT;
     } else if (gender === '여') {
+        // 여성 상수를 더합니다.
         bmr = baseBMR + BMR_FORMULA.FEMALE_CONSTANT;
     } else { // 성별 '비공개' 선택 시, 남/녀 평균값을 사용합니다.
         bmr = (baseBMR + BMR_FORMULA.MALE_CONSTANT + baseBMR + BMR_FORMULA.FEMALE_CONSTANT) / 2;
     }
+
     // 계산된 최종 BMR 값을 소수점 없이 반올림하여 자동계산 입력 필드에 표시합니다.
-    DOM.bmrAuto.value = Math.round(bmr);
+    // 이때, BMR이 음수가 되는 것을 방지하기 위해 Math.max(0, ...)를 사용하여 최솟값을 0으로 강제합니다.
+    DOM.bmrAuto.value = Math.round(Math.max(0, bmr));
 }
 
 /**
@@ -143,10 +152,10 @@ export function validateForm(data) {
     let focusTarget = null;
     // 검사할 필수 필드 목록을 정의합니다.
     const requiredFields = [
-        { name: 'age', label: '나이' },
-        { name: 'height', label: '키' },
-        { name: 'weight', label: '몸무게' },
-        { name: 'days', label: '목표 일수', max: 30 } // 최대값 검사도 함께 정의
+        {name: 'age', label: '나이'},
+        {name: 'height', label: '키'},
+        {name: 'weight', label: '몸무게'},
+        {name: 'days', label: '목표 일수', max: 30} // 최대값 검사도 함께 정의
     ];
     for (const field of requiredFields) {
         const value = +data[field.name]; // 문자열을 숫자로 변환
@@ -170,7 +179,7 @@ export function validateForm(data) {
     if (!data.skeletalMuscleMass && !data.muscleLevel) errors.push('골격근량 또는 골격근 수준');
     if (!data.activityCal && !data.activityLevel) errors.push('활동 칼로리 또는 활동 수준');
 
-    return { errors, focusTarget };
+    return {errors, focusTarget};
 }
 
 /**
