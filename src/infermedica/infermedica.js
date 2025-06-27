@@ -1,12 +1,12 @@
 import config from "../../assets/js/config.js";
 
-// Gemini 기반 건강 챗봇 스크립트 (infermedica.js 대체)
+// Gemini 기반 건강 챗봇 스크립트
 document.addEventListener("DOMContentLoaded", () => {
     loadModalHtmlHs();     // 모달 HTML 불러오기
     setupOpenButtonHs();   // 열기 버튼 연결
 });
 
-// Gemini API 키
+// Gemini API
 async function fetchGeminiResponseHs(userMessage) {
 
     const SYSTEM_PROMPT = `

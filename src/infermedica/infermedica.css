@@ -30,7 +30,7 @@
 /* 상단 헤더 */
 .chat-header-hs {
     background: #2ecc71;
-    color: white;
+    color: #fff;
     padding: 14px;
     font-weight: bold;
     display: flex;
@@ -40,12 +40,16 @@
 
 /* 닫기 버튼 */
 .close-btn-hs {
-    background: none;
+    background-color: #2ecc71;
     border: none;
-    color: white;
-    font-size: 20px;
+    color: #fff;
+    font-size: 30px;
     cursor: pointer;
+    border-radius: 6px;
+    box-shadow: none;
 }
+
+
 
 /* 메시지 표시 영역 */
 .chat-messages-hs {

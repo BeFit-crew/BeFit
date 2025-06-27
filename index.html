@@ -17,14 +17,23 @@
             <i class="fas fa-cog"></i>
         </div>
         <div class="aside-buttons-main">
-            <button class="login-btn-main aside-btn-main" data-tooltip="로그인">
-                <i class="fas fa-sign-in-alt"></i>
+            <button class="login-btn-main aside-btn-main" data-tooltip="건강체크">
+                <!-- 건강 체크 -->
+                <a href="">
+                    <i class="fas fa-user-check"></i>
+                </a>
             </button>
             <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 시청">
-                <i class="fab fa-youtube"></i>
+                <!-- 다영님 -->
+                <a href="#">
+                    <i class="fab fa-youtube"></i>
+                </a>
             </button>
             <button class="shopping-btn-main aside-btn-main" data-tooltip="쇼핑 추천 및 구매">
-                <i class="fas fa-shopping-basket"></i>
+                <!-- 동준님 -->
+                <a href="">
+                    <i class="fas fa-shopping-basket"></i>
+                </a>
             </button>
             <button class="checkHealth-btn-main aside-btn-main" data-tooltip="AI 건강 상담">
                 <i class="fas fa-comment-medical"></i>
@@ -34,24 +43,20 @@
 
     <!-- 로고 + 버튼 -->
     <div class="logo-hover-area-main">
-        <!-- css로 버튼이 로고보다 밑에있도록 조정 -->
-        <button class="start-btn-main" onclick="startApp()">START</button>
+        <button class="start-btn-main" onclick="startApp()">
+            <!-- 택준님 -->
+            <a href="#"></a>
+            START</button>
         <div class="logo-container-main">
             <div class="logo-image-main"></div>
             <div class="logo-overlay-main"></div>
         </div>
     </div>
 
-    <script>
-          const toggleBtn = document.querySelector('.aside-toggle-btn-main');
-           const asideWrapper = document.querySelector('.aside-wrapper-main');
+    <!-- 메인 js  -->
+    <script src="assets/js/main.js"></script>
 
-           toggleBtn.addEventListener('click', function () {
-              asideWrapper.classList.toggle('open');
-            });
-    </script>
-
-
+    <!-- 건강 상담 챗폿 js -->
     <script src="src/infermedica/infermedica.js" type="module"></script>
 
 </body>
