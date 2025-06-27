@@ -89,12 +89,10 @@ function setupNumberInputValidation(input, min, max) {
     input.addEventListener('input', () => {
         const val = input.value.trim();
         if (val === '' || isNaN(Number(val))) {
-            // 입력이 비었거나 숫자가 아닌 경우 경고 숨김
             hideWarning();
             return;
         }
         if (!isValid(val)) {
-            // 아직 경고를 띄우진 않고 스타일만 표시해도 됨
             input.classList.add('input-error');
         } else {
             hideWarning();
@@ -107,65 +105,11 @@ function setupNumberInputValidation(input, min, max) {
             hideWarning();
         } else {
             alert(`입력 값은 ${min} 이상 ${max} 이하여야 합니다.`);
-            input.value = '';  // 잘못된 값은 초기화
-            hideWarning();     // 스타일도 초기화
-            input.focus();     // 포커스는 원하면 다시 줄 수 있음
+            input.value = '';
+            hideWarning();
+            input.focus();
         }
     });
-}
-
-/**
- * 입력 값이 최소값과 최대값 범위를 벗어나는지 검사
- * @param {HTMLInputElement} input - 검사할 숫자 입력 필드
- * @param {number} min - 허용하는 최소값
- * @param {number} max - 허용하는 최대값
- * @returns {boolean} - 범위 내면 true, 벗어나면 false 반환
- */
-function validateInputRange(input, min, max) {
-    const value = Number(input.value);
-    if (isNaN(value)) return false;
-    return value >= min && value <= max;
-}
-
-/**
- * 모든 숫자 입력 필드에 입력 시 실시간 범위 검사 이벤트 등록
- * @returns {void}
- */
-function attachRangeValidation() {
-    const inputs = DOM.dietForm.querySelectorAll('input[type="number"]');
-
-    inputs.forEach(input => {
-        const min = Number(input.min);
-        const max = Number(input.max);
-
-        input.addEventListener('input', () => {
-            if (!validateInputRange(input, min, max)) {
-                showWarningModal(`입력 값이 ${min} 이상 ${max} 이하여야 합니다.`);
-                input.classList.add('input-error');
-            } else {
-                hideWarningModal();
-                input.classList.remove('input-error');
-            }
-        });
-    });
-}
-
-/**
- * 경고 메시지를 모달로 보여줌
- * @param {string} message - 사용자에게 보여줄 경고 문구
- */
-function showWarningModal(message) {
-    // DOM.modalBody가 기존 AI 결과 모달이라면
-    // 별도의 경고 모달 DOM 요소가 있으면 그걸 띄우거나 alert 대체 사용 가능
-    alert(message); // 임시로 alert 사용
-}
-
-/**
- * 경고 모달 숨기기 (필요 시)
- */
-function hideWarningModal() {
-    // 별도의 경고 모달 닫는 코드 위치
-    // alert() 사용 시 불필요
 }
 
 
@@ -270,11 +214,18 @@ function validateForm(data) {
         { name: 'age', label: '나이' },
         { name: 'height', label: '키' },
         { name: 'weight', label: '몸무게' },
-        { name: 'days', label: '목표 일수' }
+        // [수정] 목표일수 max 값을 30일로 제한 (과도한 요청 방지)
+        { name: 'days', label: '목표 일수', max: 30 }
     ];
     for (const field of requiredFields) {
-        if (!data[field.name] || +data[field.name] <= 0) {
+        const value = +data[field.name];
+        if (!value || value <= 0) {
             errors.push(field.label);
+            if (!focusTarget) focusTarget = DOM.dietForm[field.name];
+        }
+        // [추가] 최대값 검사 로직 추가
+        if (field.max && value > field.max) {
+            errors.push(`${field.label} (최대 ${field.max}일)`);
             if (!focusTarget) focusTarget = DOM.dietForm[field.name];
         }
     }
@@ -312,6 +263,8 @@ function preprocessFormData(data) {
  * @returns {string}
  */
 function buildPrompt(data) {
+    const planDays = Math.min(data.days, 7);
+
     const fatMassText = data.fatRate
         ? `${data.fatRate}% (${data.fatLevel ? `수준 '${data.fatLevel}' 기준 자동 계산` : '직접 입력'})`
         : (data.fatLevel || '미입력');
@@ -324,26 +277,75 @@ function buildPrompt(data) {
     const targetFatText = data.targetFatRate
         ? `${data.targetFatRate}% (${data.targetFatLevel ? `수준 '${data.targetFatLevel}' 기준 자동 계산` : '직접 입력'})`
         : (data.targetFatLevel || '미입력');
-    const targetMuscleText = data.targetSkeletalMuscle
-        ? `${data.targetSkeletalMuscle}kg (${data.targetMuscleLevel ? `수준 '${data.targetMuscleLevel}' 기준 자동 계산` : '직접 입력'})`
-        : (data.targetMuscleLevel || '미입력');
-    return `
-당신은 전문 트레이너이자 영양사입니다.
-다음 사용자 정보를 바탕으로 **건강한 일주일 식단 계획**, **운동 전략**, **추천 운동 시간**, **목표 분석**, **예상 체중 변화**를 HTML 카드 UI 형식으로 작성해주세요.
+    const targetMuscleText = data.targetSkeletalMuscleMass
+        ? `${data.targetSkeletalMuscleMass}kg (${data.targetSkeletalMuscleMassLevel ? `수준 '${data.targetSkeletalMuscleMassLevel}' 기준 자동 계산` : '직접 입력'})`
+        : (data.targetSkeletalMuscleMassLevel || '미입력');
 
-**주의사항**
-- 반드시 HTML 태그만 사용하세요. (예: <div>, <section>, <h3>, <p>)
-- 코드 블럭(\`\`\`)이나 마크다운, 설명 텍스트는 사용하지 마세요.
-- 결과는 전체 div 태그 안에 구성된 구조로 만들어 주세요.
-- 스타일은 inline CSS 없이 class 속성으로만 지정하세요.
+    const workoutFrequencyText = data.preferredWorkoutTime || "주 7회";
+    const workoutTimeNumber = data.preferredWorkoutTime ? (data.preferredWorkoutTime.match(/\d+/)?.[0] || 60) : 60;
 
-**클래스** 지정 규칙:
-- 전체 wrapper: class="ai-result-wrapper"
-- 모든 section: class="ai-section"
-- 사용자 정보 요약: class="ai-user"
-- 식단 계획: class="ai-diet"
-- 운동 전략: class="ai-training"
-- 목표 분석 및 체중 변화: class="ai-analysis"
+    // [수정] return 바로 뒤에 백틱(`)이 오도록 수정
+    return `당신은 전문 트레이너이자 영양사입니다.
+
+다음 사용자 정보를 바탕으로,
+- 건강 식단(diet)
+- 운동 루틴(training)
+- 목표 및 변화 분석(analysis)
+- 하루 평균 운동 소요 시간(workoutTime)
+
+을 반드시 아래 **JSON** 구조로만 응답하세요.
+
+**[계획 생성 중요 규칙]**
+- 사용자가 반복해서 수행할 수 있는 **${planDays}일치** 대표 계획을 생성합니다.
+- 사용자의 희망 운동 빈도(**${workoutFrequencyText}**)를 반드시 준수하여 운동일을 배정하세요.
+- 운동이 없는 날은 **"휴식"**으로 명확히 표시해야 합니다.
+
+**JSON 구조 예시**
+{
+  "user": {
+    "gender": "${data.gender || '입력하지 않음'}",
+    "age": ${data.age},
+    "height": ${data.height},
+    "weight": ${data.weight},
+    "fatRate": ${data.fatRate || null},
+    "skeletalMuscleMass": ${data.skeletalMuscleMass || null},
+    "activityCal": ${data.activityCal || null},
+    "bmr": ${data.bmrMode === 'auto' ? data.bmrAuto : data.bmrManual},
+    "targetWeight": ${data.targetWeight || null},
+    "targetFatRate": ${data.targetFatRate || null},
+    "targetSkeletalMuscleMass": ${data.targetSkeletalMuscleMass || null},
+    "days": ${data.days},
+    "limitations": "${data.limitations || '없음'}",
+    "foodAllergies": "${data.foodAllergies || '없음'}",
+    "restrictedFoods": "${data.restrictedFoods || '없음'}",
+    "preferences": "${data.preferences || '없음'}",
+    "preferredWorkout": "${data.preferredWorkout || '없음'}",
+    "preferredWorkoutTime": "${workoutFrequencyText}"
+  },
+  "diet": [
+    {
+      "day": 1,
+      "meals": [ { "type": "아침", "menu": ["닭가슴살"], "kcal": 400 } ]
+    }
+  ],
+  "training": [
+    {
+      "day": 1,
+      "routine": [ { "part": "가슴", "exercise": "벤치프레스", "set": "3 x 10" } ]
+    },
+    {
+      "day": 2,
+      "routine": [ { "part": "휴식", "exercise": "충분한 수면과 스트레칭", "set": "휴식" } ]
+    }
+  ],
+  "analysis": {
+    "goalWeight": null,
+    "goalFatRate": null,
+    "goalSkeletalMuscle": null,
+    "expectedChange": "목표 달성 요약"
+  },
+  "workoutTime": ${workoutTimeNumber}
+}
 
 [사용자 정보]
 - 성별: ${data.gender || '입력하지 않음'}
@@ -354,7 +356,7 @@ function buildPrompt(data) {
 - 골격근량: ${muscleMassText}
 - 활동 칼로리: ${activityText}
 - 기초대사량: ${data.bmrMode === 'auto' ? data.bmrAuto : data.bmrManual}kcal
-- 목표 체중: ${data.targetWeight}kg
+- 목표 체중: ${data.targetWeight || '미입력'}kg
 - 목표 체지방률: ${targetFatText}
 - 목표 골격근량: ${targetMuscleText}
 - 목표 일수: ${data.days}일
@@ -363,15 +365,14 @@ function buildPrompt(data) {
 - 제외할 음식: ${data.restrictedFoods || '없음'}
 - 먹고 싶은 음식: ${data.preferences || '없음'}
 - 선호 운동: ${data.preferredWorkout || '없음'}
-- 운동 희망 시간: ${data.preferredWorkoutTime || '없음'}
+- 운동 희망 시간 및 빈도: ${workoutFrequencyText}
 
-요구 사항:
-- \`<div class='ai-diet'>\` 안에 식단을 작성
-- \`<div class='ai-training'>\` 안에 운동 루틴을 작성
-- **\`<p class='ai-workout-time'>\` 안에 운동 소요 시간만 작성**
+**[최종 지시]**
+- 반드시 day1부터 day${planDays}까지 모두 채운 JSON 배열로 응답하세요.
+- **운동이 없는 날의 routine**은 \`[{"part": "휴식", "exercise": "가벼운 산책 또는 스트레칭", "set": "휴식"}]\` 과 같이 명확하게 '휴식'으로 채워주세요.
+- 마크다운, 설명문, 코드블록(\`\`\`) 없이 순수 JSON만 반환하세요.
 
-응답은 HTML로 작성하고, 위 구조를 반드시 지켜주세요.
-`;
+[위 사용자 정보와 구조로 ${planDays}일치 식단·운동·분석·운동시간을 한국어로 상세히 채워주세요]`;
 }
 
 /**
@@ -394,34 +395,137 @@ async function callGeminiAPI(prompt) {
 }
 
 /**
- * API 응답 처리 및 모달 표시 (원본 전체 저장)
- * @param {string} rawResponse
- * @param {HTMLElement} $modalBody
+ * AI 응답 텍스트에서 순수 JSON 텍스트만 추출합니다.
+ * 응답이 마크다운 코드 블록(` ```json ... ``` `)으로 감싸여 있거나,
+ * 불완전하게 잘렸을 경우를 대비합니다.
+ * @param {string} rawText - AI로부터 받은 원본 텍스트
+ * @returns {string} - 추출된 JSON 텍스트
  */
-function processApiResponse(rawResponse, $modalBody) {
-    let htmlContent = rawResponse;
-
-    if (htmlContent.startsWith('```')) {
-        htmlContent = htmlContent.replace(/^```(html|json)?\n/, '').replace(/```$/, '');
+function extractPureJSON(rawText) {
+    // `json` 이라는 단어가 포함된 코드 블록을 찾으려고 시도
+    let match = rawText.match(/```json\s*([\s\S]*?)\s*```/);
+    if (match && match[1]) {
+        return match[1].trim();
     }
 
-    $modalBody.innerHTML = htmlContent;
+    // 일반 코드 블록을 찾으려고 시도
+    match = rawText.match(/```\s*([\s\S]*?)\s*```/);
+    if (match && match[1]) {
+        return match[1].trim();
+    }
 
-    localStorage.setItem(STORAGE_KEY, htmlContent);
+    // 코드 블록이 없다면, 첫 '{' 와 마지막 '}' 사이의 내용을 추출
+    const firstBrace = rawText.indexOf('{');
+    const lastBrace = rawText.lastIndexOf('}');
+
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        return rawText.substring(firstBrace, lastBrace + 1);
+    }
+
+    // 아무것도 찾지 못하면 원본 텍스트 반환
+    return rawText;
 }
 
+
+
 /**
- * 로컬 스토리지에서 저장된 AI 결과를 모달에 표시 (원본 전체 불러오기)
+ * AI 응답 JSON 데이터를 사용자가 보기 좋은 HTML로 변환합니다.
+ * @param {object} data - 파싱된 AI 응답 객체
+ * @returns {string} - 렌더링된 HTML 문자열
+ */
+function renderAIResult(data) {
+    // [수정] workoutTime이 문자열일 경우 숫자만 추출
+    let workoutTimeDisplay = data.workoutTime;
+    if (typeof workoutTimeDisplay === 'string') {
+        const match = workoutTimeDisplay.match(/\d+/); // 문자열에서 첫 번째 숫자 그룹을 찾음
+        if (match) {
+            workoutTimeDisplay = `${match[0]}분`;
+        }
+    } else {
+        workoutTimeDisplay = `${data.workoutTime || '미설정'}분`;
+    }
+
+    // 사용자 정보 및 분석 섹션
+    const analysisHtml = `
+        <div class="analysis-section">
+            <h2>📊 AI 분석 및 요약</h2>
+            <p>${data.analysis.expectedChange}</p>
+            <ul>
+                <li><strong>총 목표 기간:</strong> ${data.user.days}일</li>
+                <li><strong>하루 권장 운동 시간:</strong> ${workoutTimeDisplay}</li>
+                <li><strong>목표 체중:</strong> ${data.analysis.goalWeight || '미설정'} kg</li>
+                <li><strong>목표 체지방률:</strong> ${data.analysis.goalFatRate || '미설정'} %</li>
+                <li><strong>목표 골격근량:</strong> ${data.analysis.goalSkeletalMuscle || '미설정'} kg</li>
+            </ul>
+        </div>
+    `;
+
+    // 식단 및 운동 계획 섹션
+    const planHtml = data.diet.map((dayPlan, index) => {
+        const trainingPlan = data.training[index];
+        const dietList = dayPlan.meals.map(meal => `
+            <tr>
+                <td>${meal.type}</td>
+                <td>${Array.isArray(meal.menu) ? meal.menu.join(', ') : meal.menu}</td>
+                <td>${meal.kcal} kcal</td>
+            </tr>
+        `).join('');
+
+        const trainingList = trainingPlan.routine.map(exercise => `
+            <tr>
+                <td>${exercise.part}</td>
+                <td>${exercise.exercise}</td>
+                <td>${exercise.set}</td>
+            </tr>
+        `).join('');
+
+        return `
+            <details class="day-plan" ${index === 0 ? 'open' : ''}>
+                <summary>
+                    <h3>📅 Day ${dayPlan.day}</h3>
+                </summary>
+                <div class="plan-content">
+                    <h4>🥗 식단</h4>
+                    <table>
+                        <thead><tr><th>구분</th><th>메뉴</th><th>칼로리</th></tr></thead>
+                        <tbody>${dietList}</tbody>
+                    </table>
+                    <h4>💪 운동</h4>
+                    <table>
+                        <thead><tr><th>부위</th><th>운동</th><th>세트</th></tr></thead>
+<tbody>${trainingList}</tbody>
+                    </table>
+                </div>
+            </details>
+        `;
+    }).join('');
+
+    return `<div class="ai-result-container">${analysisHtml}<hr>${planHtml}</div>`;
+}
+
+
+/**
+ * 로컬 스토리지에서 저장된 AI 결과를 모달에 표시
  */
 function showSavedResult() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) {
+    const savedJsonString = localStorage.getItem(STORAGE_KEY); // [수정] JSON 문자열을 가져옴
+    if (!savedJsonString) {
         alert('저장된 AI 결과가 없습니다.');
         return;
     }
 
-    DOM.modalBody.innerHTML = saved;
-    DOM.modal.classList.remove('hidden');
+    try {
+        // [수정] JSON을 파싱하고 렌더링 함수를 통해 HTML로 변환
+        const savedData = JSON.parse(savedJsonString);
+        DOM.modalBody.innerHTML = renderAIResult(savedData);
+        DOM.modal.classList.remove('hidden');
+    } catch (error) {
+        alert('저장된 결과를 불러오는 중 오류가 발생했습니다.');
+        console.error("저장된 JSON 파싱 오류:", error);
+        // 오류 발생 시 저장된 데이터 삭제도 고려
+        localStorage.removeItem(STORAGE_KEY);
+        updateShowSavedResultBtnVisibility();
+    }
 }
 
 
@@ -435,17 +539,15 @@ async function handleFormSubmit(e) {
     DOM.errorBox.innerHTML = '';
     DOM.result.innerHTML = '';
 
-    // 로딩 표시 후 화면 스크롤 자연스럽게 이동 (아래로)
     DOM.loading.scrollIntoView({ behavior: 'smooth' });
 
-    // ① FormData 객체에서 값만 추출해서 전달
     const formDataObj = Object.fromEntries(new FormData(DOM.dietForm).entries());
     const rawData = preprocessFormData(formDataObj);
 
     const { errors, focusTarget } = validateForm(rawData);
 
     if (errors.length > 0) {
-        alert('작성되지 않은 항목이 있습니다:\n- ' + errors.join('\n- '));
+        alert('다음 필수 항목을 확인해주세요:\n- ' + errors.join('\n- '));
         focusTarget?.focus();
         DOM.loading.style.display = 'none';
         return;
@@ -456,11 +558,33 @@ async function handleFormSubmit(e) {
         const rawResponse = await callGeminiAPI(prompt);
 
         if (rawResponse) {
-            processApiResponse(rawResponse, DOM.modalBody);
+            let aiData;
+            try {
+                let cleanedJsonText = extractPureJSON(rawResponse);
+
+                // [추가] JSON 파싱 전, 흔한 오류 자동 수정
+                // 1. 객체나 배열의 마지막 요소 뒤에 불필요한 쉼표(trailing comma) 제거
+                cleanedJsonText = cleanedJsonText.replace(/,\s*([}\]])/g, '$1');
+                // 2. 닫는 괄호( } 또는 ] ) 바로 앞에 와야 할 쉼표가 누락된 경우 추가
+                // 예: { "a": 1 } { "b": 2 } -> { "a": 1 }, { "b": 2 }
+                cleanedJsonText = cleanedJsonText.replace(/}\s*{/g, '},{');
+
+                aiData = JSON.parse(cleanedJsonText);
+            } catch (parseErr) {
+                console.error("JSON 파싱 오류:", parseErr);
+                console.error("AI 원본 응답:", rawResponse);
+                DOM.modalBody.innerHTML = `<p style="color:red; white-space: pre-wrap;">AI가 유효한 형식으로 응답하지 않았습니다. 잠시 후 다시 시도해주세요.<br><br><b>[오류 상세]</b><br>${parseErr.message}<br><br><b>[AI 응답 원문]</b><br>${rawResponse}</p>`;
+                DOM.modal.classList.remove('hidden');
+                DOM.loading.style.display = 'none';
+                return;
+            }
+
+            DOM.modalBody.innerHTML = renderAIResult(aiData);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(aiData));
             DOM.modal.classList.remove('hidden');
             updateShowSavedResultBtnVisibility();
         } else {
-            DOM.modalBody.innerHTML = '<p style="color:red">AI로부터 응답을 받지 못했습니다. 다시 시도해주세요.</p>';
+            DOM.modalBody.innerHTML = '<p style="color:red">AI로부터 응답을 받지 못했습니다. 네트워크 연결을 확인하거나 잠시 후 다시 시도해주세요.</p>';
             DOM.modal.classList.remove('hidden');
             updateShowSavedResultBtnVisibility();
         }
@@ -473,12 +597,11 @@ async function handleFormSubmit(e) {
 }
 
 
+
 /**
  * 이벤트 리스너 초기화
- * - 각 입력 필드 및 버튼에 필요한 이벤트 리스너를 등록합니다.
  */
 function initEventListeners() {
-    // 유효성 검사할 필드와 범위 정보 배열로 정의
     const validations = [
         { input: DOM.dietForm.age, min: 10, max: 125 },
         { input: DOM.dietForm.height, min: 50, max: 280 },
@@ -488,11 +611,11 @@ function initEventListeners() {
         { input: DOM.dietForm.activityCal, min: 0, max: 5000 },
         { input: DOM.targetFatRate, min: 0.1, max: 70 },
         { input: DOM.targetSkeletalMuscleMass, min: 1, max: 100 },
-        { input: DOM.dietForm.days, min: 1, max: 365 },
+        // [수정] 목표일수 최대값을 30으로 설정하여 과도한 요청 방지
+        { input: DOM.dietForm.days, min: 1, max: 30 },
         { input: DOM.dietForm.bmrManual, min: 800, max: 10000 }
     ];
 
-    // 배열 반복하며 유효성 검사 등록
     validations.forEach(({ input, min, max }) => {
         if (input) setupNumberInputValidation(input, min, max);
     });
@@ -514,7 +637,7 @@ function initEventListeners() {
     DOM.modalOverlay.addEventListener('click', () => DOM.modal.classList.add('hidden'));
     DOM.closeModal.addEventListener('click', () => DOM.modal.classList.add('hidden'));
     DOM.showSavedResultBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // 폼 제출 막기
+        e.preventDefault();
         showSavedResult();
     });
 }
@@ -526,7 +649,12 @@ function initEventListeners() {
 function checkSavedResult() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
-        console.log('✨ 저장된 AI 결과 원본 HTML:', saved);
+        try {
+            // [수정] 저장된 데이터가 유효한 JSON인지 확인하고 객체로 출력
+            console.log('✨ 저장된 AI 결과 (파싱된 객체):', JSON.parse(saved));
+        } catch {
+            console.log('✨ 저장된 AI 결과 (잘못된 형식):', saved);
+        }
     }
 }
 
@@ -541,3 +669,28 @@ function main() {
 }
 
 main();
+
+/**
+ * * 로컬 스토리지에 저장된 BeFit AI 결과(JSON)를 객체로 반환하는 공유 함수입니다.
+ *  *
+ *  * - 전역(window) 또는 모듈에서 import하여 사용할 수 있습니다.
+ *  * - 저장된 값이 JSON 형식이면 객체로 반환하고, 없거나 파싱에 실패하면 null을 반환합니다.
+ *  * - 데이터가 손상(파싱 실패)된 경우 콘솔에 오류를 출력합니다.
+ */
+export function getBefitAiResult() {
+    const STORAGE_KEY = 'befit_ai_result'; // 이 상수는 befit-ai.js 상단에 이미 선언되어 있어야 합니다.
+    const savedDataString = localStorage.getItem(STORAGE_KEY);
+
+    if (savedDataString) {
+        try {
+            // 성공적으로 데이터를 파싱하면 객체를 반환
+            return JSON.parse(savedDataString);
+        } catch (e) {
+            console.error("공유 데이터 파싱 실패:", e);
+            // 데이터가 손상되었으면 null 반환
+            return null;
+        }
+    }
+    // 저장된 데이터가 없으면 null 반환
+    return null;
+}
