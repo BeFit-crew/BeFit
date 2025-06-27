@@ -152,6 +152,43 @@ button {
     background-color: #ca6f1e;
 }
 
+/* 어사이드 버튼 툴팁 */
+.aside-btn-main[data-tooltip] {
+    position: relative;
+}
+
+.aside-btn-main[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 2000;
+}
+.playlist-btn-main[data-tooltip]::after {
+    background-color: #d4ac0d;
+}
+
+.shopping-btn-main[data-tooltip]::after {
+    background-color: #16a085;
+}
+
+.checkHealth-btn-main[data-tooltip]::after {
+    background-color: #ca6f1e;
+}
+
+.aside-btn-main[data-tooltip]:hover::after {
+    opacity: 1;
+}
 
 /* 로고와 스타트  */
 /* 플랙스로 순서를 바꾸고 형제 선택자를 사용하여 호버 효과 */
