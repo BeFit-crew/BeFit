@@ -1,4 +1,4 @@
-import config from "../../assets/js/config.js";
+import { API_KEY_HS } from "../../assets/js/config.js";
 
 // Gemini 기반 건강 챗봇 스크립트
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +28,7 @@ async function fetchGeminiResponseHs(userMessage) {
 `;
 
     const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${config.API_KEY_HS}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY_HS}`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
