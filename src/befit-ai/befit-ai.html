@@ -169,7 +169,6 @@
                 <span class="error-message-befit-ai"></span>
             </div>
 
-            <!-- 목표 체지방률 + 수준 -->
             <div class="inline-befit-ai">
                 <div class="form-group-befit-ai">
                     <label for="targetFatRate-befit-ai">목표 체지방률 (%)</label>
@@ -191,7 +190,6 @@
                 </div>
             </div>
 
-            <!-- 목표 골격근량 + 수준 -->
             <div class="inline-befit-ai">
                 <div class="form-group-befit-ai">
                     <label for="targetSkeletalMuscleMass-befit-ai">목표 골격근량 (kg)</label>
@@ -228,22 +226,26 @@
 
             <label for="limitations-befit-ai">건강 관련 특이사항</label>
             <textarea id="limitations-befit-ai" name="limitations" rows="2" lang="ko"
-                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압"></textarea>
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압">
+            </textarea>
             <span class="error-message-befit-ai"></span>
 
             <label for="foodAllergies-befit-ai">음식 알러지</label>
             <textarea id="foodAllergies-befit-ai" name="foodAllergies" rows="2" lang="ko"
-                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩"></textarea>
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩">
+            </textarea>
             <span class="error-message-befit-ai"></span>
 
             <label for="restrictedFoods-befit-ai">제외할 음식</label>
             <textarea id="restrictedFoods-befit-ai" name="restrictedFoods" rows="2" lang="ko"
-                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기"></textarea>
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기">
+            </textarea>
             <span class="error-message-befit-ai"></span>
 
             <label for="preferences-befit-ai">먹고 싶은 음식</label>
             <textarea id="preferences-befit-ai" name="preferences" rows="2" lang="ko"
-                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기"></textarea>
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기">
+            </textarea>
             <span class="error-message-befit-ai"></span>
 
             <div class="inline-befit-ai">
@@ -276,7 +278,9 @@
         <p><i class="fas fa-hourglass-half"></i> AI가 식단 및 운동을 작성 중입니다...</p>
     </div>
     <div id="result-befit-ai"></div>
+
 </main>
+
 <!-- AI 결과 모달 -->
 <div id="aiModal" class="modal hidden">
     <div class="modal-overlay" id="modalOverlay"></div>
@@ -285,5 +289,6 @@
         <div id="modalBody"></div>
     </div>
 </div>
+
 </body>
 </html>

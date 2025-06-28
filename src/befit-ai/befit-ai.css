@@ -1,56 +1,78 @@
+/**
+ * @file BeFit AI 페이지의 전체적인 시각적 스타일을 정의합니다.
+ * @description CSS 변수를 사용하여 테마 색상을 효율적으로 관리합니다.
+ */
+
+/* CSS 변수 선언부 */
+:root {
+    --primary-color: #248242; /* 메인 테마 색상 (녹색) */
+    --primary-color-darker: #1e6a36; /* 호버 시 사용할 어두운 녹색 */
+    --secondary-color: #6c757d; /* 보조 버튼 색상 (회색) */
+    --secondary-color-darker: #5a6268; /* 회색 버튼 호버 색상 */
+    --font-color-base: #2c2c2c; /* 기본 글자 색상 */
+    --background-color-light: #f6f7f8; /* 페이지 배경 색상 */
+    --error-color: #d32f2f; /* 에러 메시지 색상 */
+}
+
+/* --- 1. 기본 및 페이지 레이아웃 --- */
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f6f7f8;
-    color: #2c2c2c;
+    font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+    background-color: var(--background-color-light); /* 변수 사용 */
+    color: var(--font-color-base); /* 변수 사용 */
+    line-height: 1.6;
 }
 
-/* 로고 헤더 */
 .logo-heading-befit-ai {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #248242;
+    background-color: var(--primary-color); /* 변수 사용 */
     color: white;
     padding: 16px 24px;
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 40px auto 40px;
+    margin: 40px auto;
     max-width: 720px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
-/* 로고 이미지 크기 */
 .logo-heading-befit-ai img.logo-icon-befit-ai {
     height: 36px;
     margin-right: 12px;
 }
 
-/* 폼 영역 */
+
+/* --- 2. 폼(Form) 및 입력 요소 스타일 --- */
+
 form#dietForm-befit-ai {
     max-width: 720px;
     margin: 0 auto;
 }
 
-/* 카드 공통 영역 */
 .card-befit-ai {
     background-color: #fff;
     border-radius: 10px;
     padding: 24px;
-    margin: 0 auto 32px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    max-width: 720px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .card-title-befit-ai {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #248242;
+    color: var(--primary-color); /* 변수 사용 */
     border-bottom: 1px solid #eee;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     padding-bottom: 12px;
+}
+
+.form-group-befit-ai:last-child {
+    margin-bottom: 0;
 }
 
 .inline-befit-ai {
@@ -64,6 +86,12 @@ form#dietForm-befit-ai {
     min-width: 160px;
 }
 
+label {
+    display: block;
+    font-weight: 600;
+    margin: 6px;
+}
+
 input,
 select,
 textarea {
@@ -72,54 +100,86 @@ textarea {
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin-top: 6px;
     box-sizing: border-box;
-    margin-bottom: 24px;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border: 1px solid #248242;
+    border-color: var(--primary-color); /* 변수 사용 */
+    box-shadow: 0 0 0 3px rgba(36, 130, 66, 0.15); /* 이 부분은 특정 색상이라 유지 */
 }
 
 textarea {
-    margin-bottom: 24px;
     resize: vertical;
-    font-weight: 550;
-    font-size: 0.9rem;
+    min-height: 80px;
 }
+
+.required-star-befit-ai {
+    color: var(--error-color); /* 변수 사용 */
+    margin-left: 2px;
+}
+
+
+/* --- 3. 버튼 및 동적 UI 요소 --- */
 
 .button-container-befit-ai {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+}
+
+#showSavedResultBtn,
+.submit-btn-befit-ai {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 24px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .submit-btn-befit-ai {
-    width: 50%;
-    padding: 16px;
-    background-color: #248242;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 24px;
+    background-color: var(--primary-color); /* 변수 사용 */
 }
 
-button[type="submit"]:hover {
-    background-color: #248242;
+#showSavedResultBtn {
+    background-color: var(--secondary-color); /* 변수 사용 */
+    max-width: 200px;
+    margin-bottom: 16px; /* 두 버튼 사이 간격 */
+}
+
+.submit-btn-befit-ai:hover {
+    background-color: var(--primary-color-darker); /* 변수 사용 */
+}
+
+#showSavedResultBtn:hover {
+    background-color: var(--secondary-color-darker); /* 변수 사용 */
+}
+
+#showSavedResultBtn:active,
+.submit-btn-befit-ai:active {
+    transform: scale(0.98);
 }
 
 #errorBox-befit-ai {
     max-width: 720px;
     margin: 0 auto;
-    padding: 8px;
-    color: red;
     text-align: center;
+    border-radius: 8px;
+    color: var(--error-color); /* 변수 사용 */
+}
+
+#errorBox-befit-ai:not(:empty) {
+    background-color: #ffebee;
+    border: 1px solid var(--error-color); /* 변수 사용 */
+    padding: 12px;
 }
 
 #loading-befit-ai {
@@ -132,71 +192,40 @@ button[type="submit"]:hover {
     width: 40px;
     height: 40px;
     border: 5px solid #ccc;
-    border-top-color: #248242;
+    border-top-color: var(--primary-color); /* 변수 사용 */
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 12px;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.ai-result-wrapper {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 32px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.08);
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #333;
-    line-height: 1.6;
-}
 
-.ai-section {
-    margin-bottom: 32px;
-    padding: 24px;
-    background: #f9f9f9;
-    border-radius: 12px;
-}
+/* --- 4. 모달(Modal) 및 AI 결과 스타일 --- */
 
-.ai-section h3 {
-    font-size: 20px;
-    color: #222;
-    border-left: 6px solid #248242;
-    padding-left: 12px;
-    margin-bottom: 16px;
-}
-
-.ai-section ul {
-    padding-left: 20px;
-}
-
-.ai-section li {
-    margin-bottom: 6px;
-}
-
-/* 모달 전체 레이어 */
 .modal {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
 }
 
-/* 어두운 배경 오버레이 */
 .modal-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
 }
 
-/* 중앙 카드 스타일 */
 .modal-content {
     position: relative;
     max-width: 900px;
@@ -206,117 +235,53 @@ button[type="submit"]:hover {
     background: #fff;
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 10000;
-    font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* 닫기 버튼 */
 .modal-close {
     position: absolute;
-    top: 12px;
+    top: 16px;
     right: 16px;
     background: transparent;
     border: none;
-    font-size: 20px;
+    font-size: 24px;
+    color: #888;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
-.button-container-befit-ai {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
+.modal-close:hover {
+    color: #333;
 }
 
-#showSavedResultBtn {
-    background-color: #248242;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    margin-bottom: 16px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 140px; /* 답변 다시 보기 버튼 너비 */
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-#showSavedResultBtn:hover {
-    background-color: #1b6233;
-}
-
-.submit-btn-befit-ai {
-    background-color: #248242;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 300px; /* AI에게 식단 및 운동 추천 받기 버튼 너비 */
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn-befit-ai:hover {
-    background-color: #1b6233;
-}
-
-.required-star-befit-ai {
-    color: #d32f2f; /* 진한 빨간색 */
-    margin-left: 2px;
-    font-weight: bold;
-    font-size: 1em;
-}
-
-
-/* 숨김 처리 클래스 */
 .hidden {
     display: none !important;
 }
 
-/* =================================
-   Befit AI 결과 모달 스타일 (추가)
-   ================================= */
-
-/* 모달 내부의 AI 결과 컨테이너 */
 .ai-result-container {
     padding: 1rem;
-    font-family: 'Noto Sans KR', sans-serif; /* 기존 폰트와 통일 */
-    line-height: 1.6;
 }
 
-/* AI 분석 및 요약 섹션 */
 .analysis-section {
-    background-color: #f6f7f8; /* 기존 배경색과 유사하게 설정 */
+    background-color: #f9f9f9;
     border: 1px solid #e9ecef;
     padding: 1.5rem;
-    border-radius: 10px; /* 기존 border-radius와 통일 */
-    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
 }
 
 .analysis-section h2 {
-    font-size: 1.2rem; /* 기존 card-title-befit-ai 와 유사하게 설정 */
-    font-weight: bold;
-    color: #248242; /* 기존 테마 색상 사용 */
-    margin-top: 0;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.analysis-section p {
-    margin-bottom: 1rem;
-    color: #495057;
+    font-size: 1.3rem;
+    color: var(--primary-color); /* 변수 사용 */
+    margin: 0 0 1rem 0;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 1rem;
 }
 
 .analysis-section ul {
     list-style-type: none;
     padding-left: 0;
-    margin: 0;
 }
 
 .analysis-section li {
@@ -325,48 +290,43 @@ button[type="submit"]:hover {
 }
 
 .analysis-section strong {
-    color: #248242; /* 기존 테마 색상 사용 */
-    margin-right: 0.5rem;
+    color: var(--primary-color); /* 변수 사용 */
+    min-width: 120px;
+    display: inline-block;
 }
 
-/* 날짜별 계획 (접기/펼치기) */
 .day-plan {
     border: 1px solid #e9ecef;
-    border-radius: 10px; /* 기존 border-radius와 통일 */
+    border-radius: 10px;
     margin-bottom: 1rem;
     overflow: hidden;
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-.day-plan:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 기존 box-shadow와 유사하게 설정 */
 }
 
 .day-plan summary {
     cursor: pointer;
     padding: 1rem 1.5rem;
-    background-color: #f6f7f8;
+    background-color: #f9f9f9;
     font-weight: bold;
     font-size: 1.1rem;
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.2s ease;
 }
 
-.day-plan summary:hover {
-    background-color: #e9ecef;
+.day-plan summary::-webkit-details-marker {
+    display: none;
 }
 
 .day-plan[open] summary {
     border-bottom: 1px solid #dee2e6;
-    background-color: #e9ecef;
+    background-color: #f1f3f5;
 }
 
-/* 펼쳤을 때 나오는 아이콘 모양 변경 */
 .day-plan summary::after {
     content: '▼';
     font-size: 0.8rem;
+    color: #868e96;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -374,32 +334,24 @@ button[type="submit"]:hover {
     transform: rotate(180deg);
 }
 
-/* 식단 및 운동 계획 내용 */
 .day-plan .plan-content {
     padding: 1.5rem;
-    background-color: #fff;
-}
-
-.day-plan h3 {
-    margin: 0;
 }
 
 .day-plan h4 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    color: #333;
     font-size: 1.1rem;
-    font-weight: bold;
-    border-left: 4px solid #248242; /* 기존 테마 색상 사용 */
+    border-left: 4px solid var(--primary-color); /* 변수 사용 */
     padding-left: 0.75rem;
+    margin: 1.5rem 0 1rem 0;
 }
 
-/* 테이블 스타일 */
+.day-plan .plan-content h4:first-child {
+    margin-top: 0;
+}
+
 .day-plan table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
 }
 
 .day-plan th,
@@ -408,22 +360,33 @@ button[type="submit"]:hover {
     padding: 0.75rem;
     text-align: left;
     font-size: 0.95rem;
-    vertical-align: middle;
 }
 
 .day-plan th {
-    background-color: #f6f7f8;
-    font-weight: 600;
+    background-color: #f9f9f9;
 }
 
-.day-plan tr:nth-child(even) {
-    background-color: #fdfdfd;
-}
 
-/* 구분선 스타일 */
-hr {
-    border: 0;
-    height: 1px;
-    background-color: #e9ecef;
-    margin: 2rem 0;
+/* --- 5. 반응형 디자인 (@media 쿼리) --- */
+
+@media (max-width: 768px) {
+    .logo-heading-befit-ai,
+    form#dietForm-befit-ai {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .logo-heading-befit-ai {
+        font-size: 1.3rem;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .card-befit-ai {
+        padding: 16px;
+    }
+
+    .modal-content {
+        padding: 24px;
+    }
 }
