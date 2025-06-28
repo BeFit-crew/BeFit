@@ -7,8 +7,8 @@
  */
 
 // [의존성] 다른 모듈에서 정의된 상수와 DOM 요소를 가져옵니다.
-import { STORAGE_KEY } from './constants-befit-ai.js'; // 로컬 스토리지 키
-import DOM from './dom-befit-ai.js';                     // '다시 보기' 버튼 제어를 위한 DOM 객체
+import {STORAGE_KEY} from './constants-befit-ai.js'; // 로컬 스토리지 키
+import DOM from './dom-befit-ai.js'; // '다시 보기' 버튼 제어를 위한 DOM 객체
 
 /**
  * AI 분석 결과를 로컬 스토리지에 안전하게 저장하고, '다시 보기' 버튼의 상태를 업데이트합니다.

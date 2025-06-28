@@ -8,7 +8,7 @@
 
 // [의존성] 다른 모듈에서 정의된 DOM 요소와 스토리지 관련 함수들을 가져옵니다.
 import DOM from './dom-befit-ai.js';
-import { getBefitAiResult, updateShowSavedResultBtnVisibility } from './storage-befit-ai.js';
+import {getBefitAiResult, updateShowSavedResultBtnVisibility} from './storage-befit-ai.js';
 
 /**
  * AI가 생성한 JSON 데이터를 동적인 HTML 문자열로 변환(렌더링)합니다.
@@ -32,7 +32,7 @@ export function renderAIResult(data) {
     // [HTML 템플릿] 템플릿 리터럴(``)을 사용하여 분석 및 요약 섹션의 HTML 구조를 만듭니다.
     const analysisHtml = `
         <div class="analysis-section">
-            <h2>📊 AI 분석 및 요약</h2>
+            <h2><i class="fas fa-chart-pie"></i> BeFit AI 분석 및 요약</h2>
             <p>${data.analysis.expectedChange}</p>
             <ul>
                 <li><strong>총 목표 기간:</strong> ${data.user.days}일</li>
@@ -65,14 +65,14 @@ export function renderAIResult(data) {
         // 첫 번째 날짜(index === 0)의 계획만 기본적으로 펼쳐진 상태('open')로 보여줍니다.
         return `
             <details class="day-plan" ${index === 0 ? 'open' : ''}>
-                <summary><h3>📅 Day ${dayPlan.day}</h3></summary>
+                <summary><h3><i class="fas fa-calendar-day"></i> Day ${dayPlan.day}</h3></summary>
                 <div class="plan-content">
-                    <h4>🥗 식단</h4>
+                    <h4><i class="fas fa-utensils"></i> 식단</h4>
                     <table>
                         <thead><tr><th>구분</th><th>메뉴</th><th>칼로리</th></tr></thead>
                         <tbody>${dietList}</tbody>
                     </table>
-                    <h4>💪 운동</h4>
+                    <h4><i class="fas fa-dumbbell"></i> 운동</h4>
                     <table>
                         <thead><tr><th>부위</th><th>운동</th><th>세트</th></tr></thead>
                         <tbody>${trainingList}</tbody>
@@ -121,7 +121,7 @@ export function toggleLoading(isLoading) {
         if (DOM.result) DOM.result.innerHTML = '';
         if (DOM.errorBox) DOM.errorBox.innerHTML = '';
         // 로딩 화면이 사용자에게 보이도록 해당 위치로 스크롤을 부드럽게 이동시킵니다.
-        DOM.loading?.scrollIntoView({ behavior: 'smooth' });
+        DOM.loading?.scrollIntoView({behavior: 'smooth'});
     }
 }
 
