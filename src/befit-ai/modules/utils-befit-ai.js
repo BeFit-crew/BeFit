@@ -39,7 +39,7 @@ export function setupNumberInputValidation(input, min, max) {
         if (val === '' || isNaN(Number(val)) || isValid(val)) return;
 
         // 유효하지 않은 값이면 경고창을 띄우고, 입력값을 비운 뒤 다시 포커스를 줍니다.
-        alert(`입력 값은 ${min} 이상 ${max} 이하여야 합니다.`);
+        alert(`${min} 이상 ${max} 이하로 입력해 주세요.`);
         input.value = '';
         input.classList.remove('input-error');
         input.focus();
@@ -155,7 +155,7 @@ export function validateForm(data) {
         {name: 'age', label: '나이'},
         {name: 'height', label: '키'},
         {name: 'weight', label: '몸무게'},
-        {name: 'days', label: '목표 일수', max: 30} // 최대값 검사도 함께 정의
+        {name: 'days', label: '목표 일수', max: 365} // 최대값 검사도 함께 정의
     ];
     for (const field of requiredFields) {
         const value = +data[field.name]; // 문자열을 숫자로 변환

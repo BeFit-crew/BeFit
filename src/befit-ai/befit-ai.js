@@ -36,7 +36,7 @@ async function handleFormSubmit(e) {
     const processedData = Utils.preprocessFormData(formDataObj);
 
     // [유효성 검사] 데이터가 유효한지 검사합니다.
-    const { errors, focusTarget } = Utils.validateForm(processedData);
+    const {errors, focusTarget} = Utils.validateForm(processedData);
     if (errors.length > 0) {
         // 오류가 있으면 사용자에게 알리고, 문제가 된 첫 번째 입력 필드로 포커스를 이동시킵니다.
         alert('다음 필수 항목을 확인해주세요:\n- ' + errors.join('\n- '));
@@ -97,11 +97,19 @@ async function handleFormSubmit(e) {
 function initEventListeners() {
     // 각 숫자 입력 필드에 대한 유효성 검사 설정을 배열로 정의하고, 순회하며 적용합니다.
     const validations = [
-        { input: DOM.dietForm.age, min: 10, max: 125 },
-        // ... (나머지 유효성 검사 설정들) ...
-        { input: DOM.dietForm.bmrManual, min: 800, max: 10000 }
+        {input: DOM.dietForm.age, min: 10, max: 125},
+        {input: DOM.dietForm.height, min: 50, max: 280},
+        {input: DOM.dietForm.weight, min: 5, max: 610},
+        {input: DOM.dietForm.bmrManual, min: 800, max: 8000},
+        {input: DOM.dietForm.fatRate, min: 0.1, max: 70},
+        {input: DOM.dietForm.skeletalMuscleMass, min: 1, max: 100},
+        {input: DOM.dietForm.activityCal, min: 1, max: 5000},
+        {input: DOM.dietForm.targetWeight, min: 5, max: 610},
+        {input: DOM.targetFatRate, min: 0.1, max: 70},
+        {input: DOM.targetSkeletalMuscleMass, min: 1, max: 100},
+        {input: DOM.dietForm.days, min: 7, max: 365}
     ];
-    validations.forEach(({ input, min, max }) => {
+    validations.forEach(({input, min, max}) => {
         if (input) Utils.setupNumberInputValidation(input, min, max);
     });
 
@@ -113,7 +121,7 @@ function initEventListeners() {
     // 주요 UI 요소에 이벤트 핸들러를 연결합니다.
     DOM.bmrMode.addEventListener('change', Utils.toggleBMRMode);
     ['gender', 'age', 'height', 'weight'].forEach(field => {
-        if(DOM.dietForm[field]) {
+        if (DOM.dietForm[field]) {
             DOM.dietForm[field].addEventListener('input', Utils.calculateBMR);
         }
     });
@@ -158,4 +166,4 @@ main();
 
 // 다른 JS 파일(예: 다른 페이지의 스크립트)에서 BeFit AI의 결과를 가져다 쓸 수 있도록,
 // getBefitAiResult 함수를 모듈의 export 대상으로 지정합니다.
-export { getBefitAiResult } from './modules/storage-befit-ai.js';
+export {getBefitAiResult} from './modules/storage-befit-ai.js';

@@ -21,6 +21,7 @@ const DOM = {
 
     gender: document.getElementById('gender-befit-ai'),
 
+    targetWeight: document.getElementById('targetWeight-befit-ai'),
     targetFatRate: document.getElementById('targetFatRate-befit-ai'),
     targetFatLevel: document.getElementById('targetFatLevel-befit-ai'),
     targetSkeletalMuscleMass: document.getElementById('targetSkeletalMuscleMass-befit-ai'),
