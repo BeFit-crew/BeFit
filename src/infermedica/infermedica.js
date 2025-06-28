@@ -28,7 +28,7 @@ async function fetchGeminiResponseHs(userMessage) {
 - "운동 중 발생한 갑작스런 통증은 인대 손상 또는 연골 손상일 수 있습니다."
 `;
 
-    const response = await fetch(
+    const $responseHs = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY_HS}`,
         {
             method: "POST",
@@ -42,19 +42,19 @@ async function fetchGeminiResponseHs(userMessage) {
         }
     );
 
-    const result = await response.json();
-    return result.candidates?.[0]?.content?.parts?.[0]?.text || "화장실이 급해서 다음에 다시 물어봐주세요.";
+    const $resultHs = await $responseHs.json();
+    return $resultHs.candidates?.[0]?.content?.parts?.[0]?.text || "화장실이 급해서 다음에 다시 물어봐주세요.";
 }
 
 // 모달 HTML 동적 삽입
 function loadModalHtmlHs() {
     // 현재 HTML 경로 확인해서 상대 경로 자동 조정
-    const isInSubFolder = window.location.pathname.includes('/src/');
-    const htmlPath = isInSubFolder
+    const $isInSubFolderHs = window.location.pathname.includes('/src/');
+    const $htmlPathHs = $isInSubFolderHs
         ? '../infermedica/infermedica.html'
         : 'src/infermedica/infermedica.html';
 
-    fetch(htmlPath)
+    fetch($htmlPathHs)
         .then(res => res.text())
         .then(html => {
             document.body.insertAdjacentHTML("beforeend", html);
@@ -69,11 +69,11 @@ function loadModalHtmlHs() {
 
 // 모달 열기 버튼 이벤트 연결
 function setupOpenButtonHs() {
-    const openBtn = document.querySelector(".checkHealth-btn-main");
-    openBtn?.addEventListener("click", () => {
-        const modal = document.getElementById("modal-hs");
-        if (modal) {
-            modal.classList.add("show-hs");
+    const $openBtnHs = document.querySelector(".checkHealth-btn-main");
+    $openBtnHs?.addEventListener("click", () => {
+        const $modalHs = document.getElementById("modal-hs");
+        if ($modalHs) {
+            $modalHs.classList.add("show-hs");
             document.body.style.overflow = "hidden";
         }
     });
@@ -82,9 +82,9 @@ function setupOpenButtonHs() {
 // ESC 키로 닫기 이벤트 연결
 function setupEscCloseHs() {
     document.addEventListener("keydown", e => {
-        const modal = document.getElementById("modal-hs");
-        if (e.key === "Escape" && modal?.classList.contains("show-hs")) {
-            modal.classList.remove("show-hs");
+        const $modalHs = document.getElementById("modal-hs");
+        if (e.key === "Escape" && $modalHs?.classList.contains("show-hs")) {
+            $modalHs.classList.remove("show-hs");
             document.body.style.overflow = "";
         }
     });
@@ -93,49 +93,49 @@ setupEscCloseHs();
 
 // 모달 내부 요소 이벤트 등록
 function setupModalEventsHs() {
-    const modal = document.getElementById("modal-hs");
-    const closeBtn = document.getElementById("close-btn-hs");
-    const sendBtn = document.getElementById("send-btn-hs");
-    const input = document.getElementById("user-input-hs");
-    const chatArea = document.getElementById("chat-messages-hs");
+    const $modalHs = document.getElementById("modal-hs");
+    const $closeBtnHs = document.getElementById("close-btn-hs");
+    const $sendBtnHs = document.getElementById("send-btn-hs");
+    const $inputHs = document.getElementById("user-input-hs");
+    const $chatAreaHs = document.getElementById("chat-messages-hs");
 
-    closeBtn?.addEventListener("click", () => {
-        modal.classList.remove("show-hs");
+    $closeBtnHs?.addEventListener("click", () => {
+        $modalHs.classList.remove("show-hs");
         document.body.style.overflow = "";
     });
 
-    sendBtn?.addEventListener("click", () => handleSendHs(input, chatArea));
-    input?.addEventListener("keydown", (e) => {
+    $sendBtnHs?.addEventListener("click", () => handleSendHs($inputHs, $chatAreaHs));
+    $inputHs?.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            handleSendHs(input, chatArea);
+            handleSendHs($inputHs, $chatAreaHs);
         }
     });
     const greeting = "증상을 알려주시면, 관련된 의학적 정보를 제공해 드리겠습니다.";
-    appendMessageHs(greeting, "bot", chatArea);
+    appendMessageHs(greeting, "bot", $chatAreaHs);
 }
 
 // 채팅 메시지 출력 함수
 function appendMessageHs(text, sender, chatArea) {
-    const isAtBottom =
+    const $isAtBottomHs =
         chatArea.scrollHeight - chatArea.scrollTop <= chatArea.clientHeight + 10;
 
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("message-wrapper-hs", `${sender}-hs`);
+    const $wrapperHs = document.createElement("div");
+    $wrapperHs.classList.add("message-wrapper-hs", `${sender}-hs`);
 
-    const bubble = document.createElement("div");
-    bubble.classList.add("chat-bubble-hs", `${sender}-hs`);
-    bubble.textContent = text;
+    const $bubbleHs = document.createElement("div");
+    $bubbleHs.classList.add("chat-bubble-hs", `${sender}-hs`);
+    $bubbleHs.textContent = text;
 
-    const timestamp = document.createElement("div");
-    timestamp.classList.add("timestamp-hs");
-    timestamp.textContent = getTimeHs();
+    const $timestampHs = document.createElement("div");
+    $timestampHs.classList.add("timestamp-hs");
+    $timestampHs.textContent = getTimeHs();
 
-    wrapper.appendChild(bubble);
-    wrapper.appendChild(timestamp);
-    chatArea.appendChild(wrapper);
+    $wrapperHs.appendChild($bubbleHs);
+    $wrapperHs.appendChild($timestampHs);
+    chatArea.appendChild($wrapperHs);
 
-    if (isAtBottom) {
+    if ($isAtBottomHs) {
         chatArea.scrollTop = chatArea.scrollHeight;
     }
 }
