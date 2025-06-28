@@ -2,8 +2,9 @@ import { API_KEY_HS } from "../../assets/js/config.js";
 
 // Gemini 기반 건강 챗봇 스크립트
 document.addEventListener("DOMContentLoaded", () => {
-    loadModalHtmlHs();     // 모달 HTML 불러오기
-    setupOpenButtonHs();   // 열기 버튼 연결
+    loadModalHtmlHs();
+    setupOpenButtonHs();
+    setupEscCloseHs();
 });
 
 // Gemini API
@@ -47,13 +48,24 @@ async function fetchGeminiResponseHs(userMessage) {
 
 // 모달 HTML 동적 삽입
 function loadModalHtmlHs() {
-    fetch("src/infermedica/infermedica.html")
+    // 현재 HTML 경로 확인해서 상대 경로 자동 조정
+    const isInSubFolder = window.location.pathname.includes('/src/');
+    const htmlPath = isInSubFolder
+        ? '../infermedica/infermedica.html'
+        : 'src/infermedica/infermedica.html';
+
+    fetch(htmlPath)
         .then(res => res.text())
         .then(html => {
             document.body.insertAdjacentHTML("beforeend", html);
-            setupModalEventsHs();
+            setupModalEventsHs(); // 모달이 추가된 뒤 실행해야 함
+        })
+        .catch(err => {
+            console.error("모달 HTML 불러오기 실패:", err);
         });
 }
+
+
 
 // 모달 열기 버튼 이벤트 연결
 function setupOpenButtonHs() {

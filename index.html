@@ -12,6 +12,16 @@
 </head>
 <body>
 
+<!-- 로고 + 버튼 -->
+<div class="logo-hover-area-main">
+    <button class="start-btn-main">START</button>
+    <div class="logo-container-main">
+        <div class="logo-image-main"></div>
+        <div class="logo-overlay-main"></div>
+    </div>
+</div>
+
+    <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
     <div class="aside-wrapper-main">
         <div class="aside-toggle-btn-main">
             <i class="fas fa-cog"></i>
@@ -19,19 +29,19 @@
         <div class="aside-buttons-main">
             <button class="login-btn-main aside-btn-main" data-tooltip="건강체크">
                 <!-- 건강 체크 -->
-                <a href="">
+                <a href="src/befit-ai/befit-ai.html">
                     <i class="fas fa-user-check"></i>
                 </a>
             </button>
             <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 시청">
                 <!-- 다영님 -->
-                <a href="#">
+                <a href="src/playlist/playlist.html">
                     <i class="fab fa-youtube"></i>
                 </a>
             </button>
             <button class="shopping-btn-main aside-btn-main" data-tooltip="쇼핑 추천 및 구매">
                 <!-- 동준님 -->
-                <a href="">
+                <a href="src/shopping/shopping.html">
                     <i class="fas fa-shopping-basket"></i>
                 </a>
             </button>
@@ -41,23 +51,21 @@
         </div>
     </div>
 
-    <!-- 로고 + 버튼 -->
-    <div class="logo-hover-area-main">
-        <button class="start-btn-main" onclick="startApp()">
-            <!-- 택준님 페이지-->
-            <a href="src/befit-ai/befit-ai.html"></a>
-            START</button>
-        <div class="logo-container-main">
-            <div class="logo-image-main"></div>
-            <div class="logo-overlay-main"></div>
-        </div>
-    </div>
-
-    <!-- 메인 js  -->
-    <script src="assets/js/main.js"></script>
-
+    <!-- 메인 js 토글 클릭기능   -->
+    <script src="assets/js/main.js" defer></script>
     <!-- 건강 상담 챗폿 js -->
     <script src="src/infermedica/infermedica.js" type="module"></script>
+
+
+
+    <script>
+        // 로고 클릭
+        const $startBtnMain = document.querySelector('.start-btn-main');
+
+        $startBtnMain.addEventListener('click', () => {
+        window.location.href = 'src/befit-ai/befit-ai.html';
+        });
+    </script>
 
 </body>
 </html>
