@@ -115,7 +115,9 @@ function initEventListeners() {
 
     // 상호 배타적인 입력 필드들을 설정합니다.
     Utils.setupExclusiveInput(DOM.dietForm.fatRate, DOM.dietForm.fatLevel);
-    // ... (나머지 배타적 입력 필드 설정들) ...
+    Utils.setupExclusiveInput(DOM.dietForm.skeletalMuscleMass, DOM.dietForm.muscleLevel);
+    Utils.setupExclusiveInput(DOM.dietForm.activityCal, DOM.dietForm.activityLevel);
+    Utils.setupExclusiveInput(DOM.targetFatRate, DOM.targetFatLevel);
     Utils.setupExclusiveInput(DOM.targetSkeletalMuscleMass, DOM.targetSkeletalMuscleMassLevel);
 
     // 주요 UI 요소에 이벤트 핸들러를 연결합니다.
@@ -141,8 +143,7 @@ function initEventListeners() {
  * 이 함수가 호출되면서 전체 애플리케이션이 동작하기 시작합니다.
  */
 function main() {
-    // [방어적 코딩] 이 스크립트가 BeFit AI 폼이 없는 다른 페이지에 실수로 포함되더라도
-    // 오류를 발생시키지 않고 조용히 종료되도록 합니다.
+    // [방어적 코딩] 이 스크립트가 BeFit AI 폼이 없는 다른 페이지에 실수로 포함되더라도 오류를 발생시키지 않고 조용히 종료되도록 합니다.
     if (!DOM.dietForm) {
         return;
     }
@@ -164,6 +165,5 @@ main();
 
 // --- 5. 모듈 외부 공개 ---
 
-// 다른 JS 파일(예: 다른 페이지의 스크립트)에서 BeFit AI의 결과를 가져다 쓸 수 있도록,
-// getBefitAiResult 함수를 모듈의 export 대상으로 지정합니다.
+// 다른 JS 파일(예: 다른 페이지의 스크립트)에서 BeFit AI의 결과를 가져다 쓸 수 있도록, getBefitAiResult 함수를 모듈의 export 대상으로 지정합니다.
 export {getBefitAiResult} from './modules/storage-befit-ai.js';
