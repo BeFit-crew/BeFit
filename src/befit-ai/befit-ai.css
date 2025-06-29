@@ -1,0 +1,429 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f6f7f8;
+    color: #2c2c2c;
+}
+
+/* 로고 헤더 */
+.logo-heading-befit-ai {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #248242;
+    color: white;
+    padding: 16px 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 40px auto 40px;
+    max-width: 720px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 로고 이미지 크기 */
+.logo-heading-befit-ai img.logo-icon-befit-ai {
+    height: 36px;
+    margin-right: 12px;
+}
+
+/* 폼 영역 */
+form#dietForm-befit-ai {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* 카드 공통 영역 */
+.card-befit-ai {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin: 0 auto 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 720px;
+}
+
+.card-title-befit-ai {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #248242;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+}
+
+.inline-befit-ai {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.inline-befit-ai .form-group-befit-ai {
+    flex: 1;
+    min-width: 160px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border: 1px solid #248242;
+}
+
+textarea {
+    margin-bottom: 24px;
+    resize: vertical;
+    font-weight: 550;
+    font-size: 0.9rem;
+}
+
+.button-container-befit-ai {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn-befit-ai {
+    width: 50%;
+    padding: 16px;
+    background-color: #248242;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 24px;
+}
+
+button[type="submit"]:hover {
+    background-color: #248242;
+}
+
+#errorBox-befit-ai {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 8px;
+    color: red;
+    text-align: center;
+}
+
+#loading-befit-ai {
+    display: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#loading-befit-ai .loader-befit-ai {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #ccc;
+    border-top-color: #248242;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.ai-result-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.08);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.ai-section {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: #f9f9f9;
+    border-radius: 12px;
+}
+
+.ai-section h3 {
+    font-size: 20px;
+    color: #222;
+    border-left: 6px solid #248242;
+    padding-left: 12px;
+    margin-bottom: 16px;
+}
+
+.ai-section ul {
+    padding-left: 20px;
+}
+
+.ai-section li {
+    margin-bottom: 6px;
+}
+
+/* 모달 전체 레이어 */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 어두운 배경 오버레이 */
+.modal-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 중앙 카드 스타일 */
+.modal-content {
+    position: relative;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 10000;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 닫기 버튼 */
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.button-container-befit-ai {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#showSavedResultBtn {
+    background-color: #248242;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 140px; /* 답변 다시 보기 버튼 너비 */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#showSavedResultBtn:hover {
+    background-color: #1b6233;
+}
+
+.submit-btn-befit-ai {
+    background-color: #248242;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 300px; /* AI에게 식단 및 운동 추천 받기 버튼 너비 */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn-befit-ai:hover {
+    background-color: #1b6233;
+}
+
+.required-star-befit-ai {
+    color: #d32f2f; /* 진한 빨간색 */
+    margin-left: 2px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+
+/* 숨김 처리 클래스 */
+.hidden {
+    display: none !important;
+}
+
+/* =================================
+   Befit AI 결과 모달 스타일 (추가)
+   ================================= */
+
+/* 모달 내부의 AI 결과 컨테이너 */
+.ai-result-container {
+    padding: 1rem;
+    font-family: 'Noto Sans KR', sans-serif; /* 기존 폰트와 통일 */
+    line-height: 1.6;
+}
+
+/* AI 분석 및 요약 섹션 */
+.analysis-section {
+    background-color: #f6f7f8; /* 기존 배경색과 유사하게 설정 */
+    border: 1px solid #e9ecef;
+    padding: 1.5rem;
+    border-radius: 10px; /* 기존 border-radius와 통일 */
+    margin-bottom: 1.5rem;
+}
+
+.analysis-section h2 {
+    font-size: 1.2rem; /* 기존 card-title-befit-ai 와 유사하게 설정 */
+    font-weight: bold;
+    color: #248242; /* 기존 테마 색상 사용 */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.analysis-section p {
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+.analysis-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.analysis-section li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.analysis-section strong {
+    color: #248242; /* 기존 테마 색상 사용 */
+    margin-right: 0.5rem;
+}
+
+/* 날짜별 계획 (접기/펼치기) */
+.day-plan {
+    border: 1px solid #e9ecef;
+    border-radius: 10px; /* 기존 border-radius와 통일 */
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.day-plan:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 기존 box-shadow와 유사하게 설정 */
+}
+
+.day-plan summary {
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    background-color: #f6f7f8;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.day-plan summary:hover {
+    background-color: #e9ecef;
+}
+
+.day-plan[open] summary {
+    border-bottom: 1px solid #dee2e6;
+    background-color: #e9ecef;
+}
+
+/* 펼쳤을 때 나오는 아이콘 모양 변경 */
+.day-plan summary::after {
+    content: '▼';
+    font-size: 0.8rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.day-plan[open] summary::after {
+    transform: rotate(180deg);
+}
+
+/* 식단 및 운동 계획 내용 */
+.day-plan .plan-content {
+    padding: 1.5rem;
+    background-color: #fff;
+}
+
+.day-plan h3 {
+    margin: 0;
+}
+
+.day-plan h4 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-left: 4px solid #248242; /* 기존 테마 색상 사용 */
+    padding-left: 0.75rem;
+}
+
+/* 테이블 스타일 */
+.day-plan table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.day-plan th,
+.day-plan td {
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.day-plan th {
+    background-color: #f6f7f8;
+    font-weight: 600;
+}
+
+.day-plan tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+
+/* 구분선 스타일 */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 2rem 0;
+}
