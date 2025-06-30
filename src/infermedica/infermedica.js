@@ -1,4 +1,5 @@
-import { API_KEY_HS } from "../../assets/js/config.js";
+import {API_KEY_HS} from "../../assets/js/config.js";
+import {getBefitAiResult} from '../../src/befit-ai/befit-ai.js';
 
 // Gemini 기반 건강 챗봇 스크립트
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,34 +10,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Gemini API
 async function fetchGeminiResponseHs(userMessage) {
+    const aiData = getBefitAiResult();
+    const limitation = aiData?.user?.limitations;
+    const foodAllergies = aiData?.user?.foodAllergies;
+    const restrictedFoods = aiData?.user?.restrictedFoods;
+    const height = aiData?.user?.height;
+    const age = aiData?.user?.age;
 
     const SYSTEM_PROMPT = `
-당신은 종합병원 의사입니다.  
-사용자가 증상을 설명하면 다음 원칙에 따라 간결하고 명확하게 설명하세요.
+당신은 종합병원 의사입니다.
+
+환자는 "${limitation}"과 같은 건강상 제한사항이 있습니다.
+환자의 나이는 "${age}"살, 키는 "${height}"cm 입니다.
+환자는 "${foodAllergies}"에 알레르기가 있고 "${restrictedFoods}"를 못먹습니다.
+이 점을 고려해 증상에 대해 분석하고 조언해주세요.
 
 - 감정 표현 없이, 의학적 사실(Fact)만 제시  
 - 의심되는 질환, 해부학적 부위, 가능한 원인, 경과 예후를 간결히 설명  
 - 일반인이 이해할 수 있는 수준의 의학 용어를 사용  
-- 지금 당장 어떤것을 해야하는지 알려줘
-- 필요 시 병원 내원 여부와 응급 여부를 명확히 판단  
+- 지금 당장 어떤것을 해야하는지 알려줘  
+- 병원 내원 여부와 응급 여부를 명확히 판단  
 - 문장 수는 1~2줄 이내로 제한  
 - 말투는 설명 중심으로, 공감이나 위로는 생략  
-- ** 나 강조 문구, 특수문자, 숫자 없이 답변
-
-예시:
-- "무릎 앞쪽 통증은 대개 슬개건염 가능성이 있습니다."
-- "운동 중 발생한 갑작스런 통증은 인대 손상 또는 연골 손상일 수 있습니다."
-`;
+- **, 강조 문구, 특수문자, 숫자 없이 답변
+`.trim();
 
     const $responseHs = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY_HS}`,
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 contents: [
-                    { role: "user", parts: [{ text: SYSTEM_PROMPT }] }, // 역할 부여
-                    { role: "user", parts: [{ text: userMessage }] }     // 실제 질문
+                    {role: "user", parts: [{text: SYSTEM_PROMPT}]},
+                    {role: "user", parts: [{text: userMessage}]}
                 ]
             }),
         }
@@ -66,7 +73,6 @@ function loadModalHtmlHs() {
 }
 
 
-
 // 모달 열기 버튼 이벤트 연결
 function setupOpenButtonHs() {
     const $openBtnHs = document.querySelector(".checkHealth-btn-main");
@@ -89,16 +95,37 @@ function setupEscCloseHs() {
         }
     });
 }
+
 setupEscCloseHs();
 
 // 모달 내부 요소 이벤트 등록
-function setupModalEventsHs() {
+async function setupModalEventsHs() {
+    const aiData = getBefitAiResult();
+    const limitation = aiData?.user?.limitations;
+    const foodAllergies = aiData?.user?.foodAllergies;
+    const restrictedFoods = aiData?.user?.restrictedFoods;
+
     const $modalHs = document.getElementById("modal-hs");
     const $closeBtnHs = document.getElementById("close-btn-hs");
     const $sendBtnHs = document.getElementById("send-btn-hs");
     const $inputHs = document.getElementById("user-input-hs");
     const $chatAreaHs = document.getElementById("chat-messages-hs");
 
+    // 제한사항 안내 메시지 출력
+    if (foodAllergies) {
+        appendMessageHs(`저장된 음식 알레르기는 '${foodAllergies}'`, "bot", $chatAreaHs);
+    }
+    if (limitation) {
+        appendMessageHs(`건강 제한사항은 '${limitation}'가 있습니다. 이 점을 고려해 상담을 진행하겠습니다.`, "bot", $chatAreaHs);
+    } else {
+        appendMessageHs("현재 저장된 건강 제한사항이 없습니다. 당뇨, 고혈압, 알레르기 등이 있다면 입력해주세요.", "bot", $chatAreaHs);
+    }
+
+    // 증상 정보 있으면 자동 응답
+    appendMessageHs("증상을 입력하시면 분석을 도와드릴게요.", "bot", $chatAreaHs);
+
+
+    // 모달 닫기, 전송 버튼 등 이벤트 연결
     $closeBtnHs?.addEventListener("click", () => {
         $modalHs.classList.remove("show-hs");
         document.body.style.overflow = "";
@@ -111,8 +138,6 @@ function setupModalEventsHs() {
             handleSendHs($inputHs, $chatAreaHs);
         }
     });
-    const greeting = "증상을 알려주시면, 관련된 의학적 정보를 제공해 드리겠습니다.";
-    appendMessageHs(greeting, "bot", $chatAreaHs);
 }
 
 // 채팅 메시지 출력 함수
