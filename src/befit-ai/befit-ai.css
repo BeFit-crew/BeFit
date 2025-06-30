@@ -56,6 +56,7 @@ form#dietForm-befit-ai {
 
 .card-befit-ai {
     background-color: #fff;
+    border: 1px, solid, var(--primary-color);
     border-radius: 10px;
     padding: 24px;
     margin-bottom: 32px;
@@ -273,7 +274,7 @@ textarea {
 
 .analysis-section h2 {
     font-size: 1.3rem;
-    color: var(--primary-color); /* 변수 사용 */
+    color: var(--primary-color);
     margin: 0 0 1rem 0;
     border-bottom: 2px solid #e9ecef;
     padding-bottom: 1rem;
@@ -290,7 +291,7 @@ textarea {
 }
 
 .analysis-section strong {
-    color: var(--primary-color); /* 변수 사용 */
+    color: var(--primary-color);
     min-width: 120px;
     display: inline-block;
 }
@@ -340,7 +341,7 @@ textarea {
 
 .day-plan h4 {
     font-size: 1.1rem;
-    border-left: 4px solid var(--primary-color); /* 변수 사용 */
+    border-left: 4px solid var(--primary-color);
     padding-left: 0.75rem;
     margin: 1.5rem 0 1rem 0;
 }
@@ -384,6 +385,7 @@ textarea {
     }
 
     .card-befit-ai {
+        border: 1px, solid, var(--primary-color);
         padding: 16px;
     }
 
@@ -425,9 +427,9 @@ textarea {
     }
 
     .day-plan td:before {
-        content: attr(data-label); /* HTML의 data-label 속성값을 가져옴 */
+        content: attr(data-label);
         position: absolute;
-        left: 0.75rem; /* padding과 동일하게 */
+        left: 0.75rem;
         width: 45%;
         padding-right: 10px;
         white-space: nowrap;
