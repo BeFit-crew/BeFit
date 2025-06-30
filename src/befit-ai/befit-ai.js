@@ -1,5 +1,5 @@
 // Gemini API URL 외부 설정에서 import
-import config from '../../assets/js/config.js';
+import { befit_AI_API_URL } from '../../assets/js/config.js';
 
 // =============================
 // 상수 및 설정
@@ -381,7 +381,7 @@ function buildPrompt(data) {
  * @returns {Promise<string|null>}
  */
 async function callGeminiAPI(prompt) {
-    const response = await fetch(config.AI_API_URL, {
+    const response = await fetch(befit_AI_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -662,9 +662,6 @@ function checkSavedResult() {
  * 애플리케이션 메인 함수
  */
 function main() {
-    if (!DOM.dietForm) {
-        return;
-    }
     toggleBMRMode();
     initEventListeners();
     checkSavedResult();
