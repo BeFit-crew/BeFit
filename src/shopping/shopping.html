@@ -11,15 +11,20 @@
     <!-- Font Awesome 아이콘 라이브러리 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link rel="stylesheet" href="shopping.css"/>
+
+    <!-- 공통 버튼과 모달 -->
+    <link rel="stylesheet" href="../../assets/css/common.css">
+    <link rel="stylesheet" href="../infermedica/infermedica.css">
 </head>
 <body class="body-dj">
 
-<!--    https://cors-anywhere.herokuapp.com/corsdemo 임시적으로 서버 빌려쓰기 -->
+<!--    https://cors-anywhere.herokuapp.com/corsdemo 임시적으로 프록시 서버 이용 -->
 
-    <header class="header-dj">
-        <a class="header-container-dj" href="../../index.html">
-            <img src="../../assets/img/be-fit-logo.png" alt="BeFit로고" class="header-img-dj">
-        </a>
+    <header>
+        <h1 class="logo-heading-befit-ai">
+            <img src="../befit-ai/img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai"/>
+            Be Fit – 상품 검색 페이지
+        </h1>
     </header>
 
     <div class="container-dj">
@@ -34,11 +39,7 @@
         <!-- 추천 검색어 -->
         <div class="recommend-dj">
             <p class="recommend-ai-dj">🤖 Ai 추천 검색어 - </p>
-            <ul class="recommend-list-dj">
-                <li class="recommend-list-item-dj">아령</li>
-                <li class="recommend-list-item-dj">쉐이크</li>
-                <li class="recommend-list-item-dj">러닝화</li>
-            </ul>
+            <ul class="recommend-list-dj"></ul>
         </div>
 
         <!-- 상품 목록을 감싸는 컨테이너 -->
@@ -57,6 +58,48 @@
 
         </div>
     </div>
+
+
+    <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
+    <div class="aside-wrapper-main">
+        <div class="aside-toggle-btn-main">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="aside-buttons-main">
+        <button class="login-btn-main aside-btn-main" data-tooltip="건강 플래너">
+               <!-- 건강 체크 -->
+            <a href="../befit-ai/befit-ai.html">
+                <i class="fas fa-user-check"></i>
+            </a>
+        </button>
+        <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 추천">
+            <!-- 다영님 -->
+            <a href="../playlist/playlist.html">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </button>
+        <button class="shopping-btn-main aside-btn-main" data-tooltip="상품 검색">
+            <!-- 동준님 -->
+            <a href="../shopping/shopping.html">
+                <i class="fas fa-shopping-basket"></i>
+            </a>
+            </button>
+            <button class="checkHealth-btn-main aside-btn-main" data-tooltip="AI 건강 상담">
+                <i class="fas fa-comment-medical"></i>
+            </button>
+         </div>
+    </div>
+
+
+    <!-- 메인 js 토글 클릭기능   -->
+    <script src="../../assets/js/main.js" defer></script>
+    <!-- 건강 상담 챗폿 js -->
+    <script src="../infermedica/infermedica.js" type="module"></script>
+
+
+
+
+
 
     <script src="shopping.js" type="module"></script>
 </body>

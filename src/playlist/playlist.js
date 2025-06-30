@@ -1,4 +1,4 @@
-// 유튜브 API 키 하루 제한 있음
+// 유튜브 API 키 하루 제한 있음 
 const API_KEY = 'API키 입력';
 let nextPageToken = '';  // 페이지 토큰 초기화
 let currentQuery = '';  // 현재 쿼리 초기화

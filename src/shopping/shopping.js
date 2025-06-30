@@ -1,4 +1,6 @@
 import config from "../../assets/js/config.js";
+import { getBefitAiResult } from "../befit-ai/modules/storage-befit-ai.js";
+
 
 // ========== 전역 변수 및 상수 ========== //
 let startItemDj = 1; // 검색 시작위치 변수
@@ -68,14 +70,53 @@ function displayRecommendQueryDj(queries) {
  * @returns {string} - AI에게 질문할 최종 프롬프트
  */
 function generatePromptDj() {
-  const prompt = `
-당신은 세계 최고의 상품판매원입니다. 운동과 건강에 관련된 제품을 5개 추천해주세요. (예를 들어 아령, 쉐이크, 러닝화)
-출력형식은 밑에 지정해 줄텐데 참고로 "아령 쉐이크 러닝화" 같이 단어 사이에 띄어쓰기 하나씩만 넣어주세요. 참고로 상품명에 여성용,남성용 같은 건 빼줘
-그리고 추가로 질문시 방금 답변한 상품들은 제외하고 다른 상품들로 채워줘
+  // DOMContentLoaded 없이 직접 함수를 호출하여 데이터를 가져옵니다.
+  const aiData = getBefitAiResult();
+
+  if (aiData && aiData.diet && aiData.training) {
+    // 중첩된 배열의 모든 항목을 가져오기 위해 flatMap을 사용합니다.
+    const meals = aiData.diet.flatMap(day => day.meals.map(meal => meal.menu).flat()).join(', ');
+    const exercises = aiData.training.flatMap(day => day.routine.map(r => r.exercise)).join(', ');
+
+    // 사용자의 알러지, 제한 음식, 선호 사항을 프롬프트에 반영합니다.
+    const allergies = aiData.user.foodAllergies || '없음';
+    const restrictions = aiData.user.restrictedFoods || '없음';
+    const preferences = aiData.user.preferences || '없음';
+    const preferredWorkout = aiData.user.preferredWorkout || '없음';
+
+    const prompt = `
+당신은 세계 최고의 상품 판매원입니다. 아래 사용자 정보를 바탕으로 운동, 건강, 식단과 관련된 제품 5개를 추천해주세요.
+
+[사용자 정보]
+- 음식 알러지: ${allergies}
+- 제외해야 할 음식: ${restrictions}
+- 선호하는 음식: ${preferences}
+- 선호하는 운동: ${preferredWorkout}
+- 추천 식단 메뉴: ${meals}
+- 추천 운동 종류: ${exercises}
+
+[요청 사항]
+1.  위 사용자 정보를 모두 종합적으로 고려하여 가장 관련성 높은 상품 5개를 추천하세요.
+2.  알러지 및 제외 음식과 관련된 상품은 반드시 제외해야 합니다.
+3.  "닭가슴살 쉐이크 아령 요가매트 폼롤러" 와 같이, 각 상품 이름을 띄어쓰기 하나로 구분하여 한 줄로만 응답해주세요.
+4.  '여성용', '남성용' 같은 단어는 상품명에서 제외해주세요.
+5.  추가 질문 시에는 이전에 추천했던 상품은 제외하고 새로운 상품을 추천해주세요.
+
 [출력 형식]
-(여기에 상품) (여기에 상품) (여기에 상품) (여기에 상품) (여기에 상품)
-    `;
-  return prompt;
+(상품1) (상품2) (상품3) (상품4) (상품5)`;
+    return prompt;
+
+  } else {
+    // aiData가 없을 경우의 기본 프롬프트
+    const prompt = `
+당신은 세계 최고의 상품 판매원입니다. 운동과 건강, 식단에 관련된 제품을 5개 추천해주세요. (예: 아령, 쉐이크, 러닝화, 피망, 닭가슴살)
+출력 형식은 "아령 쉐이크 러닝화" 같이 단어 사이에 띄어쓰기 하나씩만 넣어주세요. 상품명에 '여성용', '남성용' 같은 단어는 빼주세요.
+추가로 질문 시 방금 답변한 상품들은 제외하고 다른 상품들로 채워주세요.
+
+[출력 형식]
+(상품1) (상품2) (상품3) (상품4) (상품5)`;
+    return prompt;
+  }
 }
 
 /**
@@ -184,6 +225,7 @@ recommendQueryListDj.addEventListener('click', searchRecommendQueryDj);
 
 // 상품 더보기
 loadMoreBtnDj.addEventListener('click', loadMoreProductDj);
+
 
 // ========== 실행 코드 ========== //
 getRecommendQueryFromAiDj(); // AI의 추천검색어 화면에 표시
