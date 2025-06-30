@@ -395,4 +395,51 @@ textarea {
         flex-direction: column;
         gap: 0;
     }
+
+    .day-plan table, .day-plan thead, .day-plan tbody, .day-plan th, .day-plan td, .day-plan tr {
+        display: block;
+    }
+
+    .day-plan thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .day-plan tr {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .day-plan td {
+        border: none;
+        border-bottom: 1px solid #f1f3f5;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .day-plan td:last-child {
+        border-bottom: none;
+    }
+
+    .day-plan td:before {
+        content: attr(data-label); /* HTML의 data-label 속성값을 가져옴 */
+        position: absolute;
+        left: 0.75rem; /* padding과 동일하게 */
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    #showSavedResultBtn {
+       max-width: 40%;
+    }
+
+    .submit-btn-befit-ai {
+        max-width: 80%
+    }
 }
