@@ -370,6 +370,7 @@ textarea {
 /* --- 5. 반응형 디자인 (@media 쿼리) --- */
 
 @media (max-width: 768px) {
+
     .logo-heading-befit-ai,
     form#dietForm-befit-ai {
         margin-left: 16px;
@@ -388,5 +389,10 @@ textarea {
 
     .modal-content {
         padding: 24px;
+    }
+
+    .inline-befit-ai {
+        flex-direction: column;
+        gap: 0;
     }
 }
