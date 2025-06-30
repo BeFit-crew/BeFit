@@ -10,263 +10,285 @@
     <script type="module" src="befit-ai.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1 class="logo-heading-befit-ai">
-            <img src="img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai"/>
-            Be Fit – AI 기반 개인 맞춤 건강 플래너
-        </h1>
-    </header>
+<header>
+    <h1 class="logo-heading-befit-ai">
+        <img src="img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai"/>
+        Be Fit – AI 기반 개인 맞춤 건강 플래너
+    </h1>
+</header>
 
-    <main>
-        <form id="dietForm-befit-ai">
-            <!-- 1. 기본 정보 -->
-            <section class="card-befit-ai">
-                <h2 class="card-title-befit-ai">👤 기본 정보</h2>
+<main>
+    <form id="dietForm-befit-ai">
+        <!-- 1. 기본 정보 -->
+        <section class="card-befit-ai">
+            <h2 class="card-title-befit-ai">
+                <i class="fas fa-user"></i> 기본 정보
+            </h2>
 
-                <div class="form-group-befit-ai">
-                    <label for="gender-befit-ai">성별 <span class="required-star-befit-ai">*</span></label>
-                    <select id="gender-befit-ai" name="gender" required>
-                        <option value="" disabled selected>성별을 선택해 주세요.</option>
-                        <option value="남">👨 남성</option>
-                        <option value="여">👩 여성</option>
-                        <option value="비공개">❔ 선택하지 않음</option>
-                    </select>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="age-befit-ai">나이 (만) <span class="required-star-befit-ai">*</span></label>
-                        <input type="number" id="age-befit-ai" name="age" min="10" max="125" required/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="height-befit-ai">신장 (cm) <span class="required-star-befit-ai">*</span></label>
-                        <input type="number" id="height-befit-ai" name="height" step="0.1" min="50" max="280" required/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-
-                <div class="form-group-befit-ai">
-                    <label for="weight-befit-ai">체중 (kg) <span class="required-star-befit-ai">*</span></label>
-                    <input type="number" id="weight-befit-ai" name="weight" step="0.1" min="5" max="610" required/>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <div class="form-group-befit-ai">
-                    <label for="bmrMode-befit-ai">기초대사량 (BMR) 입력 방식 <span class="required-star-befit-ai">*</span></label>
-                    <select id="bmrMode-befit-ai" name="bmrMode">
-                        <option value="manual">직접 입력</option>
-                        <option value="auto">모름 (자동 계산)</option>
-                    </select>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <div id="bmr-manual-group-befit-ai" class="form-group-befit-ai">
-                    <label for="bmrManual-befit-ai">기초대사량 (BMR) <span class="required-star-befit-ai">*</span></label>
-                    <input type="number" id="bmrManual-befit-ai" name="bmrManual" min="800" max="10000" required/>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <div id="bmr-auto-group-befit-ai" class="form-group-befit-ai" style="display:none;">
-                    <label for="bmr-auto-befit-ai">계산된 기초대사량</label>
-                    <input type="number" id="bmr-auto-befit-ai" name="bmrAuto" readonly/>
-                </div>
-            </section>
-
-            <!-- 2. 체성분 및 활동 정보 -->
-            <section class="card-befit-ai">
-                <h2 class="card-title-befit-ai">🧬 체성분 및 활동 정보</h2>
-
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="fatRate-befit-ai">체지방률 (%)</label>
-                        <input type="number" id="fatRate-befit-ai" name="fatRate" step="0.1" min="0.1" max="70"/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="fatLevel-befit-ai">체지방 수준</label>
-                        <select id="fatLevel-befit-ai" name="fatLevel">
-                            <option value="">선택 안 함</option>
-                            <option value="상">🔴 매우 높음</option>
-                            <option value="중상">🟠 다소 높음</option>
-                            <option value="중">🟡 보통</option>
-                            <option value="중하">🟢 다소 낮음</option>
-                            <option value="하">🔵 매우 낮음</option>
-                        </select>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="skeletalMuscleMass-befit-ai">골격근량 (kg)</label>
-                        <input type="number" id="skeletalMuscleMass-befit-ai" name="skeletalMuscleMass" step="0.1"
-                               min="1" max="100"/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="muscleLevel-befit-ai">근육 수준</label>
-                        <select id="muscleLevel-befit-ai" name="muscleLevel">
-                            <option value="">선택 안 함</option>
-                            <option value="상">🔴 매우 높음</option>
-                            <option value="중상">🟠 다소 높음</option>
-                            <option value="중">🟡 보통</option>
-                            <option value="중하">🟢 다소 낮음</option>
-                            <option value="하">🔵 매우 낮음</option>
-                        </select>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="activityCal-befit-ai">일일 활동량 (kcal)</label>
-                        <input type="number" id="activityCal-befit-ai" name="activityCal" min="0" max="5000"/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="activityLevel-befit-ai">활동 수준</label>
-                        <select id="activityLevel-befit-ai" name="activityLevel">
-                            <option value="">선택 안 함</option>
-                            <option value="상">🔴 매우 높음</option>
-                            <option value="중상">🟠 다소 높음</option>
-                            <option value="중">🟡 보통</option>
-                            <option value="중하">🟢 다소 낮음</option>
-                            <option value="하">🔵 매우 낮음</option>
-                        </select>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. 목표 설정 -->
-            <section class="card-befit-ai">
-                <h2 class="card-title-befit-ai">🎯 목표 설정</h2>
-
-                <div class="form-group-befit-ai">
-                    <label for="goal-befit-ai">목표 <span class="required-star-befit-ai">*</span></label>
-                    <select id="goal-befit-ai" name="goal" required>
-                        <option value="" disabled selected>목표를 선택해 주세요.</option>
-                        <option value="다이어트">🔥 체지방 감량 프로그램</option>
-                        <option value="유지">⚖️ 신체 컨디션 유지</option>
-                        <option value="린매스업">💪 체지방 감소 + 근육 증가</option>
-                        <option value="벌크업">🏋️ 근비대 중점 체중 증가</option>
-                        <option value="건강 개선">🌿 건강 및 생활습관 개선</option>
-                    </select>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <div class="form-group-befit-ai">
-                    <label for="targetWeight-befit-ai">목표 체중 (kg)</label>
-                    <input type="number" id="targetWeight-befit-ai" name="targetWeight" step="0.1" min="5" max="610"/>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-
-                <!-- 목표 체지방률 + 수준 -->
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="targetFatRate-befit-ai">목표 체지방률 (%)</label>
-                        <input type="number" id="targetFatRate-befit-ai" name="targetFatRate" step="0.1" min="0.1" max="70"/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="targetFatLevel-befit-ai">목표 체지방 수준</label>
-                        <select id="targetFatLevel-befit-ai" name="targetFatLevel">
-                            <option value="">선택 안 함</option>
-                            <option value="상">🔴 매우 높음</option>
-                            <option value="중상">🟠 다소 높음</option>
-                            <option value="중">🟡 보통</option>
-                            <option value="중하">🟢 다소 낮음</option>
-                            <option value="하">🔵 매우 낮음</option>
-                        </select>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-
-                <!-- 목표 골격근량 + 수준 -->
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="targetSkeletalMuscleMass-befit-ai">목표 골격근량 (kg)</label>
-                        <input type="number" id="targetSkeletalMuscleMass-befit-ai" name="targetSkeletalMuscleMass" step="0.1" min="1" max="100"/>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="targetSkeletalMuscleMassLevel-befit-ai">목표 골격근 수준</label>
-                        <select id="targetSkeletalMuscleMassLevel-befit-ai" name="targetSkeletalMuscleMassLevel">
-                            <option value="">선택 안 함</option>
-                            <option value="상">🔴 매우 높음</option>
-                            <option value="중상">🟠 다소 높음</option>
-                            <option value="중">🟡 보통</option>
-                            <option value="중하">🟢 다소 낮음</option>
-                            <option value="하">🔵 매우 낮음</option>
-                        </select>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-
-                <div class="form-group-befit-ai">
-                    <label for="days-befit-ai">목표 기간 (일) <span class="required-star-befit-ai">*</span></label>
-                    <input type="number" id="days-befit-ai" name="days" min="1" max="365" required/>
-                    <span class="error-message-befit-ai"></span>
-                </div>
-            </section>
-
-            <!-- 4. 맞춤 설정 -->
-            <section class="card-befit-ai">
-                <h2 class="card-title-befit-ai">⚙️ 맞춤 설정</h2>
-
-                <label for="limitations-befit-ai">건강 관련 특이사항</label>
-                <textarea id="limitations-befit-ai" name="limitations" rows="2" lang="ko" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압"></textarea>
+            <div class="form-group-befit-ai">
+                <label for="gender-befit-ai">성별 <span class="required-star-befit-ai">*</span></label>
+                <select id="gender-befit-ai" name="gender" required>
+                    <option value="" disabled selected>성별을 선택해 주세요.</option>
+                    <option value="남">♂️남성</option>
+                    <option value="여">♀️여성</option>
+                    <option value="비공개">선택하지 않음</option>
+                </select>
                 <span class="error-message-befit-ai"></span>
-
-                <label for="foodAllergies-befit-ai">음식 알러지</label>
-                <textarea id="foodAllergies-befit-ai" name="foodAllergies" rows="2" lang="ko" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩"></textarea>
-                <span class="error-message-befit-ai"></span>
-
-                <label for="restrictedFoods-befit-ai">제외할 음식</label>
-                <textarea id="restrictedFoods-befit-ai" name="restrictedFoods" rows="2" lang="ko" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기"></textarea>
-                <span class="error-message-befit-ai"></span>
-
-                <label for="preferences-befit-ai">먹고 싶은 음식</label>
-                <textarea id="preferences-befit-ai" name="preferences" rows="2" lang="ko" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기"></textarea>
-                <span class="error-message-befit-ai"></span>
-
-                <div class="inline-befit-ai">
-                    <div class="form-group-befit-ai">
-                        <label for="preferredWorkout-befit-ai">하고 싶은 운동</label>
-                        <textarea id="preferredWorkout-befit-ai" name="preferredWorkout" rows="2" lang="ko" placeholder="항목은 쉼표(,)로 구분해주세요. ex. 웨이트, 걷기"></textarea>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                    <div class="form-group-befit-ai">
-                        <label for="preferredWorkoutTime-befit-ai">희망 운동 시간</label>
-                        <textarea id="preferredWorkoutTime-befit-ai" name="preferredWorkoutTime" rows="2" lang="ko" placeholder="ex. 하루 30분, 주 3회 등"></textarea>
-                        <span class="error-message-befit-ai"></span>
-                    </div>
-                </div>
-            </section>
-
-            <div class="button-container-befit-ai">
-                <button id="showSavedResultBtn" type="button" style="display:none;">답변 다시 보기</button>
-                <button class="submit-btn-befit-ai" type="submit">💬 AI에게 식단 및 운동 추천 받기</button>
             </div>
 
-        </form>
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="age-befit-ai">나이 (만) <span class="required-star-befit-ai">*</span></label>
+                    <input type="number" id="age-befit-ai" name="age" min="10" max="125" required/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="height-befit-ai">신장 (cm) <span class="required-star-befit-ai">*</span></label>
+                    <input type="number" id="height-befit-ai" name="height" step="0.1" min="50" max="280" required/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
 
-        <div id="errorBox-befit-ai"></div>
-        <div id="loading-befit-ai">
-            <div class="loader-befit-ai"></div>
-            <p>⌛ AI가 식단 및 운동을 작성 중입니다...</p>
+            <div class="form-group-befit-ai">
+                <label for="weight-befit-ai">체중 (kg) <span class="required-star-befit-ai">*</span></label>
+                <input type="number" id="weight-befit-ai" name="weight" step="0.1" min="5" max="610" required/>
+                <span class="error-message-befit-ai"></span>
+            </div>
+
+            <div class="form-group-befit-ai">
+                <label for="bmrMode-befit-ai">기초대사량 (BMR) 입력 방식 <span class="required-star-befit-ai">*</span></label>
+                <select id="bmrMode-befit-ai" name="bmrMode">
+                    <option value="manual">직접 입력</option>
+                    <option value="auto">모름 (자동 계산)</option>
+                </select>
+                <span class="error-message-befit-ai"></span>
+            </div>
+
+            <div id="bmr-manual-group-befit-ai" class="form-group-befit-ai">
+                <label for="bmrManual-befit-ai">기초대사량 (BMR) <span class="required-star-befit-ai">*</span></label>
+                <input type="number" id="bmrManual-befit-ai" name="bmrManual" min="800" max="8000" required/>
+                <span class="error-message-befit-ai"></span>
+            </div>
+
+            <div id="bmr-auto-group-befit-ai" class="form-group-befit-ai" style="display:none;">
+                <label for="bmr-auto-befit-ai">계산된 기초대사량</label>
+                <input type="number" id="bmr-auto-befit-ai" name="bmrAuto" readonly/>
+            </div>
+        </section>
+
+        <!-- 2. 체성분 및 활동 정보 -->
+        <section class="card-befit-ai">
+            <h2 class="card-title-befit-ai">
+                <i class="fas fa-dna"></i> 체성분 및 활동 정보
+            </h2>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="fatRate-befit-ai">체지방률 (%)</label>
+                    <input type="number" id="fatRate-befit-ai" name="fatRate" step="0.1" min="0.1" max="70"/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="fatLevel-befit-ai">체지방 수준</label>
+                    <select id="fatLevel-befit-ai" name="fatLevel">
+                        <option value="">선택 안 함</option>
+                        <option value="상">🔴 매우 높음</option>
+                        <option value="중상">🟠 다소 높음</option>
+                        <option value="중">🟡 보통</option>
+                        <option value="중하">🟢 다소 낮음</option>
+                        <option value="하">🔵 매우 낮음</option>
+                    </select>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="skeletalMuscleMass-befit-ai">골격근량 (kg)</label>
+                    <input type="number" id="skeletalMuscleMass-befit-ai" name="skeletalMuscleMass" step="0.1" min="1"
+                           max="100"/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="muscleLevel-befit-ai">근육 수준</label>
+                    <select id="muscleLevel-befit-ai" name="muscleLevel">
+                        <option value="">선택 안 함</option>
+                        <option value="상">🔴 매우 높음</option>
+                        <option value="중상">🟠 다소 높음</option>
+                        <option value="중">🟡 보통</option>
+                        <option value="중하">🟢 다소 낮음</option>
+                        <option value="하">🔵 매우 낮음</option>
+                    </select>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="activityCal-befit-ai">일일 활동량 (kcal)</label>
+                    <input type="number" id="activityCal-befit-ai" name="activityCal" min="1" max="5000"/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="activityLevel-befit-ai">활동 수준</label>
+                    <select id="activityLevel-befit-ai" name="activityLevel">
+                        <option value="">선택 안 함</option>
+                        <option value="상">🔴 매우 높음</option>
+                        <option value="중상">🟠 다소 높음</option>
+                        <option value="중">🟡 보통</option>
+                        <option value="중하">🟢 다소 낮음</option>
+                        <option value="하">🔵 매우 낮음</option>
+                    </select>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 목표 설정 -->
+        <section class="card-befit-ai">
+            <h2 class="card-title-befit-ai">
+                <i class="fas fa-bullseye"></i> 목표 설정
+            </h2>
+
+            <div class="form-group-befit-ai">
+                <label for="goal-befit-ai">목표 <span class="required-star-befit-ai">*</span></label>
+                <select id="goal-befit-ai" name="goal" required>
+                    <option value="" disabled selected>목표를 선택해 주세요.</option>
+                    <option value="다이어트">🔥 체지방 감량 프로그램</option>
+                    <option value="유지">⚖️ 신체 컨디션 유지</option>
+                    <option value="린매스업">💪 체지방 감소 + 근육 증가</option>
+                    <option value="벌크업">🏋️ 근비대 중점 체중 증가</option>
+                    <option value="건강 개선">🌿 건강 및 생활습관 개선</option>
+                </select>
+                <span class="error-message-befit-ai"></span>
+            </div>
+
+            <div class="form-group-befit-ai">
+                <label for="targetWeight-befit-ai">목표 체중 (kg)</label>
+                <input type="number" id="targetWeight-befit-ai" name="targetWeight" step="0.1" min="5" max="610"/>
+                <span class="error-message-befit-ai"></span>
+            </div>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="targetFatRate-befit-ai">목표 체지방률 (%)</label>
+                    <input type="number" id="targetFatRate-befit-ai" name="targetFatRate" step="0.1" min="0.1"
+                           max="70"/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="targetFatLevel-befit-ai">목표 체지방 수준</label>
+                    <select id="targetFatLevel-befit-ai" name="targetFatLevel">
+                        <option value="">선택 안 함</option>
+                        <option value="상">🔴 매우 높음</option>
+                        <option value="중상">🟠 다소 높음</option>
+                        <option value="중">🟡 보통</option>
+                        <option value="중하">🟢 다소 낮음</option>
+                        <option value="하">🔵 매우 낮음</option>
+                    </select>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="targetSkeletalMuscleMass-befit-ai">목표 골격근량 (kg)</label>
+                    <input type="number" id="targetSkeletalMuscleMass-befit-ai" name="targetSkeletalMuscleMass"
+                           step="0.1" min="1" max="100"/>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="targetSkeletalMuscleMassLevel-befit-ai">목표 골격근 수준</label>
+                    <select id="targetSkeletalMuscleMassLevel-befit-ai" name="targetSkeletalMuscleMassLevel">
+                        <option value="">선택 안 함</option>
+                        <option value="상">🔴 매우 높음</option>
+                        <option value="중상">🟠 다소 높음</option>
+                        <option value="중">🟡 보통</option>
+                        <option value="중하">🟢 다소 낮음</option>
+                        <option value="하">🔵 매우 낮음</option>
+                    </select>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+
+            <div class="form-group-befit-ai">
+                <label for="days-befit-ai">목표 기간 (일) <span class="required-star-befit-ai">*</span></label>
+                <input type="number" id="days-befit-ai" name="days" min="7" max="365" required/>
+                <span class="error-message-befit-ai"></span>
+            </div>
+        </section>
+
+        <!-- 4. 맞춤 설정 -->
+        <section class="card-befit-ai">
+            <h2 class="card-title-befit-ai">
+                <i class="fas fa-cog"></i> 맞춤 설정
+            </h2>
+
+            <label for="limitations-befit-ai">건강 관련 특이사항</label>
+            <textarea id="limitations-befit-ai" name="limitations" rows="2" lang="ko"
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 허리 디스크, 고혈압">
+            </textarea>
+            <span class="error-message-befit-ai"></span>
+
+            <label for="foodAllergies-befit-ai">음식 알러지</label>
+            <textarea id="foodAllergies-befit-ai" name="foodAllergies" rows="2" lang="ko"
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 새우, 땅콩">
+            </textarea>
+            <span class="error-message-befit-ai"></span>
+
+            <label for="restrictedFoods-befit-ai">제외할 음식</label>
+            <textarea id="restrictedFoods-befit-ai" name="restrictedFoods" rows="2" lang="ko"
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 소고기, 돼지고기">
+            </textarea>
+            <span class="error-message-befit-ai"></span>
+
+            <label for="preferences-befit-ai">먹고 싶은 음식</label>
+            <textarea id="preferences-befit-ai" name="preferences" rows="2" lang="ko"
+                      placeholder="항목은 쉼표(,)로 구분해주세요. ex. 제육볶음, 소불고기">
+            </textarea>
+            <span class="error-message-befit-ai"></span>
+
+            <div class="inline-befit-ai">
+                <div class="form-group-befit-ai">
+                    <label for="preferredWorkout-befit-ai">하고 싶은 운동</label>
+                    <textarea id="preferredWorkout-befit-ai" name="preferredWorkout" rows="2" lang="ko"
+                              placeholder="항목은 쉼표(,)로 구분해주세요. ex. 웨이트, 걷기"></textarea>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+                <div class="form-group-befit-ai">
+                    <label for="preferredWorkoutTime-befit-ai">희망 운동 시간</label>
+                    <textarea id="preferredWorkoutTime-befit-ai" name="preferredWorkoutTime" rows="2" lang="ko"
+                              placeholder="ex. 하루 30분, 주 3회 등"></textarea>
+                    <span class="error-message-befit-ai"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="button-container-befit-ai">
+            <button id="showSavedResultBtn" type="button" style="display:none;">답변 다시 보기</button>
+            <button class="submit-btn-befit-ai" type="submit"><i class="far fa-comment-dots"></i> AI에게 식단 및 운동 추천 받기
+            </button>
         </div>
-        <div id="result-befit-ai"></div>
-    </main>
-    <!-- AI 결과 모달 -->
-    <div id="aiModal" class="modal hidden">
-        <div class="modal-overlay" id="modalOverlay"></div>
-        <div class="modal-content">
-            <button id="closeModal" class="modal-close">✖</button>
-            <div id="modalBody"></div>
-        </div>
+
+    </form>
+
+    <div id="errorBox-befit-ai"></div>
+    <div id="loading-befit-ai">
+        <div class="loader-befit-ai"></div>
+        <p><i class="fas fa-hourglass-half"></i> AI가 식단 및 운동을 작성 중입니다...</p>
     </div>
+    <div id="result-befit-ai"></div>
+
+</main>
+
+<!-- AI 결과 모달 -->
+<div id="aiModal" class="modal hidden">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+        <button id="closeModal" class="modal-close">✖</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
 </body>
 </html>
