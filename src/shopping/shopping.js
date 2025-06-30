@@ -1,5 +1,5 @@
 import config from "../../assets/js/config.js";
-import { getBefitAiResult } from "../befit-ai/befit-ai.js";
+import { getBefitAiResult } from "../befit-ai/modules/storage-befit-ai.js";
 
 
 // ========== 전역 변수 및 상수 ========== //
