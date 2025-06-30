@@ -5,8 +5,8 @@
 
 /* CSS 변수 선언부 */
 :root {
-    --primary-color: #248242; /* 메인 테마 색상 (녹색) */
-    --primary-color-darker: #1e6a36; /* 호버 시 사용할 어두운 녹색 */
+    --primary-color: #1a723f; /* 메인 테마 색상 (녹색) */
+    --primary-color-darker: #1e6a39; /* 호버 시 사용할 어두운 녹색 */
     --secondary-color: #6c757d; /* 보조 버튼 색상 (회색) */
     --secondary-color-darker: #5a6268; /* 회색 버튼 호버 색상 */
     --font-color-base: #2c2c2c; /* 기본 글자 색상 */
