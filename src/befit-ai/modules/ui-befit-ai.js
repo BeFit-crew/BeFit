@@ -49,16 +49,16 @@ export function renderAIResult(data) {
 
         const dietList = dayPlan.meals.map(meal => `
             <tr>
-                <td>${meal.type}</td>
-                <td>${Array.isArray(meal.menu) ? meal.menu.join(', ') : meal.menu}</td>
-                <td>${meal.kcal} kcal</td>
+                <td data-label="식사">${meal.type}</td>
+                <td data-label="메뉴">${Array.isArray(meal.menu) ? meal.menu.join(', ') : meal.menu}</td>
+                <td data-label="칼로리">${meal.kcal} kcal</td>
             </tr>`).join(''); // .join('')으로 모든 <tr> 문자열을 하나로 합칩니다.
 
         const trainingList = trainingPlan.routine.map(exercise => `
             <tr>
-                <td>${exercise.part}</td>
-                <td>${exercise.exercise}</td>
-                <td>${exercise.set}</td>
+                <td data-label="부위">${exercise.part}</td>
+                <td data-label="운동">${exercise.exercise}</td>
+                <td data-label="세트">${exercise.set}</td>
             </tr>`).join('');
 
         // 각 날짜의 계획은 <details> 태그를 사용하여 접고 펼 수 있는 아코디언 형태로 만듭니다.
