@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>운동 영상 추천 시스템</title>
     <!-- CSS 연결 -->
+    <link rel="stylesheet" href="../../assets/css/common.css">
     <link rel="stylesheet" href="playlist.css">
     <!-- FontAwesome (아이콘 사용) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- 공통 버튼과 모달 -->
+    <link rel="stylesheet" href="../infermedica/infermedica.css">
 </head>
 <body>
 <div class="container">
@@ -86,5 +90,43 @@
 
 <!-- JavaScript 연결 -->
 <script src="playlist.js"></script>
+
+    <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
+    <div class="aside-wrapper-main">
+        <div class="aside-toggle-btn-main">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="aside-buttons-main">
+            <button class="login-btn-main aside-btn-main" data-tooltip="건강체크">
+                <!-- 건강 체크 -->
+                <a href="../befit-ai/befit-ai.html">
+                    <i class="fas fa-user-check"></i>
+                </a>
+            </button>
+            <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 시청">
+                <!-- 다영님 -->
+                <a href="../playlist/playlist.html">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </button>
+            <button class="shopping-btn-main aside-btn-main" data-tooltip="쇼핑 추천 및 구매">
+                <!-- 동준님 -->
+                <a href="../shopping/shopping.html">
+                    <i class="fas fa-shopping-basket"></i>
+                </a>
+            </button>
+            <button class="checkHealth-btn-main aside-btn-main" data-tooltip="AI 건강 상담">
+                <i class="fas fa-comment-medical"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- 메인 js 토글 클릭기능   -->
+    <script src="../../assets/js/main.js" defer></script>
+    <!-- 건강 상담 챗폿 js -->
+    <script src="../infermedica/infermedica.js" type="module"></script>
+
+
 </body>
 </html>
