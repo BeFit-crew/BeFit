@@ -1,61 +1,80 @@
-import config from "../../assets/js/config.js";
+import { API_KEY_HS } from "../../assets/js/config.js";
+import { getBefitAiResult } from "../../src/befit-ai/befit-ai.js";
 
-// Gemini 기반 건강 챗봇 스크립트
-document.addEventListener("DOMContentLoaded", () => {
-    loadModalHtmlHs();     // 모달 HTML 불러오기
-    setupOpenButtonHs();   // 열기 버튼 연결
-});
+// =============================
+// 상수 및 설정
+// =============================
+const SYSTEM_PROMPT = `
+당신은 종합병원 의사입니다.
 
-// Gemini API
-async function fetchGeminiResponseHs(userMessage) {
-
-    const SYSTEM_PROMPT = `
-당신은 종합병원 의사입니다.  
-사용자가 증상을 설명하면 다음 원칙에 따라 간결하고 명확하게 설명하세요.
+환자는 "{limitation}"과 같은 건강상 제한사항이 있습니다.
+환자의 나이는 "{age}"살, 키는 "{height}"cm 입니다.
+환자는 "{foodAllergies}"에 알레르기가 있습니다.
+이 점을 고려해 증상에 대해 분석하고 조언해주세요.
 
 - 감정 표현 없이, 의학적 사실(Fact)만 제시  
 - 의심되는 질환, 해부학적 부위, 가능한 원인, 경과 예후를 간결히 설명  
 - 일반인이 이해할 수 있는 수준의 의학 용어를 사용  
-- 지금 당장 어떤것을 해야하는지 알려줘
-- 필요 시 병원 내원 여부와 응급 여부를 명확히 판단  
+- 지금 당장 어떤 것을 해야 하는지 알려줘  
+- 병원 내원 여부와 응급 여부를 명확히 판단  
 - 문장 수는 1~2줄 이내로 제한  
 - 말투는 설명 중심으로, 공감이나 위로는 생략  
-- ** 나 강조 문구, 특수문자, 숫자 없이 답변
+- **, 강조 문구, 특수문자, 숫자 없이 답변
+`.trim();
 
-예시:
-- "무릎 앞쪽 통증은 대개 슬개건염 가능성이 있습니다."
-- "운동 중 발생한 갑작스런 통증은 인대 손상 또는 연골 손상일 수 있습니다."
-`;
+// 페이지 로드시 실행
+document.addEventListener("DOMContentLoaded", () => {
+    loadModalHtmlHs();
+    setupOpenButtonHs();
+    setupEscCloseHs();
+});
+
+// Gemini API 호출
+async function fetchGeminiResponseHs(userMessage) {
+    const aiData = getBefitAiResult();
+    const { limitations, foodAllergies, height, age } = aiData?.user || {};
+
+    const prompt = SYSTEM_PROMPT
+        .replace("{limitation}", limitations || "제한사항 없음")
+        .replace("{age}", age || "알 수 없음")
+        .replace("{height}", height || "알 수 없음")
+        .replace("{foodAllergies}", foodAllergies || "없음");
 
     const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${config.API_KEY_HS}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY_HS}`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 contents: [
-                    { role: "user", parts: [{ text: SYSTEM_PROMPT }] }, // 역할 부여
-                    { role: "user", parts: [{ text: userMessage }] }     // 실제 질문
+                    { role: "user", parts: [{ text: prompt }] },
+                    { role: "user", parts: [{ text: userMessage }] }
                 ]
             }),
         }
     );
 
     const result = await response.json();
-    return result.candidates?.[0]?.content?.parts?.[0]?.text || "화장실이 급해서 다음에 다시 물어봐주세요.";
+    return result.candidates?.[0]?.content?.parts?.[0]?.text || "죄송합니다. 다시 입력해 주세요.";
 }
 
 // 모달 HTML 동적 삽입
 function loadModalHtmlHs() {
-    fetch("src/infermedica/infermedica.html")
+    const isInSubFolder = window.location.pathname.includes('/src/');
+    const htmlPath = isInSubFolder
+        ? '../infermedica/infermedica.html'
+        : 'src/infermedica/infermedica.html';
+
+    fetch(htmlPath)
         .then(res => res.text())
         .then(html => {
             document.body.insertAdjacentHTML("beforeend", html);
             setupModalEventsHs();
-        });
+        })
+        .catch(err => console.error("모달 HTML 불러오기 실패:", err));
 }
 
-// 모달 열기 버튼 이벤트 연결
+// 버튼/ESC 키 이벤트 연결
 function setupOpenButtonHs() {
     const openBtn = document.querySelector(".checkHealth-btn-main");
     openBtn?.addEventListener("click", () => {
@@ -67,7 +86,6 @@ function setupOpenButtonHs() {
     });
 }
 
-// ESC 키로 닫기 이벤트 연결
 function setupEscCloseHs() {
     document.addEventListener("keydown", e => {
         const modal = document.getElementById("modal-hs");
@@ -77,15 +95,32 @@ function setupEscCloseHs() {
         }
     });
 }
-setupEscCloseHs();
 
-// 모달 내부 요소 이벤트 등록
-function setupModalEventsHs() {
+// 초기 안내 메시지 출력
+function showInitialMessagesHs(chatArea, { limitations, foodAllergies }) {
+    if (foodAllergies) {
+        appendMessageHs(`저장된 음식 알레르기는 '${foodAllergies}'`, "bot", chatArea);
+    }
+    if (limitations) {
+        appendMessageHs(`건강 제한사항은 '${limitations}'가 있습니다. 이 점을 고려해 상담을 진행하겠습니다.`, "bot", chatArea);
+    } else {
+        appendMessageHs("현재 저장된 건강 제한사항이 없습니다. 당뇨, 고혈압, 알레르기 등이 있다면 입력해주세요.", "bot", chatArea);
+    }
+    appendMessageHs("증상을 입력하시면 분석을 도와드릴게요.", "bot", chatArea);
+}
+
+// 모달 내부 이벤트 연결
+async function setupModalEventsHs() {
+    const aiData = getBefitAiResult();
+    const { limitations, foodAllergies } = aiData?.user || {};
+
     const modal = document.getElementById("modal-hs");
     const closeBtn = document.getElementById("close-btn-hs");
     const sendBtn = document.getElementById("send-btn-hs");
     const input = document.getElementById("user-input-hs");
     const chatArea = document.getElementById("chat-messages-hs");
+
+    showInitialMessagesHs(chatArea, { limitations, foodAllergies });
 
     closeBtn?.addEventListener("click", () => {
         modal.classList.remove("show-hs");
@@ -99,11 +134,9 @@ function setupModalEventsHs() {
             handleSendHs(input, chatArea);
         }
     });
-    const greeting = "증상을 알려주시면, 관련된 의학적 정보를 제공해 드리겠습니다.";
-    appendMessageHs(greeting, "bot", chatArea);
 }
 
-// 채팅 메시지 출력 함수
+// 채팅 메시지 출력
 function appendMessageHs(text, sender, chatArea) {
     const isAtBottom =
         chatArea.scrollHeight - chatArea.scrollTop <= chatArea.clientHeight + 10;
@@ -128,7 +161,7 @@ function appendMessageHs(text, sender, chatArea) {
     }
 }
 
-// 현재 시각 포맷 반환
+// 현재 시각 포맷
 function getTimeHs() {
     const now = new Date();
     const hour = now.getHours();
