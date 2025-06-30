@@ -22,8 +22,8 @@
     width: 60px;
     height: 60px;
     padding: 0;
-    background-color: #27ae60;
-    color: white;
+    background-color: #1a723f;
+    color: #fff;
     font-size: 1.5rem;
     border-radius: 50%;
     cursor: pointer;
@@ -48,7 +48,7 @@
     font-weight: 700;
     border-radius: 50%;
     border: none;
-    color: white;
+    color: #fff;
     font-size: 1.5rem;
     cursor: pointer;
     opacity: 0;
@@ -160,30 +160,32 @@
 
 /* 챗박스 컨테이너 */
 .chatbox-hs {
-    background: white;
+    background: #fff;
     width: 400px;
     height: 600px;
     display: flex;
     flex-direction: column;
-    border-radius: 12px;
+    border-radius: 0 0 16px 16px;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
 /* 상단 헤더 */
 .chat-header-hs {
-    background: #2ecc71;
+    background: #1a723f;
     color: #fff;
+    font-size: 1.2em;
     padding: 14px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    bottom: 15px;
 }
 
 /* 닫기 버튼 */
 .close-btn-hs {
-    background-color: #2ecc71;
+    background-color: #1a723f;
     border: none;
     color: #fff;
     font-size: 30px;
@@ -199,7 +201,7 @@
     flex: 1;
     padding: 12px;
     overflow-y: auto;
-    background: #f9f9f9;
+    background: #fff;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -230,7 +232,7 @@
     background: #2ecc71;
     border: none;
     border-radius: 6px;
-    color: white;
+    color: #fff;
     cursor: pointer;
 
 }
@@ -269,7 +271,7 @@
 
 .chat-bubble-hs.user-hs {
     background: #2ecc71;
-    color: white;
+    color: #fff;
     border-bottom-right-radius: 0;
 }
 
