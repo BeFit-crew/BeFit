@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>운동 영상 추천 시스템</title>
-    <!-- CSS 연결 -->
-    <link rel="stylesheet" href="../../assets/css/common.css">
     <link rel="stylesheet" href="playlist.css">
-    <!-- FontAwesome (아이콘 사용) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- 공통 버튼과 모달 -->
-    <link rel="stylesheet" href="../infermedica/infermedica.css">
+    <script type="module" src="playlist.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>🏋 운동 영상 추천 시스템</h1>
 
+<!-- 로고 헤더 -->
+<p class="logo-heading-befit-ai">
+    <img src="../befit-ai/img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai" />
+    <span id="user-name"></span>
+</p>
+
+
+    <!-- 키워드 요약 -->
+    <div id="result-display"></div>
+
+    <!-- 자동 추천 영상 슬라이드 -->
+    <div class="video-slider-container" id="autoResultsContainer" style="display: none;">
+        <div class="video-slider" id="autoResults"></div>
+        <div class="slider-buttons">
+            <button id="prevBtn">&#10094;</button>
+            <button id="nextBtn">&#10095;</button>
+        </div>
+    </div>
+</section>
+
+<!-- 수동 검색 영역 -->
+<section class="manual-section">
+    <h2>운동 영상 키워드 검색하기</h2>
     <div class="filters">
+        <!-- 🔹 운동 부위 -->
         <div class="filter-group">
             <span class="filter-label">운동 부위</span>
             <div class="filter-options" id="bodyPart">
@@ -28,6 +45,7 @@
             </div>
         </div>
 
+        <!-- 운동 스타일 -->
         <div class="filter-group">
             <span class="filter-label">운동 스타일</span>
             <div class="filter-options" id="style">
@@ -41,6 +59,7 @@
             </div>
         </div>
 
+        <!-- 연령 -->
         <div class="filter-group">
             <span class="filter-label">운동 연령</span>
             <div class="filter-options" id="age">
@@ -54,10 +73,11 @@
             </div>
         </div>
 
+        <!-- 운동 목적 -->
         <div class="filter-group">
             <span class="filter-label">운동 목적</span>
             <div class="filter-options" id="purpose">
-                <div class="tag">근력, 근지구력 향상</div>
+                <div class="tag">근력 향상</div>
                 <div class="tag">다이어트</div>
                 <div class="tag">체형교정</div>
                 <div class="tag">심폐지구력 향상</div>
@@ -66,67 +86,30 @@
             </div>
         </div>
 
+        <!-- 운동 시간 -->
         <div class="filter-group">
             <label class="filter-label" for="duration">운동 시간 (분)</label>
-            <input type="number" id="duration" class="input-field" min="5" value="30">
+            <input type="number" id="duration" class="input-field" min="5" value="30" />
         </div>
 
+        <!-- 키워드 검색 -->
         <div class="filter-group">
             <label class="filter-label" for="keyword">원하는 키워드로 검색</label>
-            <input type="text" id="keyword" class="input-field" placeholder="예: 다이어트, 복근운동">
+            <input type="text" id="keyword" class="input-field" placeholder="예: 다이어트, 복근운동" />
         </div>
 
+        <!-- 버튼 -->
         <div class="actions">
-            <button class="btn" onclick="clearFilters()">전체 해제</button>
-            <button class="btn" onclick="searchVideos()">추천받기</button>
+            <button class="btn" id="clearBtn">전체 해제</button>
+            <button class="btn" id="searchBtn">추천받기</button>
         </div>
     </div>
 
-    <div class="video-section-title">🏃 추천 운동 영상</div>
-    <div class="video-section-container" id="videoContainer">
-        <div class="video-list" id="results"></div>
+    <!-- 수동 검색 결과 -->
+    <div class="video-section-container manual" id="manualResultsContainer">
+        <div class="video-list manual" id="manualResults"></div>
     </div>
-</div>
-
-<!-- JavaScript 연결 -->
-<script src="playlist.js"></script>
-
-    <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
-    <div class="aside-wrapper-main">
-        <div class="aside-toggle-btn-main">
-            <i class="fas fa-cog"></i>
-        </div>
-        <div class="aside-buttons-main">
-            <button class="login-btn-main aside-btn-main" data-tooltip="건강 플래너">
-                <!-- 건강 체크 -->
-                <a href="../befit-ai/befit-ai.html">
-                    <i class="fas fa-user-check"></i>
-                </a>
-            </button>
-            <button class="playlist-btn-main aside-btn-main" data-tooltip="운동 영상 추천">
-                <!-- 다영님 -->
-                <a href="../playlist/playlist.html">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </button>
-            <button class="shopping-btn-main aside-btn-main" data-tooltip="상품 검색">
-                <!-- 동준님 -->
-                <a href="../shopping/shopping.html">
-                    <i class="fas fa-shopping-basket"></i>
-                </a>
-            </button>
-            <button class="checkHealth-btn-main aside-btn-main" data-tooltip="AI 건강 상담">
-                <i class="fas fa-comment-medical"></i>
-            </button>
-        </div>
-    </div>
-
-
-    <!-- 메인 js 토글 클릭기능   -->
-    <script src="../../assets/js/main.js" defer></script>
-    <!-- 건강 상담 챗폿 js -->
-    <script src="../infermedica/infermedica.js" type="module"></script>
-
+</section>
 
 </body>
 </html>
