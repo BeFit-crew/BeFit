@@ -112,8 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.style.margin = '0 auto';
 
         const logoHeading = document.querySelector('.logo-heading-befit-ai span#user-name');
-        if (logoHeading) logoHeading.textContent = `Be-Fit 사용자 추천 영상`;
-
         searchVideosFromAIData(aiData);
     } else {
         document.querySelector('h1').textContent = "저장된 AI 결과가 없습니다.";
