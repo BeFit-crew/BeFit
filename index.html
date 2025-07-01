@@ -11,15 +11,99 @@
 
 </head>
 <body>
+    <!-- 헤더 기능과 설명  -->
+    <header class="mega-header">
+        <nav class="nav">
+            <ul class="nav-list">
 
-<!-- 로고 + 버튼 -->
-<div class="logo-hover-area-main">
-    <button class="start-btn-main">START</button>
-    <div class="logo-container-main">
-        <div class="logo-image-main"></div>
-        <div class="logo-overlay-main"></div>
+                <li class="nav-item">
+                    BeFit
+                    <div class="mega-menu">
+                        <div class="menu-left">
+                            <ul>
+                                <li data-target="planner-1">맞춤 설정</li>
+                                <li data-target="planner-2">AI 분석 및 요약</li>
+<!--                                <li data-target="planner-3"></li>-->
+                            </ul>
+                        </div>
+                        <div class="menu-right">
+                            <div class="desc active" id="planner-1">
+                                사용자의 체성분 및 활동 정보 목표(체지방률, 골격근량 등)을 기간과 건강관련 특이사항등
+                                세부사항을 입력할 수 있습니다.
+                            </div>
+                            <div class="desc" id="planner-2">
+                                저장된 데이터로 세부사항을 분석하여 필요한 정보들을 정리해주고
+                                사용자에게 딱 맞는 식단과 운동을 일마다 알려드립니다.
+
+                            </div>
+                            <div class="desc" id="planner-3">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    BeFit+
+                    <div class="mega-menu">
+                        <div class="menu-left">
+                            <ul>
+                                <li data-target="fitness-1">운동 영상 추천</li>
+                                <li data-target="fitness-2">상품 검색</li>
+                                <li data-target="fitness-3">AI 건강 상담</li>
+                            </ul>
+                        </div>
+                        <div class="menu-right">
+                            <div class="desc active" id="fitness-1">
+                                맞춤 분석에 따라 관련된 운동을 추천하고 키워드를 누르거나 키워드를 입력해 사용자에 맞는 운동 영상을 추천해드립니다.
+                            </div>
+                            <div class="desc" id="fitness-2">
+                                맞춤 분석에 따라 필요한 상품을 추천하고 운동복, 신발, 단백질 보충제 등 사용자에 필요한 물건을 검색하여 바로 구매할 수 있습니다.
+                            </div>
+                            <div class="desc" id="fitness-3">
+                                의료 전문 AI로 사용자에 정보에 맞춰 답변하여 실시간으로 언제 어디서나 증상을 말하고 답할 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    More
+                    <div class="mega-menu">
+                        <div class="menu-left">
+                            <ul>
+                                <li data-target="more-1">사용자 경험 강화</li>
+                                <li data-target="more-2">동기부여 시스템</li>
+                                <li data-target="more-3">프리미엄 구독</li>
+                            </ul>
+                        </div>
+                        <div class="menu-right">
+                            <div class="desc active" id="more-1">
+                                사용자 인증 및 DB 연동 회원가입/로그인 기능을 추가하고 DB(Firebase 등)에 사용자 정보를 저장 예정
+                            </div>
+                            <div class="desc" id="more-2">
+                                진행 상황 트래킹 및 데이터 시각화, AI 추천 계획을 연동하는 캘린더 기능 추가 사용자가 직접 수정하고 달성 여부를 체크하는 To-Do List 기능 구현 예정
+                            </div>
+                            <div class="desc" id="more-3">
+                                더 정교한 AI 모델을 활용 건강 상품 제휴 및 커머스 기능 강화 예정
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 로고 + 하트 아이콘 -->
+    <div class="logo-hover-area-main">
+        <div class="logo-container-main">
+            <!-- 심장 위치의 하트 -->
+            <button class="start-btn-main" data-tooltip="START" ><i class="fas fa-heartbeat"></i></button>
+
+            <div class="logo-image-main"></div>
+            <div class="logo-overlay-main"></div>
+        </div>
     </div>
-</div>
+
 
     <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
     <div class="aside-wrapper-main">
@@ -61,9 +145,38 @@
     <script>
         // 로고 클릭
         const $startBtnMain = document.querySelector('.start-btn-main');
+        const $logoImage = document.querySelector('.logo-image-main');
 
         $startBtnMain.addEventListener('click', () => {
         window.location.href = 'src/befit-ai/befit-ai.html';
+        });
+
+        $startBtnMain.addEventListener('mouseenter', () => {
+            $logoImage.classList.add('heartbeat-active');
+        });
+
+        $startBtnMain.addEventListener('mouseleave', () => {
+            $logoImage.classList.remove('heartbeat-active');
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll('.menu-left li');
+            const descriptions = document.querySelectorAll('.menu-right .desc');
+
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const target = item.getAttribute('data-target');
+
+                    descriptions.forEach(desc => {
+                        desc.classList.remove('active');
+                    });
+
+                    const targetDesc = document.getElementById(target);
+                    if (targetDesc) {
+                        targetDesc.classList.add('active');
+                    }
+                });
+            });
         });
     </script>
 

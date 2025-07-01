@@ -1,5 +1,9 @@
 /* 전체 모달 배경 */
 
+/* */
+a {
+    color: white;
+}
 /* 어사이드 버튼 전체 박스 (토글 버튼 고정) */
 .aside-wrapper-main {
     position: fixed;
@@ -39,6 +43,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    color: #fff;
+
 }
 
 .aside-btn-main {
