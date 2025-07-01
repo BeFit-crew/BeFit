@@ -27,18 +27,27 @@ function updateAutoSection() {
 
     const offset = currentSlideIndex * 100;
     slider.style.transform = `translateX(-${offset}%)`;
-    slider.style.width = `${100 * totalSlides}%`;
+    slider.style.width = '100%';
     videoItems.forEach(item => {
-        item.style.flex = `0 0 ${100 / totalSlides}%`;
+        item.style.flex = `0 0 100%`;
     });
 }
 
-function fetchVideos(query, targetContainerId, pageToken = '') {
-    const container = document.getElementById(targetContainerId);
-    document.getElementById(targetContainerId + 'Container').style.display = 'block';
+// ✅ 자동 추천 전용 영상 불러오기 (duration 사용)
+function fetchAutoVideos(query, duration = 30) {
+    const container = document.getElementById('autoResults');
+    document.getElementById('autoResultsContainer').style.display = 'block';
 
-    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=8&q=${encodeURIComponent(query)}&regionCode=KR&relevanceLanguage=ko&key=${youtube_AI_API_KEY}`;
-    if (pageToken) url += `&pageToken=${pageToken}`;
+    let durationFilter = '';
+    if (duration >= 40) {
+        durationFilter = '&videoDuration=long';
+    } else if (duration >= 10) {
+        durationFilter = '&videoDuration=medium';
+    } else {
+        durationFilter = '&videoDuration=short';
+    }
+
+    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=8&q=${encodeURIComponent(query)}&regionCode=KR&relevanceLanguage=ko&key=${youtube_AI_API_KEY}${durationFilter}`;
 
     fetch(url)
         .then(res => res.json())
@@ -62,7 +71,7 @@ function fetchVideos(query, targetContainerId, pageToken = '') {
                 container.innerHTML = '<p>추천 영상을 찾을 수 없습니다.</p>';
             }
         })
-        .catch(error => console.error('❌ 영상 불러오기 실패:', error));
+        .catch(error => console.error('❌ 자동 영상 불러오기 실패:', error));
 }
 
 function searchVideosFromAIData(aiData) {
@@ -72,14 +81,14 @@ function searchVideosFromAIData(aiData) {
     const firstDay = aiData.training[0];
     const parts = [...new Set(firstDay.routine.map(ex => ex.part))];
     const duration = aiData.workoutTime ?? 60;
-    const period = user.days ?? user.period ?? '';
     const gender = user.gender ?? '';
     const goal = user.goal ?? '';
+    const period = user.days ?? user.period ?? '';
 
     const query = `${gender} ${parts.join(' ')} 운동 ${duration}분 ${goal} 루틴`.trim();
     currentQuery = query;
     nextPageToken = '';
-    fetchVideos(query, 'autoResults');
+    fetchAutoVideos(query, duration); // 자동만 duration 적용
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -111,15 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.style.maxWidth = '720px';
         resultDisplay.style.margin = '0 auto';
 
-        const logoHeading = document.querySelector('.logo-heading-befit-ai span#user-name');
-        if (logoHeading) logoHeading.textContent = `Be-Fit 사용자 추천 영상`;
-
         searchVideosFromAIData(aiData);
     } else {
         document.querySelector('h1').textContent = "저장된 AI 결과가 없습니다.";
     }
 });
 
+// 수동 검색 관련은 기존 그대로 유지
 document.querySelectorAll('.tag').forEach(tag => {
     tag.addEventListener('click', () => {
         tag.classList.toggle('active');
@@ -138,13 +145,43 @@ document.getElementById('clearBtn').addEventListener('click', () => {
 
 document.getElementById('searchBtn').addEventListener('click', () => {
     const container = document.getElementById('manualResultsContainer');
-    if (container) container.style.display = 'block'; // 추천버튼 누르면 수동 검색 보임
+    if (container) container.style.display = 'block';
 
     const query = buildQuery();
     currentQuery = query;
     nextPageToken = '';
-    fetchVideos(query, 'manualResults');
+    fetchManualVideos(query); // duration 없이 수동은 그대로
 });
+
+function fetchManualVideos(query, pageToken = '') {
+    const container = document.getElementById('manualResults');
+
+    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=8&q=${encodeURIComponent(query)}&regionCode=KR&relevanceLanguage=ko&key=${youtube_AI_API_KEY}`;
+    if (pageToken) url += `&pageToken=${pageToken}`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            nextPageToken = data.nextPageToken || '';
+            container.innerHTML = '';
+
+            if (data.items && data.items.length > 0) {
+                data.items.forEach(item => {
+                    if (item.id && item.id.videoId) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'video-item';
+                        wrapper.innerHTML = `
+                            <iframe src="https://www.youtube.com/embed/${item.id.videoId}" allowfullscreen></iframe>
+                        `;
+                        container.appendChild(wrapper);
+                    }
+                });
+            } else {
+                container.innerHTML = '<p>추천 영상을 찾을 수 없습니다.</p>';
+            }
+        })
+        .catch(error => console.error('❌ 수동 영상 불러오기 실패:', error));
+}
 
 function getSelectedText(id) {
     const active = document.querySelector(`#${id} .tag.active`);
