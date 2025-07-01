@@ -10,7 +10,7 @@
     --secondary-color: #6c757d; /* 보조 버튼 색상 (회색) */
     --secondary-color-darker: #5a6268; /* 회색 버튼 호버 색상 */
     --font-color-base: #2c2c2c; /* 기본 글자 색상 */
-    --background-color-light: #f6f7f8; /* 페이지 배경 색상 */
+    --background-color-light: #f4f4f4; /* 페이지 배경 색상 */
     --error-color: #d32f2f; /* 에러 메시지 색상 */
 }
 
