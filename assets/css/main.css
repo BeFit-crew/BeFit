@@ -10,6 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
+    /*background-color: #f4f4f4;*/
     background: linear-gradient(-45deg, #e6db96, #fed6e3, #d4fc79, #96e6a1);
     background-size: 400% 400%;
     animation: background-main 10s ease infinite;
@@ -22,16 +23,104 @@ button {
 /* 배경 애니메이션*/
 @keyframes background-main {
     0% {
-        background-position: 0% 50%;
+        background-position: 0 50%;
     }
     50% {
         background-position: 100% 50%;
     }
     100% {
-        background-position: 0% 50%;
+        background-position: 0 50%;
     }
 }
 
+.blur-header{
+    filter: blur(10px);
+}
+
+.mega-header {
+    padding: 20px;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+}
+.nav-list {
+    list-style: none;
+    display: flex;
+    height: 100%;
+    /*box-shadow: 3px 3px 15px rgba(0,0,0,0.5);*/
+    width: 60%;
+    top: 100%;
+    gap: 36px;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+
+    /*box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);*/
+
+}
+
+.nav-item {
+    position: relative;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 2em;
+    color: #207651;
+
+}
+
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    padding: 24px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    gap: 40px;
+    width: 90vw;
+    max-width: 600px;
+    z-index: 999;
+}
+
+.menu-column h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-column li {
+    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.nav-item:hover .mega-menu,
+.nav-item .mega-menu:hover {
+    display: flex;
+}
+
+@media (max-width: 600px) {
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
 /* 로고와 스타트  */
 /* 플랙스로 순서를 바꾸고 형제 선택자를 사용하여 호버 효과 */
 .logo-hover-area-main {
@@ -41,8 +130,8 @@ button {
 }
 
 .logo-container-main {
-    width: 400px;
-    height: 400px;
+    width: 650px;
+    height: 650px;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -51,18 +140,31 @@ button {
 
 }
 
-.logo-image-main,
-.logo-overlay-main {
+/*.logo-overlay-main, */
+.logo-image-main {
     position: absolute;
     inset: 0;
-    background-image: url('../img/be-fit-logo.png');
+    background-image: url('../img/logo-Befit.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: all 0.8s ease;
+    /*transition: all 0.8s ease;*/
 }
 
-.logo-overlay-main {
+.logo-image-main.heartbeat-active {
+    animation: logo-heartbeat 1.5s infinite;
+}
+
+@keyframes logo-heartbeat {
+    0%, 100% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.15); /* 너무 크면 어색하니 살짝만 확대 */
+    }
+}
+/* 밑에서 올라오는 로고 제거 */
+/*.logo-overlay-main {
     transform: translateY(100%);
     opacity: 0;
 }
@@ -74,20 +176,71 @@ button {
 .start-btn-main:hover ~ .logo-container-main .logo-overlay-main {
     transform: translateY(0);
     opacity: 1;
+}*/
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.2);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.2);
+    }
+    70% {
+        transform: scale(1);
+    }
 }
 
 .start-btn-main {
-    padding: 12px 24px;
+    position: absolute;
+    color: #fff;
+    top: 53%;
+    left: 57%;
     font-size: 3rem;
     font-weight: 700;
-    background-color: #27ae60;
-    color: white;
+    background: transparent;
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s;
+    pointer-events: auto;
+    box-shadow: none;
+    z-index: 500;
+    animation: heartbeat 1.5s infinite;
+    transition: all 0.3s ease;
+}
+.start-btn-main[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 0;
+    bottom: 90%;
+    /*transform: translateY(-50%);*/
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 2000;
 }
 
-.start-btn-main:hover {
-    background-color: #1a723f;
+.start-btn-main:hover  {
+    color: #1a723f;
+    background: transparent;
+    transform: none;
+    font-size: 4rem;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    animation: heartbeat 1.5s infinite;
+    transition: all 0.3s ease;
+}
+.start-btn-main:hover::after {
+    opacity: 1;
+    transform: none;
+    font-size: 1.1rem;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
 }

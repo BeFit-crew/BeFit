@@ -12,14 +12,89 @@
 </head>
 <body>
 
-<!-- 로고 + 버튼 -->
-<div class="logo-hover-area-main">
-    <button class="start-btn-main">START</button>
-    <div class="logo-container-main">
-        <div class="logo-image-main"></div>
-        <div class="logo-overlay-main"></div>
+    <header class="mega-header">
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    Watch
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Featured</h4>
+                            <ul>
+                                <li>🟢 Staff Picks</li>
+                                <li>🎬 Generation Vimeo</li>
+                                <li>🌍 Best of the Year</li>
+                            </ul>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Browse Videos By</h4>
+                            <ul>
+                                <li>🏅 Best of Staff Picks</li>
+                                <li>📚 Categories</li>
+                                <li>📺 Channels</li>
+                                <li>💰 On Demand</li>
+                                <li>🌐 Browse All</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    Exercise
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>운동 플랜</h4>
+                            <ul>
+                                <li>🏋️‍♀️ 웨이트 트레이닝</li>
+                                <li>🏃‍♂️ 유산소 루틴</li>
+                                <li>🧘‍♀️ 스트레칭</li>
+                            </ul>
+                        </div>
+                        <div class="menu-column">
+                            <h4>레벨별 운동</h4>
+                            <ul>
+                                <li>🟢 입문자</li>
+                                <li>🟡 중급자</li>
+                                <li>🔴 고급자</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    Nutrition
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>식단 관리</h4>
+                            <ul>
+                                <li>🥗 건강 식단</li>
+                                <li>🍱 다이어트 식단</li>
+                                <li>🍗 단백질 중심</li>
+                            </ul>
+                        </div>
+                        <div class="menu-column">
+                            <h4>영양 정보</h4>
+                            <ul>
+                                <li>📊 칼로리 계산기</li>
+                                <li>🥑 영양소 가이드</li>
+                                <li>💧 수분 섭취 팁</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 로고 + 하트 아이콘 -->
+    <div class="logo-hover-area-main">
+        <div class="logo-container-main">
+            <!-- 심장 위치의 하트 -->
+            <button class="start-btn-main" data-tooltip="START" ><i class="fas fa-heartbeat"></i></button>
+
+            <div class="logo-image-main"></div>
+            <div class="logo-overlay-main"></div>
+        </div>
     </div>
-</div>
+
 
     <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
     <div class="aside-wrapper-main">
@@ -61,9 +136,18 @@
     <script>
         // 로고 클릭
         const $startBtnMain = document.querySelector('.start-btn-main');
+        const $logoImage = document.querySelector('.logo-image-main');
 
         $startBtnMain.addEventListener('click', () => {
         window.location.href = 'src/befit-ai/befit-ai.html';
+        });
+
+        $startBtnMain.addEventListener('mouseenter', () => {
+            $logoImage.classList.add('heartbeat-active');
+        });
+
+        $startBtnMain.addEventListener('mouseleave', () => {
+            $logoImage.classList.remove('heartbeat-active');
         });
     </script>
 
