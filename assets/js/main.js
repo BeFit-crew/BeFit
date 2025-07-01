@@ -8,14 +8,14 @@ $asideToggleBtnMain.addEventListener('click', function () {
     $asideWrapperMain.classList.toggle('open');
 });
 
-function loadModalHtmlHs() {
-    fetch("../../src/infermedica/infermedica.html")
-        .then(res => res.text())
-        .then(html => {
-            document.body.insertAdjacentHTML("beforeend", html);
-            setupModalEventsHs();
-        });
-}
+// function loadModalHtmlHs() {
+//     fetch("../../src/infermedica/infermedica.html")
+//         .then(res => res.text())
+//         .then(html => {
+//             document.body.insertAdjacentHTML("beforeend", html);
+//             setupModalEventsHs();
+//         });
+// }
 
 
 
