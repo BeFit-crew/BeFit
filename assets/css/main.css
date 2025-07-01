@@ -10,14 +10,11 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
-    /*background-color: #f4f4f4;*/
-    background: linear-gradient(-45deg, #e6db96, #fed6e3, #d4fc79, #96e6a1);
-    background-size: 400% 400%;
-    animation: background-main 10s ease infinite;
+    background-color: #f4f4f4;
+
 }
 button {
     box-shadow: 3px 3px 10px rgba(0,0,0,0.5)
-
 }
 
 /* 배경 애니메이션*/
@@ -33,102 +30,106 @@ button {
     }
 }
 
-.blur-header{
-    filter: blur(10px);
-}
-
+/* 헤더 */
 .mega-header {
     padding: 20px;
     margin: 0;
     position: fixed;
     top: 0;
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
-    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 16px 16px;
+    z-index: 1000;
 }
 .nav-list {
     list-style: none;
     display: flex;
-    height: 100%;
-    /*box-shadow: 3px 3px 15px rgba(0,0,0,0.5);*/
-    width: 60%;
-    top: 100%;
-    gap: 36px;
+    gap: 70px;
     margin: 0;
     padding: 0;
-    z-index: 1000;
-
-    /*box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);*/
-
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
-
 .nav-item {
     position: relative;
     font-weight: 800;
     cursor: pointer;
-    display: inline-block;
     padding: 8px 12px;
-    font-size: 2em;
+    font-size: 1.8rem;
     color: #207651;
-
 }
-
 .mega-menu {
-    display: none;
     position: absolute;
-    top: calc(100%);
+    top: 100%;
     left: 0;
-    padding: 24px;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    background: rgba(32, 118, 81, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
+    padding: 24px;
     gap: 40px;
-    width: 90vw;
-    max-width: 600px;
-    z-index: 999;
+    width: 600px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
-
-.menu-column h4 {
-    font-size: 14px;
-    margin-bottom: 8px;
+.nav-item:hover .mega-menu,
+.mega-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
-
-.menu-column ul {
+.menu-left ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    color: #fff;
+}
+.menu-left li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 800;
+    transition: background 0.2s;
+    font-size: 0.8em;
+}
+.menu-left li:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+}
+.menu-right {
+    flex: 1;
+    min-width: 240px;
+    color: #fff;
+    font-weight: 500;
+    border-left: #fff 1px solid;
+    padding-left: 30px;
+}
+.desc {
+    display: none;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.desc.active {
+    display: block;
 }
 
-.menu-column li {
-    margin: 6px 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-}
-
-.nav-item:hover .mega-menu,
-.nav-item .mega-menu:hover {
-    display: flex;
-}
-
-@media (max-width: 600px) {
-    .nav-list {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-}
 /* 로고와 스타트  */
 /* 플랙스로 순서를 바꾸고 형제 선택자를 사용하여 호버 효과 */
 .logo-hover-area-main {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    margin-top: 25px;
+    /*background-color: #f4f4f4;*/
+    width: 50%;
+    border-radius: 16px;
+    background: linear-gradient(-45deg, #e6db96, #fed6e3, #d4fc79, #96e6a1);
+    background-size: 400% 400%;
+    animation: background-main 5s alternate infinite;
 }
-
 .logo-container-main {
     width: 650px;
     height: 650px;
