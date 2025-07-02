@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Be Fit Video</title>
+    <title>BeFit Video</title>
     <link rel="stylesheet" href="../../assets/css/common.css">
     <link rel="stylesheet" href="playlist.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -14,11 +14,13 @@
 </head>
 <body>
 
-<!-- 로고 헤더 -->
-<p class="logo-heading-befit-ai">
-    <img src="../befit-ai/img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai" />
-    <span id="user-name">Be-Fit 사용자 추천 영상</span>
-</p>
+    <!-- 로고 헤더 -->
+    <p class="logo-heading-befit-ai">
+        <a href="../../index.html">
+            <img src="../befit-ai/img/be-fit-logo-white.png" alt="BeFit 로고" class="logo-icon-befit-ai"/>
+        </a>
+        <span id="user-name">BeFit 사용자 추천 영상</span>
+    </p>
 
 
     <!-- 키워드 요약 -->
@@ -33,87 +35,87 @@
         </div>
     </div>
 
-<!-- 수동 검색 영역 -->
-<section class="manual-section">
-    <h2>운동 영상 키워드 검색하기</h2>
-    <div class="filters">
-        <!-- 🔹 운동 부위 -->
-        <div class="filter-group">
-            <span class="filter-label">운동 부위</span>
-            <div class="filter-options" id="bodyPart">
-                <div class="tag">전신</div>
-                <div class="tag">하체</div>
-                <div class="tag">상체</div>
-                <div class="tag">복부</div>
-                <div class="tag">유산소</div>
+    <!-- 수동 검색 영역 -->
+    <section class="manual-section">
+        <h2>운동 영상 키워드 검색하기</h2>
+        <div class="filters">
+            <!-- 🔹 운동 부위 -->
+            <div class="filter-group">
+                <span class="filter-label">운동 부위</span>
+                <div class="filter-options" id="bodyPart">
+                    <div class="tag">전신</div>
+                    <div class="tag">하체</div>
+                    <div class="tag">상체</div>
+                    <div class="tag">복부</div>
+                    <div class="tag">유산소</div>
+                </div>
+            </div>
+
+            <!-- 운동 스타일 -->
+            <div class="filter-group">
+                <span class="filter-label">운동 스타일</span>
+                <div class="filter-options" id="style">
+                    <div class="tag">홈트레이닝</div>
+                    <div class="tag">요가</div>
+                    <div class="tag">필라테스</div>
+                    <div class="tag">헬스</div>
+                    <div class="tag">스트레칭</div>
+                    <div class="tag">유산소</div>
+                    <div class="tag">크로스핏</div>
+                </div>
+            </div>
+
+            <!-- 연령 -->
+            <div class="filter-group">
+                <span class="filter-label">운동 연령</span>
+                <div class="filter-options" id="age">
+                    <div class="tag">10대</div>
+                    <div class="tag">20대</div>
+                    <div class="tag">30대</div>
+                    <div class="tag">40대</div>
+                    <div class="tag">50대</div>
+                    <div class="tag">60대</div>
+                    <div class="tag">70대</div>
+                </div>
+            </div>
+
+            <!-- 운동 목적 -->
+            <div class="filter-group">
+                <span class="filter-label">운동 목적</span>
+                <div class="filter-options" id="purpose">
+                    <div class="tag">근력 향상</div>
+                    <div class="tag">다이어트</div>
+                    <div class="tag">체형교정</div>
+                    <div class="tag">심폐지구력 향상</div>
+                    <div class="tag">유연성 향상</div>
+                    <div class="tag">체력 증진</div>
+                </div>
+            </div>
+
+            <!-- 운동 시간 -->
+            <div class="filter-group">
+                <label class="filter-label" for="duration">운동 시간 (분)</label>
+                <input type="number" id="duration" class="input-field" min="5" value="30"/>
+            </div>
+
+            <!-- 키워드 검색 -->
+            <div class="filter-group">
+                <label class="filter-label" for="keyword">원하는 키워드로 검색</label>
+                <input type="text" id="keyword" class="input-field" placeholder="예: 다이어트, 복근운동"/>
+            </div>
+
+            <!-- 버튼 -->
+            <div class="actions">
+                <button class="btn" id="clearBtn">전체 해제</button>
+                <button class="btn" id="searchBtn">추천받기</button>
             </div>
         </div>
 
-        <!-- 운동 스타일 -->
-        <div class="filter-group">
-            <span class="filter-label">운동 스타일</span>
-            <div class="filter-options" id="style">
-                <div class="tag">홈트레이닝</div>
-                <div class="tag">요가</div>
-                <div class="tag">필라테스</div>
-                <div class="tag">헬스</div>
-                <div class="tag">스트레칭</div>
-                <div class="tag">유산소</div>
-                <div class="tag">크로스핏</div>
-            </div>
+        <!-- 수동 검색 결과 -->
+        <div class="video-section-container manual" id="manualResultsContainer">
+            <div class="video-list manual" id="manualResults"></div>
         </div>
-
-        <!-- 연령 -->
-        <div class="filter-group">
-            <span class="filter-label">운동 연령</span>
-            <div class="filter-options" id="age">
-                <div class="tag">10대</div>
-                <div class="tag">20대</div>
-                <div class="tag">30대</div>
-                <div class="tag">40대</div>
-                <div class="tag">50대</div>
-                <div class="tag">60대</div>
-                <div class="tag">70대</div>
-            </div>
-        </div>
-
-        <!-- 운동 목적 -->
-        <div class="filter-group">
-            <span class="filter-label">운동 목적</span>
-            <div class="filter-options" id="purpose">
-                <div class="tag">근력 향상</div>
-                <div class="tag">다이어트</div>
-                <div class="tag">체형교정</div>
-                <div class="tag">심폐지구력 향상</div>
-                <div class="tag">유연성 향상</div>
-                <div class="tag">체력 증진</div>
-            </div>
-        </div>
-
-        <!-- 운동 시간 -->
-        <div class="filter-group">
-            <label class="filter-label" for="duration">운동 시간 (분)</label>
-            <input type="number" id="duration" class="input-field" min="5" value="30" />
-        </div>
-
-        <!-- 키워드 검색 -->
-        <div class="filter-group">
-            <label class="filter-label" for="keyword">원하는 키워드로 검색</label>
-            <input type="text" id="keyword" class="input-field" placeholder="예: 다이어트, 복근운동" />
-        </div>
-
-        <!-- 버튼 -->
-        <div class="actions">
-            <button class="btn" id="clearBtn">전체 해제</button>
-            <button class="btn" id="searchBtn">추천받기</button>
-        </div>
-    </div>
-
-    <!-- 수동 검색 결과 -->
-    <div class="video-section-container manual" id="manualResultsContainer">
-        <div class="video-list manual" id="manualResults"></div>
-    </div>
-</section>
+    </section>
 
     <!-- 어사이드 버튼 ( 여기서부터 밑에 있는 스크립트 까지 복사) -->
     <div class="aside-wrapper-main">
@@ -144,10 +146,10 @@
             </button>
         </div>
 
-    <!-- 메인 js 토글 클릭기능   -->
-    <script src="../../assets/js/main.js" defer></script>
-    <!-- 건강 상담 챗폿 js -->
-    <script src="../infermedica/infermedica.js" type="module"></script>
+        <!-- 메인 js 토글 클릭기능   -->
+        <script src="../../assets/js/main.js" defer></script>
+        <!-- 건강 상담 챗폿 js -->
+        <script src="../infermedica/infermedica.js" type="module"></script>
 
 
 </body>
