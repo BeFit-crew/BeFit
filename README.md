@@ -97,7 +97,7 @@ BeFit/
 ---
 
 ## 작업 방식
-[팀 협업 문서](./docs/team_rules/befit_team_rules.md)
+[팀 협업 문서](docs/team_rules/BeFit-Team-Rules.md)
 
 * 매일 회의를 통해 역할 분담 및 기능 계획 수립
 * 회의 내용 회의록 작성 및 공유
@@ -138,6 +138,8 @@ BeFit/
 ---
 
 ## 프로젝트 설명
+
+[프로젝트 설명](docs/pdf/BeFit-Fitfolio.pdf)
 
 ### 핵심 컨셉: 생성, 확장, 상호작용
 
@@ -185,7 +187,7 @@ BeFit/
 ### 팀 트러블슈팅: 공용 모듈 Null 참조 오류
 
 - **문제**: DOM 의존 공용 모듈이 특정 페이지에서 Null 오류 발생
-- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](./docs/BeFit_JavaScript_Troubleshooting-Null-Reference.md)를 확인해 주세요.
+- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](docs/BeFit-Troubleshooting-Null-Reference.md)를 확인해 주세요.
 
 ---
 
@@ -209,3 +211,5 @@ BeFit/
 [BeFit Repository 바로가기](https://github.com/BeFit-crew/BeFit)
 
 이메일: [wtj1998@naver.com](mailto:wtj1998@naver.com)
+
+작성자: [왕택준](https://github.com/TJK98) (BeFit 프로젝트 팀장)

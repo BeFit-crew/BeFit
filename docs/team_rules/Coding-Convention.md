@@ -1,8 +1,10 @@
 # 코딩 및 프로젝트 구조 규칙
 
-> [↩️ 전체 규칙으로 돌아가기](./befit_team_rules.md)
+> [↩ 전체 규칙으로 돌아가기](BeFit-Team-Rules.md)
 
-이 문서는 코드 작성 시의 네이밍 규칙과 프로젝트 디렉토리 구조를 정의합니다.
+본 문서는 코드 작성 시의 네이밍 규칙과 프로젝트 디렉토리 구조를 정의합니다.
+
+작성자: [왕택준](https://github.com/TJK98)
 
 ---
 
@@ -32,26 +34,21 @@
 ## 2. 디렉토리 구조 예시
 ```
 BeFit/
-├── .gitignore
-├── index.html                   # 메인 페이지
-├── README.md                    # 프로젝트 소개 문서
+├── .gitignore # Git 추적 제외 파일 설정
+├── index.html # 메인 페이지
+├── README.md # 프로젝트 소개 문서
 │
-├── assets/                      # 공통 리소스
-│   ├── css/
-│   ├── img/
-│   └── js/
+├── assets/ # 공통 정적 리소스 디렉토리
+│ ├── css/ # 메인 CSS 파일
+│ ├── img/ # 프로젝트 이미지 리소스
+│ └── js/ # 메인 JS 파일 및 환경설정(config.js 등)
 │
-├── docs/                        # 문서 자료
+├── docs/ # 프로젝트 산출/문서 자료
 │
-├── src/                         # 개별 기능별 페이지
-│   ├── befit-ai/
-│   │   ├── befit-ai.css
-│   │   ├── befit-ai.html
-│   │   └── befit-ai.js
-│   │
-│   ├── infermedica/
-│   │   └── ...
-│   │
-│   └── ...
+├── src/ # 기능별(페이지별) 소스코드 디렉토리
+│ ├── befit-ai/
+│ ├── infermedica/
+│ ├── playlist/
+│ └── shopping/
 
 ```
