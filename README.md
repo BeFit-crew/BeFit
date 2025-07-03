@@ -27,7 +27,7 @@
 |------|--------------------------------------|------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | 팀장 | [왕택준](https://github.com/TJK98)      | Frontend, Gemini API 연동, 핵심 AI 데이터 로직 구현, Local Storage 상태 관리, GitHub 관리, PR 관리, 팀 문서 작성, README 작성, PPT 제작 및 발표 | [왕택준 회고록](https://velog.io/@wtj1998/BeFit-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D) |
 | 팀원 | [김다영](https://github.com/llllllllie) | Frontend, YouTube Data API 연동, 맞춤 운동 영상 추천 기능                                                                    | [김다영 회고록](https://github.com/llllllllie/project-retros/blob/main/Be-Fit%20프로젝트) |
-| 팀원 | [박현수](https://github.com/hsp64)      | Frontend, Gemini API 연동, AI 챗봇 기능, 메인 페이지                                                                        | [박현수 회고록](https://github.com/hsp64/memoir/blob/main/teamFitfolio20250623.md) |
+| 팀원 | [박현수](https://github.com/hsp64)      | Frontend, Gemini API 연동, AI 챗봇 기능, 메인 페이지, 페이지 별 모달 창 구현                                                         | [박현수 회고록](https://github.com/hsp64/memoir/blob/main/teamFitfolio20250623.md) |
 | 팀원 | [신동준](https://github.com/sdj3959) | Frontend, Naver Shopping API 연동, 상품 검색 및 추천 기능                                                                   | [신동준 회고록](https://github.com/sdj3959/my-retrospectives/blob/master/projects/202506/BeFit/README.md) |
 
 ---
