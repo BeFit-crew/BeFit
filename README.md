@@ -49,7 +49,7 @@
 
 2. `assets/js/config.js` 파일 생성 및 API 키 등록
 
-[프로젝트 클론 가이드 문서](./docs/BeFit_Project_Clone_Guide.md)를 확인해 주세요.
+[프로젝트 클론 가이드 문서](docs/team_guide/BeFit_Project_Clone_Guide.md)를 확인해 주세요.
 
 3. index.html을 Live Server로 실행
 
@@ -187,7 +187,7 @@ BeFit/
 ### 팀 트러블슈팅: 공용 모듈 Null 참조 오류
 
 - **문제**: DOM 의존 공용 모듈이 특정 페이지에서 Null 오류 발생
-- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](docs/BeFit-Troubleshooting-Null-Reference.md)를 확인해 주세요.
+- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](docs/team_guide/BeFit-Null-Reference-Troubleshooting-Guide.md)를 확인해 주세요.
 
 ---
 
