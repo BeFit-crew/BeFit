@@ -49,7 +49,7 @@
 
 2. `assets/js/config.js` 파일 생성 및 API 키 등록
 
-[프로젝트 클론 가이드 문서](docs/team_guide/BeFit_Project_Clone_Guide.md)를 확인해 주세요.
+[프로젝트 클론 가이드 문서](docs/team_guide/BeFit-Project-Clone-Guide.md)를 확인해 주세요.
 
 3. index.html을 Live Server로 실행
 
