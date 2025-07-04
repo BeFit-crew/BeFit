@@ -1,8 +1,9 @@
 
-# 🛠️ BeFit: JavaScript Null 참조 오류 트러블슈팅 가이드
+# BeFit: JavaScript Null 참조 오류 트러블슈팅 가이드
 
-본 문서는 BeFit 프로젝트의 여러 페이지에서 공용으로 사용되는 JavaScript 모듈에서 발생한  
-`Cannot read properties of null` 오류의 원인 및 해결 과정을 공식적으로 정리한 기술 문서입니다.
+본 문서는 BeFit 프로젝트의 여러 페이지에서 공용으로 사용되는 JavaScript 모듈에서 발생한 `Cannot read properties of null` 오류의 원인 및 해결 과정을 공식적으로 정리한 기술 문서입니다.
+
+작성자: [왕택준](https://github.com/TJK98)
 
 ---
 
@@ -79,3 +80,5 @@ main();
 - **권장 사항**:  
   여러 페이지에서 공용으로 활용되는 JavaScript 모듈의 경우,  
   핵심 DOM 의존성에 대한 사전 검사 및 예외 처리(early return)를 반드시 적용할 것을 권장함
+
+> 본 문서는 공용 JavaScript 모듈에서 발생한 **null 참조 오류를 방지**하기 위한 구조적 개선 사례를 기록한 기술 문서입니다.

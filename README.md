@@ -49,7 +49,7 @@
 
 2. `assets/js/config.js` 파일 생성 및 API 키 등록
 
-[프로젝트 클론 가이드 문서](./docs/BeFit_Project_Clone_Guide.md)를 확인해 주세요.
+[프로젝트 클론 가이드 문서](docs/team_guide/BeFit-Project-Clone-Guide.md)를 확인해 주세요.
 
 3. index.html을 Live Server로 실행
 
@@ -97,7 +97,7 @@ BeFit/
 ---
 
 ## 작업 방식
-[팀 협업 문서](./docs/team_rules/befit_team_rules.md)
+[팀 협업 문서](docs/team_rules/BeFit-Team-Rules.md)
 
 * 매일 회의를 통해 역할 분담 및 기능 계획 수립
 * 회의 내용 회의록 작성 및 공유
@@ -138,6 +138,8 @@ BeFit/
 ---
 
 ## 프로젝트 설명
+
+[프로젝트 설명](docs/pdf/BeFit-Fitfolio.pdf)
 
 ### 핵심 컨셉: 생성, 확장, 상호작용
 
@@ -185,7 +187,7 @@ BeFit/
 ### 팀 트러블슈팅: 공용 모듈 Null 참조 오류
 
 - **문제**: DOM 의존 공용 모듈이 특정 페이지에서 Null 오류 발생
-- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](./docs/BeFit_JavaScript_Troubleshooting-Null-Reference.md)를 확인해 주세요.
+- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](docs/team_guide/BeFit-Null-Reference-Troubleshooting-Guide.md)를 확인해 주세요.
 
 ---
 
@@ -200,12 +202,15 @@ BeFit/
 
 ## 문의 및 지원
 
-이 프로젝트는 [MIT License](./LICENSE)로 공개되어 있습니다.  
-자유롭게 사용, 수정, 배포할 수 있으며,  
+이 프로젝트는 MIT 라이선스 하에 공개되어 있습니다.  
 자세한 내용은 LICENSE 파일을 참고해 주세요.
+
+[LICENSE](LICENSE)
 
 > 궁금한 점은 언제든 GitHub Issue, 댓글, 혹은 메일로 문의 바랍니다.
 
-[BeFit Repository 바로가기](https://github.com/BeFit-crew/BeFit)
+[BeFit Repository](https://github.com/BeFit-crew/BeFit)
 
 이메일: [wtj1998@naver.com](mailto:wtj1998@naver.com)
+
+작성자: [왕택준](https://github.com/TJK98)
