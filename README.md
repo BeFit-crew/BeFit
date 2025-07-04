@@ -202,14 +202,15 @@ BeFit/
 
 ## 문의 및 지원
 
-이 프로젝트는 [MIT License](./LICENSE)로 공개되어 있습니다.  
-자유롭게 사용, 수정, 배포할 수 있으며,  
+이 프로젝트는 MIT 라이선스 하에 공개되어 있습니다.  
 자세한 내용은 LICENSE 파일을 참고해 주세요.
+
+[LICENSE](LICENSE)
 
 > 궁금한 점은 언제든 GitHub Issue, 댓글, 혹은 메일로 문의 바랍니다.
 
-[BeFit Repository 바로가기](https://github.com/BeFit-crew/BeFit)
+[BeFit Repository](https://github.com/BeFit-crew/BeFit)
 
 이메일: [wtj1998@naver.com](mailto:wtj1998@naver.com)
 
-작성자: [왕택준](https://github.com/TJK98) (BeFit 프로젝트 팀장)
+작성자: [왕택준](https://github.com/TJK98)

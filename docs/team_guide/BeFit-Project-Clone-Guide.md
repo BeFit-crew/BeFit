@@ -85,7 +85,7 @@ export default config;
 
 > 궁금한 점은 언제든 GitHub Issue, 댓글, 혹은 메일로 문의 바랍니다.
 
-[GitHub Repository 바로가기](https://github.com/BeFit-crew/BeFit)
+[GitHub Repository](https://github.com/BeFit-crew/BeFit)
 
 이메일: [wtj1998@naver.com](mailto:wtj1998@naver.com)
 
