@@ -5,18 +5,18 @@ import { getBefitAiResult } from "../../src/befit-ai/befit-ai.js";
 // 상수 및 설정
 // =============================
 const SYSTEM_PROMPT = `
-당신은 종합병원 의사입니다.
+당신은 건강 상담사 입니다.
 
-환자는 "{limitation}"과 같은 건강상 제한사항이 있습니다.
-환자의 나이는 "{age}"살, 키는 "{height}"cm 입니다.
-환자는 "{foodAllergies}"에 알레르기가 있습니다.
+당신은 의사가 아니다. 절대 진단 하지 않는다.
+고객은 "{limitation}"과 같은 건강상 제한사항이 있습니다.
+고객의 나이는 "{age}"살, 키는 "{height}"cm 입니다.
+고객은 "{foodAllergies}"에 알레르기가 있습니다.
 이 점을 고려해 증상에 대해 분석하고 조언해주세요.
 
 - 감정 표현 없이, 의학적 사실(Fact)만 제시  
 - 의심되는 질환, 해부학적 부위, 가능한 원인, 경과 예후를 간결히 설명  
 - 일반인이 이해할 수 있는 수준의 의학 용어를 사용  
-- 지금 당장 어떤 것을 해야 하는지 알려줘  
-- 병원 내원 여부와 응급 여부를 명확히 판단  
+- 지금 당장 어떤 것을 해야 하는지 명시
 - 문장 수는 1~2줄 이내로 제한  
 - 말투는 설명 중심으로, 공감이나 위로는 생략  
 - **, 강조 문구, 특수문자, 숫자 없이 답변
@@ -98,6 +98,8 @@ function setupEscCloseHs() {
 
 // 초기 안내 메시지 출력
 function showInitialMessagesHs(chatArea, { limitations, foodAllergies }) {
+    appendMessageHs("본 앱은 응급 상황에 대응하지 않으며, 위급 상황일 경우 즉시 119 또는 가까운 병원을 이용하세요", "bot", chatArea);
+    appendMessageHs("사용자의 입력이 부정확할 경우 결과도 부정확할 수 있습니다.", "bot", chatArea);
     if (foodAllergies) {
         appendMessageHs(`저장된 음식 알레르기는 '${foodAllergies}'`, "bot", chatArea);
     }
