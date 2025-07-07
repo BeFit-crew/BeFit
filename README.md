@@ -126,6 +126,8 @@ BeFit/
 
 ### 개발 기간
 
+**프로젝트 기간:** 2025.06.23 ~ 2025.07.02
+
 | 기간            | 단계                    | 주요 내용                                   |
 |-----------------|------------------------|---------------------------------------------|
 | 6.23 ~ 6.24     | 1단계: 기획/환경 구축      | 주제 선정, 스택/API 논의, 협업 규칙, 문서화      |
@@ -149,21 +151,7 @@ BeFit/
 
 ### 시스템 아키텍처
 
-```plaintext
-+-------------------+
-|   User Browser    |
-|   (Frontend)      |
-+----|----------|---+
-     |          |
-     v          |
-[ Local Storage ]  (AI 맞춤 데이터 저장/공유)
-     |          |
-     v          |
-[ Gemini API ]   (계획)
-[ Gemini API ]   (챗봇)
-[ Naver API ]    (쇼핑)
-[ YouTube API ]  (영상)
-```
+![BeFit_Architecture_Diagram.png](assets/img/BeFit_Architecture_Diagram.png)
 
 ---
 
