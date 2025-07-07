@@ -8,14 +8,21 @@ $asideToggleBtnMain.addEventListener('click', function () {
     $asideWrapperMain.classList.toggle('open');
 });
 
-// function loadModalHtmlHs() {
-//     fetch("../../src/infermedica/infermedica.html")
-//         .then(res => res.text())
-//         .then(html => {
-//             document.body.insertAdjacentHTML("beforeend", html);
-//             setupModalEventsHs();
-//         });
-// }
+const checkbox = document.getElementById("agree-checkbox");
+const continueBtn = document.getElementById("continue-btn");
 
+checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+        continueBtn.disabled = false;
+        continueBtn.classList.add("active");
+    } else {
+        continueBtn.disabled = true;
+        continueBtn.classList.remove("active");
+    }
+});
 
-
+continueBtn.addEventListener("click", () => {
+    // 동의한 내용이 로컬에 있다면 모달 안나오게 설정
+    // localStorage.setItem("disclaimerAgreed", "true");
+    document.querySelector(".disclaimer-modal").style.display = "none";
+});
