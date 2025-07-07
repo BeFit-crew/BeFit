@@ -1,4 +1,4 @@
-# BeFit: AI 분석 모듈 초기화 오류 트러블슈팅 가이드
+# AI 분석 모듈 초기화 오류 트러블슈팅 가이드
 
 본 문서는 BeFit 프로젝트의 **AI 분석 모듈(`befit-ai.js`)**이 특정 DOM 요소가 없는 페이지에서 로드될 때 발생하는 `Cannot read properties of null` 오류의 원인 및 해결 과정을 공식적으로 정리한 기술 문서입니다.
 
