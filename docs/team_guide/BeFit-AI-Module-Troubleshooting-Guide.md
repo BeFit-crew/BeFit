@@ -1,6 +1,6 @@
-# AI 분석 모듈 초기화 오류 트러블슈팅 가이드
+# befit-ai.js 공통 모듈의 `null` 참조 트러블슈팅 가이드
 
-본 문서는 BeFit 프로젝트의 **AI 분석 모듈(`befit-ai.js`)**이 특정 DOM 요소가 없는 페이지에서 로드될 때 발생하는 `Cannot read properties of null` 오류의 원인 및 해결 과정을 공식적으로 정리한 기술 문서입니다.
+본 문서는 BeFit 프로젝트의 **AI 분석 모듈(`befit-ai.js`)**이 특정 DOM 요소가 없는 페이지에서 로드될 때 발생하는 `Cannot read properties of null` 오류의 원인 및 해결 과정을 정리한 기술 문서입니다.
 
 **작성자:** [왕택준](https://github.com/TJK98)
 
@@ -20,6 +20,7 @@
     main @ befit-ai.js:152
     (anonymous) @ befit-ai.js:163
     ```
+-   **발생 페이지**: **`index.html`을 제외한 모든 페이지** (`befit-ai.html`, `playlist.html`, `shopping.html`)
 
 -   **발생 배경**:
     AI 분석 기능(폼 요소)이 없는 일반 페이지에서 `/src/befit-ai/befit-ai.js` 모듈이 실행될 때
@@ -34,8 +35,8 @@
 문제의 근본 원인은 **모듈의 의존성**과 **방어 코드 부재**에 있습니다.
 
 1.  **DOM 의존성**: 모듈 로직 전체가 `dietForm-befit-ai` 폼과 그 하위 요소들(예: `age` 입력 필드)의 존재를 전제로 설계되었습니다.
-2.  **Null 참조 발생**: `initEventListeners` 함수 내에서 `document.getElementById('age-input')`과 같은 코드가 `null`을 반환합니다.
-3.  **Null에 대한 속성 접근**: 이 `null` 값에 대해 `.value`나 `.addEventListener` 같은 속성/메서드에 접근하면서 `TypeError`가 발생하고, 스크립트 실행이 즉시 중단됩니다. 에러 메시지의 `(reading 'age')`는 아마도 `form.elements.age`와 같이 객체의 속성으로 DOM 요소에 접근하려다 발생한 것으로 추정됩니다.
+2.  **`null` 참조 발생**: `initEventListeners` 함수 내에서 `document.getElementById('age-input')`과 같은 코드가 `null`을 반환합니다.
+3.  **`null`에 대한 속성 접근**: 이 `null` 값에 대해 `.value`나 `.addEventListener` 같은 속성/메서드에 접근하면서 `TypeError`가 발생하고, 스크립트 실행이 즉시 중단됩니다. 에러 메시지의 `(reading 'age')`는 아마도 `form.elements.age`와 같이 객체의 속성으로 DOM 요소에 접근하려다 발생한 것으로 추정됩니다.
 
 ---
 
@@ -43,8 +44,7 @@
 
 ### 3-1. 비효율적인 접근 방식
 
-- 각 함수/이벤트 리스너 내부에 개별적으로 `if (element)`와 같은 null 체크를 추가하는 방법을 초기에 고려하였으나,  
-  이 방식은 조건문 중복, 코드 가독성 저하, 추후 유지보수 난이도 상승 등의 문제가 있음을 확인하였습니다.
+- 각 함수/이벤트 리스너 내부에 개별적으로 `if (element)`와 같은 null 체크를 추가하는 방법을 초기에 고려하였으나, 이 방식은 조건문 중복, 코드 가독성 저하, 추후 유지보수 난이도 상승 등의 문제가 있음을 확인하였습니다.
 
 ### 3-2. 최종 해결책: Guard Clause 패턴 적용
 
@@ -82,4 +82,4 @@ document.addEventListener("DOMContentLoaded", main);
 -   **해결**: 모듈의 진입점에서 **Guard Clause(가드 클로즈) 패턴**을 사용하여 자신의 실행 환경을 스스로 검사하고, 조건이 맞지 않으면 조용히 실행을 종료하는 **방어적 초기화(Defensive Initialization)** 구조를 적용했습니다.
 -   **배운 점**: 모듈을 설계할 때, "필요한 요소가 언제나 존재할 것"이라고 가정해서는 안 됩니다. 모든 페이지에서 안전하게 임포트될 수 있도록, 자신의 실행 여부를 스스로 결정하는 **독립적이고 방어적인 구조**를 갖추는 것이 견고한 웹 애플리케이션의 핵심임을 깨달았습니다.
 
-> 본 문서는 특정 DOM에 의존하는 공용 모듈의 `null` 참조 오류를 방지하기 위한 구조적 개선 사례를 기록한 기술 문서입니다.
+> 본 문서는 특정 DOM에 의존하는 공용 모듈의 null 참조 오류를 방지하기 위한 구조적 개선 사례를 기록한 기술 문서입니다.
