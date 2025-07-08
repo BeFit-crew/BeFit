@@ -8,21 +8,29 @@ $asideToggleBtnMain.addEventListener('click', function () {
     $asideWrapperMain.classList.toggle('open');
 });
 
-const checkbox = document.getElementById("agree-checkbox");
-const continueBtn = document.getElementById("continue-btn");
+// 문서가 로드된 후 실행
+document.addEventListener("DOMContentLoaded", () => {
+    const $agreeCheckbox = document.getElementById("agree-checkbox");
+    const $continueBtn = document.getElementById("continue-btn");
+    const $disclaimerModal = document.querySelector(".disclaimer-modal");
 
-checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-        continueBtn.disabled = false;
-        continueBtn.classList.add("active");
-    } else {
-        continueBtn.disabled = true;
-        continueBtn.classList.remove("active");
+    if ($agreeCheckbox && $continueBtn && $disclaimerModal) {
+
+        // 동의 기록이 없으면 모달 표시
+        if (localStorage.getItem("disclaimerAgreed") !== "true") {
+            $disclaimerModal.style.display = "flex";
+        }
+
+        // 체크박스 상태에 따라 버튼 활성화
+        $agreeCheckbox.addEventListener("change", () => {
+            $continueBtn.disabled = !$agreeCheckbox.checked;
+            $continueBtn.classList.toggle("active", $agreeCheckbox.checked);
+        });
+
+        // '계속' 버튼 클릭 시 동의 저장 및 모달 닫기
+        $continueBtn.addEventListener("click", () => {
+            localStorage.setItem("disclaimerAgreed", "true");
+            $disclaimerModal.style.display = "none";
+        });
     }
-});
-
-continueBtn.addEventListener("click", () => {
-    // 동의한 내용이 로컬에 있다면 모달 안나오게 설정
-    // localStorage.setItem("disclaimerAgreed", "true");
-    document.querySelector(".disclaimer-modal").style.display = "none";
 });

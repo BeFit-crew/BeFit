@@ -126,6 +126,8 @@ BeFit/
 
 ### 개발 기간
 
+**프로젝트 기간:** 2025.06.23 ~ 2025.07.02
+
 | 기간            | 단계                    | 주요 내용                                   |
 |-----------------|------------------------|---------------------------------------------|
 | 6.23 ~ 6.24     | 1단계: 기획/환경 구축      | 주제 선정, 스택/API 논의, 협업 규칙, 문서화      |
@@ -149,21 +151,7 @@ BeFit/
 
 ### 시스템 아키텍처
 
-```plaintext
-+-------------------+
-|   User Browser    |
-|   (Frontend)      |
-+----|----------|---+
-     |          |
-     v          |
-[ Local Storage ]  (AI 맞춤 데이터 저장/공유)
-     |          |
-     v          |
-[ Gemini API ]   (계획)
-[ Gemini API ]   (챗봇)
-[ Naver API ]    (쇼핑)
-[ YouTube API ]  (영상)
-```
+![BeFit_Architecture_Diagram.png](assets/img/BeFit_Architecture_Diagram.png)
 
 ---
 
@@ -184,10 +172,17 @@ BeFit/
   - *문제*: Naver API CORS 에러
   - *해결*: 공개 프록시 서버 활용
 
-### 팀 트러블슈팅: 공용 모듈 Null 참조 오류
+### 팀 트러블슈팅
 
-- **문제**: DOM 의존 공용 모듈이 특정 페이지에서 Null 오류 발생
-- **해결**: 자세한 해결 방법은 [공용 모듈 Null 참조 오류 문서](docs/team_guide/BeFit-Null-Reference-Troubleshooting-Guide.md)를 확인해 주세요.
+#### BeFit AI 모듈 문제
+
+-   **문제 현상**: AI 분석 기능(폼)이 없는 페이지에서 관련 공용 모듈이 실행될 때, 특정 DOM 요소를 찾지 못해 `null` 참조 오류가 발생했습니다.
+-   **해결 방안**: 자세한 해결 방법은 [BeFit AI 모듈 문제 해결 가이드](docs/team_guide/BeFit-AI-Module-Troubleshooting-Guide.md) 문서를 확인해 주세요.
+
+#### BeFit 공용 모듈 복합 문제 (Null 참조 및 UI 불일치)
+
+-   **문제 현상**: 공용 `main.js`에서 페이지별 DOM 구조 차이로 인한 `null` 참조 오류와, 렌더링 순서에 따른 UI 상태(모달) 불일치 문제가 동시에 발생했습니다.
+-   **해결 방안**: 자세한 해결 과정은 [BeFit 공용 모듈 복합 문제 해결 가이드](docs/team_guide/BeFit-Common-Module-Troubleshooting-Guide.md) 문서를 확인해 주세요.
 
 ---
 
@@ -203,14 +198,12 @@ BeFit/
 ## 문의 및 지원
 
 이 프로젝트는 MIT 라이선스 하에 공개되어 있습니다.  
-자세한 내용은 LICENSE 파일을 참고해 주세요.
-
-[LICENSE](LICENSE)
+자세한 내용은 [LICENSE](LICENSE) 파일을 참고해 주세요.
 
 > 궁금한 점은 언제든 GitHub Issue, 댓글, 혹은 메일로 문의 바랍니다.
 
 [BeFit Repository](https://github.com/BeFit-crew/BeFit)
 
-이메일: [wtj1998@naver.com](mailto:wtj1998@naver.com)
+**이메일:** [wtj1998@naver.com](mailto:wtj1998@naver.com)
 
-작성자: [왕택준](https://github.com/TJK98)
+**작성자:** [왕택준](https://github.com/TJK98)

@@ -159,8 +159,8 @@ function main() {
 
 // --- 4. 애플리케이션 실행 ---
 
-// 페이지가 로드되고 스크립트가 실행될 때, main 함수를 호출하여 애플리케이션을 시작합니다.
-main();
+// DOM이 완전히 로드된 후 메인 로직을 실행합니다.
+document.addEventListener("DOMContentLoaded", main);
 
 
 // --- 5. 모듈 외부 공개 ---
